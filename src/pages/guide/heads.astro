@@ -140,7 +140,7 @@ const footerLinks = [
                   data-idx={i + 1}
                   aria-label={`${row.member.name} の頭 ${i + 1}`}
                 >
-                  <MinecraftHead b64={h.b64} size={88} label={`${row.member.name} ${i + 1}`} />
+                  <MinecraftHead b64={h.b64} size={130} label={`${row.member.name} ${i + 1}`} />
                   <span class="head-num">{String(i + 1).padStart(2, "0")}</span>
                 </button>
               ))}
@@ -168,7 +168,7 @@ const footerLinks = [
       <button class="modal-close" aria-label="閉じる" data-modal-close>✕</button>
       <div class="modal-stage" id="modal-stage">
         <div id="modal-head-wrap">
-          <MinecraftHead b64={heads[0].b64} size={280} hoverSpin={false} label="拡大表示" />
+          <MinecraftHead b64={heads[0].b64} size={320} scale={0.9} hoverSpin={false} label="拡大表示" />
         </div>
       </div>
       <div class="modal-info">
@@ -245,7 +245,7 @@ const footerLinks = [
         modalHash.textContent = hash;
         currentHash = hash;
         rotX = -18; rotY = 25;
-        modalStage.style.transform = "rotateX(-18deg) rotateY(25deg)";
+        applyModalTransform();
         if (typeof modal.showModal === "function") modal.showModal();
         else modal.setAttribute("open", "");
       }
@@ -279,6 +279,10 @@ const footerLinks = [
       // --- drag rotation ---
       let rotX = -18, rotY = 25;
       let dragging = false, lx = 0, ly = 0;
+      function applyModalTransform() {
+        const s = getComputedStyle(modalHead).getPropertyValue("--mc-scale").trim() || "1";
+        modalStage.style.transform = "rotateX(" + rotX + "deg) rotateY(" + rotY + "deg) scale(" + s + ")";
+      }
       modalHead.addEventListener("pointerdown", (e) => {
         dragging = true; lx = e.clientX; ly = e.clientY;
         modalHead.setPointerCapture(e.pointerId);
@@ -289,7 +293,7 @@ const footerLinks = [
         lx = e.clientX; ly = e.clientY;
         rotY += dx * 0.6;
         rotX = Math.max(-80, Math.min(80, rotX - dy * 0.6));
-        modalStage.style.transform = "rotateX(" + rotX + "deg) rotateY(" + rotY + "deg)";
+        applyModalTransform();
       });
       const endDrag = (e) => { dragging = false; try { modalHead.releasePointerCapture(e.pointerId); } catch (_) {} };
       modalHead.addEventListener("pointerup", endDrag);
@@ -395,7 +399,7 @@ const footerLinks = [
 
   .head-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 14px;
   }
   .head-card {
@@ -403,10 +407,10 @@ const footerLinks = [
     background: var(--surface-grad);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 14px 10px 10px;
+    padding: 6px 6px 8px;
     cursor: pointer;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 6px;
+    gap: 2px;
     aspect-ratio: 1;
     transition: transform .15s, border-color .15s, box-shadow .15s;
     font-family: inherit; color: inherit;
@@ -448,7 +452,7 @@ const footerLinks = [
     padding: 36px 40px 32px;
     color: var(--text);
     display: grid;
-    grid-template-columns: 320px 280px;
+    grid-template-columns: 360px 280px;
     gap: 32px;
     align-items: center;
     position: relative;
@@ -464,7 +468,7 @@ const footerLinks = [
   .modal-close:hover { color: var(--text); background: var(--surface-2); }
   .modal-stage {
     display: flex; align-items: center; justify-content: center;
-    min-height: 320px;
+    min-height: 360px;
   }
   #modal-head-wrap :global(.mc-head) {
     cursor: grab;
@@ -499,7 +503,7 @@ const footerLinks = [
     .filter-count { width: 100%; text-align: right; }
 
     .member-head { gap: 8px; margin-bottom: 14px; }
-    .head-grid { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px; }
+    .head-grid { grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 10px; }
 
     .modal-inner { grid-template-columns: 1fr; padding: 24px 22px 26px; gap: 18px; }
     .modal-stage { min-height: 260px; }
