@@ -1,0 +1,311 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GuideCredits from "../../components/GuideCredits.astro";
+
+const footerLinks = [
+  { href: "/", label: "トップ" },
+  { href: "/guide", label: "ガイド" },
+  { href: "/systems", label: "システム" },
+];
+---
+<BaseLayout title="経済の使い方 — ホロリスくらふと" footerLinks={footerLinks}>
+  <header class="dhero" data-screen-label="経済ヒーロー">
+    <img src="/assets/kinsaku-player-shop.jpg" alt="" />
+    <div class="dhero-tint"></div>
+    <div class="dhero-inner">
+      <div class="crumb"><a href="/">トップ</a> &nbsp;/&nbsp; <a href="/guide">ガイド</a> &nbsp;/&nbsp; 経済</div>
+      <h1>経済の使い方</h1>
+      <p>お金を稼ぐ、使う、取引する。サーバー独自の経済システムをぐるっと一周。</p>
+    </div>
+  </header>
+
+  <div class="draft-banner">
+    <strong>DRAFT</strong>
+    <span>このページは記載内容が調整中です。最新仕様はサーバー内 <code>/help</code> または Discord をご確認ください。</span>
+  </div>
+
+  <section class="band">
+    <div class="sec">
+      <div class="sec-head center">
+        <div class="sec-en dashed">3 STEPS</div>
+        <h2 class="sec-title">3 ステップで分かる経済</h2>
+      </div>
+      <div class="step-grid">
+        <div class="step">
+          <span class="step-num">1</span>
+          <h3>稼ぐ</h3>
+          <p>職業に就いて働く、カジノで遊ぶ、プレイヤーショップで売る。あなたに合った稼ぎ方を選べます。</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <h3>使う</h3>
+          <p>頭ガチャを引いたり、カジノに突っ込んだり、他プレイヤーから珍品を買ったり。使い道は自由。</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <h3>取引する</h3>
+          <p>看板チェストショップを建てて、24 時間動く店主に。資材売買から委託建築まで、活発な経済圏が広がります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>COMMANDS</span></div>
+        <h2 class="sec-title">よく使うコマンド</h2>
+        <p class="sec-lead">残高確認・送金・ショップ作成など。サーバー内で動作するコマンド類。</p>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd">
+          <code>/money</code>
+          <p>自分の残高を確認。</p>
+        </div>
+        <div class="cmd">
+          <code>/money top</code>
+          <p>残高ランキングをチェック。</p>
+        </div>
+        <div class="cmd">
+          <code>/pay &lt;名前&gt; &lt;額&gt;</code>
+          <p>指定プレイヤーに送金。</p>
+        </div>
+        <div class="cmd">
+          <code>/shop</code>
+          <p>サーバーショップ（システム店）を開く。</p>
+        </div>
+        <div class="cmd">
+          <code>/sell hand</code>
+          <p>手に持ったアイテムをサーバーに即売。</p>
+        </div>
+        <div class="cmd">
+          <code>/casino</code>
+          <p>カジノメダルの残高や交換メニュー。</p>
+        </div>
+      </div>
+      <p class="cmd-note">※ 上記はドラフトの目安です。実装の有無や正確な書式はサーバー内で確認してください。</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>EARN</span></div>
+        <h2 class="sec-title">稼ぎ方カタログ</h2>
+      </div>
+      <div class="mini-grid">
+        <div class="mini">
+          <h4>職業に就く</h4>
+          <p>農業・冒険者・商人・採掘士など。アクションに応じて自動でお金が入る。詳しくは <a href="/guide/jobs">職業ガイド</a>。</p>
+          <span class="tag">常時収入</span>
+        </div>
+        <div class="mini">
+          <h4>プレイヤーショップ</h4>
+          <p>看板チェストショップで店を開く。需要のあるアイテムをコツコツ並べれば、寝てる間にも売れていく。</p>
+          <span class="tag">無人経営OK</span>
+        </div>
+        <div class="mini">
+          <h4>カジノ</h4>
+          <p>スロットやパチンコでメダルを稼ぎ、メダルを通貨に交換。運も実力のうち。</p>
+          <span class="tag">運次第</span>
+        </div>
+        <div class="mini">
+          <h4>受託・依頼</h4>
+          <p>建築代行、整地、Mob討伐など、他プレイヤーから受託。Discord で募集が飛び交います。</p>
+          <span class="tag">交渉次第</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>SPEND</span></div>
+        <h2 class="sec-title">使い道カタログ</h2>
+      </div>
+      <div class="mini-grid">
+        <div class="mini">
+          <h4>頭ガチャ</h4>
+          <p>ホロメンの頭スキンを 400 種類以上から引く。お気に入りが出るまで回す沼。</p>
+          <a class="tag" href="/guide/heads">頭一覧を見る</a>
+        </div>
+        <div class="mini">
+          <h4>レコード入手</h4>
+          <p>サーバーショップやプレイヤーショップで音楽レコードを購入。</p>
+          <a class="tag" href="/guide/records">レコード一覧</a>
+        </div>
+        <div class="mini">
+          <h4>カジノ</h4>
+          <p>稼いだお金をカジノに投入。当たれば大儲け、外せばまた稼ぐ。</p>
+          <span class="tag">心の修行</span>
+        </div>
+        <div class="mini">
+          <h4>プレイヤー取引</h4>
+          <p>レア装備、希少建材、装飾アイテムなどを他プレイヤーから購入。</p>
+          <span class="tag">相場は流動的</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>SHOP</span></div>
+        <h2 class="sec-title">プレイヤーショップの作り方（ドラフト）</h2>
+        <p class="sec-lead">チェスト + 看板の組み合わせで、誰でも無人ショップを開けます。</p>
+      </div>
+      <div class="shop-howto">
+        <ol>
+          <li>売りたいアイテムをチェストに入れる。</li>
+          <li>チェストの上に空の看板を立てる。</li>
+          <li>看板の 1 行目に <code>[Shop]</code>、2 行目に売値、3 行目に商品名、4 行目に数量を記入。</li>
+          <li>看板が緑色に光れば、無人ショップとして稼働開始。</li>
+        </ol>
+        <p class="shop-note">※ 看板の書式・プラグイン名は実装に合わせて差し替え予定。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>FAQ</span></div>
+        <h2 class="sec-title">よくある質問</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>初期所持金はいくらですか？</summary>
+          <p>新規参加時に少額の初期所持金が支給されます。正確な金額は調整中です。</p>
+        </details>
+        <details>
+          <summary>シーズン跨ぎでお金は引き継がれますか？</summary>
+          <p>原則として、お金やアイテムはシーズン毎にリセットされます。詳細はシーズン開始時のアナウンスを確認してください。</p>
+        </details>
+        <details>
+          <summary>カジノで負けすぎて借金になった場合は？</summary>
+          <p>残高はマイナスにならない仕様です。手持ちがなくなったらまた稼ぎに戻りましょう。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <GuideCredits>
+    <h3>参考・実装</h3>
+    <ul>
+      <li>経済プラグイン：（後日記載）</li>
+      <li>チェストショップ：（後日記載）</li>
+    </ul>
+    <small>※ このページの内容は調整中のドラフトです。正確な情報はサーバー内コマンドおよび Discord アナウンスをご確認ください。</small>
+  </GuideCredits>
+</BaseLayout>
+
+<style>
+  .dhero { position: relative; height: 320px; overflow: hidden; }
+  .dhero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .dhero-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,38,.45) 0%, rgba(10,20,38,.92) 100%); }
+  :global([data-theme="light"]) .dhero-tint { background: linear-gradient(180deg, rgba(58,43,34,.3) 0%, rgba(58,43,34,.78) 100%); }
+  .dhero-inner { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 0 44px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .crumb { color: rgba(255,255,255,.78); font-size: 13px; font-weight: 700; }
+  .crumb a { color: var(--accent); }
+  .dhero h1 { font-size: 46px; font-weight: 900; color: #fff; line-height: 1.12; }
+  .dhero p { color: rgba(255,255,255,.85); font-weight: 700; font-size: 14.5px; max-width: 620px; line-height: 1.8; }
+
+  .draft-banner {
+    background: rgba(252, 211, 77, .12);
+    border-top: 1px solid rgba(252, 211, 77, .3);
+    border-bottom: 1px solid rgba(252, 211, 77, .3);
+    color: #FCD34D;
+    padding: 14px 44px;
+    text-align: center;
+    font-size: 13.5px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+  }
+  .draft-banner strong {
+    font-family: var(--font-en);
+    font-size: 11px;
+    letter-spacing: .14em;
+    background: #FCD34D;
+    color: #422006;
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+  .draft-banner code { font-family: var(--font-mono); font-size: 12px; background: rgba(252,211,77,.18); padding: 1px 6px; border-radius: 4px; color: #FCD34D; }
+
+  .band.alt { background: var(--bg-2); }
+
+  .step-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .step { background: var(--surface-grad); border: 1px solid var(--border); border-radius: 16px; padding: 30px 26px; position: relative; }
+  .step::before {
+    content: ""; position: absolute; top: 0; left: 26px; width: 52px; height: 4px;
+    background: var(--accent); border-radius: 0 0 4px 4px; box-shadow: 0 0 16px var(--accent-glow);
+  }
+  .step-num { font-family: var(--font-en); font-size: 38px; font-weight: 800; color: var(--accent); display: block; line-height: 1; margin-top: 8px; }
+  .step h3 { font-size: 20px; font-weight: 900; margin: 10px 0 8px; color: var(--text); }
+  .step p { font-size: 13.5px; color: var(--text-muted); font-weight: 500; line-height: 1.9; }
+
+  .cmd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .cmd { background: var(--surface-grad); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+  .cmd code {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--surface-2);
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .cmd p { font-size: 12.5px; color: var(--text-muted); font-weight: 500; line-height: 1.8; }
+  .cmd-note { margin-top: 16px; font-size: 12px; color: var(--text-soft); }
+
+  .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .mini { background: var(--surface-grad); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+  .mini h4 { font-size: 16.5px; font-weight: 900; margin-bottom: 8px; color: var(--text); }
+  .mini p { font-size: 13px; color: var(--text-muted); font-weight: 500; line-height: 1.85; }
+  .mini a { color: var(--accent); }
+  .mini .tag { margin-top: 14px; cursor: pointer; }
+  a.tag:hover { background: var(--accent-soft); }
+
+  .shop-howto { background: var(--surface-grad); border: 1px solid var(--border); border-radius: 14px; padding: 26px 32px; }
+  .shop-howto ol { padding-left: 22px; display: flex; flex-direction: column; gap: 10px; }
+  .shop-howto li { font-size: 14px; color: var(--text-muted); font-weight: 500; line-height: 1.85; }
+  .shop-howto code {
+    font-family: var(--font-mono); font-size: 12.5px;
+    background: var(--surface-2); padding: 2px 8px; border-radius: 4px;
+    color: var(--accent); font-weight: 700;
+  }
+  .shop-note { margin-top: 16px; font-size: 12px; color: var(--text-soft); }
+
+  .faq { display: flex; flex-direction: column; gap: 8px; }
+  .faq details {
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 22px;
+  }
+  .faq details[open] { border-color: var(--accent); }
+  .faq summary {
+    font-weight: 800; color: var(--text);
+    cursor: pointer; font-size: 14.5px;
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq summary::after { content: "+"; color: var(--accent); font-family: var(--font-en); font-size: 18px; }
+  .faq details[open] summary::after { content: "−"; }
+  .faq p { margin-top: 10px; font-size: 13.5px; color: var(--text-muted); font-weight: 500; line-height: 1.9; }
+
+  @media (max-width: 760px) {
+    .dhero { height: 260px; }
+    .dhero-inner { padding: 0 22px; }
+    .dhero h1 { font-size: 30px; }
+    .draft-banner { padding: 12px 22px; font-size: 12.5px; }
+    .step-grid { grid-template-columns: 1fr; }
+    .cmd-grid { grid-template-columns: 1fr; }
+    .mini-grid { grid-template-columns: 1fr; }
+    .shop-howto { padding: 22px 22px; }
+  }
+</style>

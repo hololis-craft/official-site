@@ -1,0 +1,132 @@
+[
+  {
+    "title": "Ridin' on Dreams",
+    "author": "hololive IDOL PROJECT",
+    "duration": 267,
+    "disc-namespace": "ridinondreamshololiveidolprojectone",
+    "model-data": 16,
+    "creeper-drop": false,
+    "lores": [],
+    "loot-tables": {},
+    "fragment-loot-tables": {}
+  },
+  {
+    "title": "デビュタントボール（remix）",
+    "author": "星街すいせい",
+    "duration": 348,
+    "disc-namespace": "remixone",
+    "model-data": 15,
+    "creeper-drop": true,
+    "lores": [],
+    "loot-tables": {
+      "chests/village/village_desert_house": 50,
+      "chests/village/village_snowy_house": 50,
+      "chests/village/village_taiga_house": 50
+    },
+    "fragment-loot-tables": {}
+  },
+  {
+    "title": "繭と心",
+    "author": "星街すいせい",
+    "duration": 350,
+    "disc-namespace": "onethree",
+    "model-data": 14,
+    "creeper-drop": true,
+    "lores": [],
+    "loot-tables": {
+      "chests/village/village_plains_house": 50,
+      "chests/village/village_savanna_house": 50
+    },
+    "fragment-loot-tables": {}
+  },
+  {
+    "title": "ぽ",
+    "author": "尾丸ポルカ",
+    "duration": 143,
+    "disc-namespace": "onefour",
+    "model-data": 6,
+    "creeper-drop": true,
+    "lores": [],
+    "loot-tables": {
+      "chests/abandoned_mineshaft": 50
+    },
+    "fragment-loot-tables": {}
+  },
+  {
+    "title": "Color Rise Harmony",
+    "author": "hololive IDOL PROJECT",
+    "duration": 236,
+    "disc-namespace": "colorriseharmony",
+    "model-data": 17,
+    "creeper-drop": true,
+    "lores": [],
+    "loot-tables": {},
+    "fragment-loot-tables": {}
+  },
+  {
+    "title": "Capture the Moment",
+    "author": "hololive IDOL PROJECT",
+    "duration": 272,
+    "disc-namespace": "capturethemoment",
+    "model-data": 18,
+    "creeper-drop": true,
+    "lores": [],
+    "loot-tables": {},
+    "fragment-loot-tables": {}
+  },
+  {
+    "title": "Our Bright Parade",
+    "author": "hololive IDOL PROJECT",
+    "duration": 270,
+    "disc-namespace": "ourbrightparade",
+    "model-data": 19,
+    "creeper-drop": true,
+    "lores": [],
+    "loot-tables": {},
+    "fragment-loot-tables": {}
+  },
+  {
+    "title": "Prism Melody",
+    "author": "hololive IDOL PROJECT",
+    "duration": 269,
+    "disc-namespace": "prismmelody",
+    "model-data": 20,
+    "creeper-drop": true,
+    "lores": [],
+    "loot-tables": {},
+    "fragment-loot-tables": {}
+  },
+  {
+    "title": "キラメキライダー☆",
+    "author": "hololive IDOL PROJECT",
+    "duration": 50,
+    "disc-namespace": "kiramekirider",
+    "model-data": 21,
+    "creeper-drop": true,
+    "lores": [],
+    "loot-tables": {},
+    "fragment-loot-tables": {}
+  },
+  {
+    "title": "Shiny Smily Story",
+    "author": "hololive IDOL PROJECT",
+    "duration": 256,
+    "disc-namespace": "shinysmilystory",
+    "model-data": 22,
+    "creeper-drop": true,
+    "lores": [],
+    "loot-tables": {},
+    "fragment-loot-tables": {}
+  },
+  {
+    "title": "BLUE CLAPPER （Twilight ver.）",
+    "author": "hololive IDOL PROJECT",
+    "duration": 414,
+    "disc-namespace": "blueclappertwilight",
+    "model-data": 23,
+    "creeper-drop": true,
+    "lores": [],
+    "loot-tables": {},
+    "fragment-loot-tables": {}
+  }
+]

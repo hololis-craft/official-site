@@ -1,0 +1,21 @@
+---
+interface FooterLink {
+  href: string;
+  label: string;
+}
+interface Props {
+  links?: FooterLink[];
+}
+const { links = [
+  { href: "/systems", label: "システム" },
+  { href: "/history", label: "歴史" },
+  { href: "#", label: "X (Twitter)" },
+] } = Astro.props;
+---
+<footer class="footer">
+  <b>ホロリスくらふと</b>
+  <span>ホロライブリスナー有志による非公式ファンコミュニティです。</span>
+  <div class="footer-links">
+    {links.map((l) => (<a href={l.href}>{l.label}</a>))}
+  </div>
+</footer>

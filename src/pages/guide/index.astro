@@ -1,0 +1,131 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const footerLinks = [
+  { href: "/", label: "トップ" },
+  { href: "/systems", label: "システム" },
+  { href: "/history", label: "歴史" },
+];
+
+const guides = [
+  {
+    href: "/guide/heads",
+    en: "HEADS",
+    title: "ホロメン頭ガチャ",
+    desc: "ガチャから入手できる 400 種類以上のホロメンの頭をすべて閲覧。3D で回転確認も。",
+    cta: "頭一覧へ",
+    img: "/assets/hololive-head-gacha.jpeg",
+  },
+  {
+    href: "/guide/records",
+    en: "RECORDS",
+    title: "レコード一覧",
+    desc: "ホロライブ関連曲のアレンジ全 11 種。曲名・尺・入手場所をひとまとめに。",
+    cta: "レコード一覧へ",
+    img: "/assets/miko-suisei-shrine-with-gomoku.jpg",
+  },
+  {
+    href: "/guide/economy",
+    en: "ECONOMY",
+    title: "経済の使い方",
+    desc: "稼ぐ → 使う → 取引する。基本コマンドと、お金の活用先を 1 ページで。",
+    cta: "経済ガイドへ",
+    img: "/assets/kinsaku-player-shop.jpg",
+    draft: true,
+  },
+  {
+    href: "/guide/jobs",
+    en: "JOBS",
+    title: "職業の選び方",
+    desc: "農業・冒険・商人など。職業ごとの収入源と進め方をカタログで。",
+    cta: "職業ガイドへ",
+    img: "/assets/bibidiba-castle.jpeg",
+    draft: true,
+  },
+];
+---
+<BaseLayout title="ガイド — ホロリスくらふと" footerLinks={footerLinks}>
+  <header class="dhero" data-screen-label="ガイドヒーロー">
+    <img src="/assets/illuminated-laplus-darkness-night.jpg" alt="夜のロビー" />
+    <div class="dhero-tint"></div>
+    <div class="dhero-inner">
+      <div class="crumb"><a href="/">トップ</a> &nbsp;/&nbsp; ガイド</div>
+      <h1>遊び方ガイド</h1>
+      <p>頭ガチャの全種類、レコードの一覧、経済と職業の使い方。ホロリスくらふとを楽しむための解説をまとめました。</p>
+    </div>
+  </header>
+
+  <section class="band">
+    <div class="sec">
+      <div class="guide-grid">
+        {guides.map((g) => (
+          <a class="guide-card" href={g.href}>
+            <div class="ph"><img src={g.img} alt="" /></div>
+            <div class="body">
+              <div class="sec-en"><span>{g.en}</span></div>
+              <h3>
+                {g.title}
+                {g.draft && <span class="draft-pill">DRAFT</span>}
+              </h3>
+              <p>{g.desc}</p>
+              <span class="go">{g.cta} →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .dhero { position: relative; height: 320px; overflow: hidden; }
+  .dhero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .dhero-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,38,.35) 0%, rgba(10,20,38,.9) 100%); }
+  :global([data-theme="light"]) .dhero-tint { background: linear-gradient(180deg, rgba(58,43,34,.25) 0%, rgba(58,43,34,.74) 100%); }
+  .dhero-inner { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 0 44px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .crumb { color: rgba(255,255,255,.78); font-size: 13px; font-weight: 700; }
+  .crumb a { color: var(--accent); }
+  .dhero h1 { font-size: 50px; font-weight: 900; color: #fff; line-height: 1.1; }
+  .dhero p { color: rgba(255,255,255,.85); font-weight: 700; font-size: 15px; max-width: 620px; line-height: 1.8; }
+
+  .guide-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .guide-card {
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .18s, border-color .18s;
+  }
+  .guide-card:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+  .guide-card .ph { aspect-ratio: 16 / 9; overflow: hidden; }
+  .guide-card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+  .guide-card:hover .ph img { transform: scale(1.04); }
+  .guide-card .body { padding: 22px 26px 26px; display: flex; flex-direction: column; gap: 8px; }
+  .guide-card h3 {
+    font-size: 22px; font-weight: 900; margin-top: 10px;
+    color: var(--text); display: flex; align-items: center; gap: 12px;
+  }
+  .guide-card p { font-size: 13.5px; color: var(--text-muted); font-weight: 500; line-height: 1.9; }
+  .guide-card .go { margin-top: 10px; color: var(--accent); font-weight: 900; font-size: 14px; }
+
+  .draft-pill {
+    font-family: var(--font-en);
+    font-size: 11px; font-weight: 800; letter-spacing: .12em;
+    background: var(--accent-soft); color: var(--accent);
+    padding: 3px 9px; border-radius: 999px;
+    border: 1px solid var(--pill-border);
+  }
+
+  @media (max-width: 760px) {
+    .guide-grid { grid-template-columns: 1fr; }
+    .dhero { height: 260px; }
+    .dhero-inner { padding: 0 22px; }
+    .dhero h1 { font-size: 32px; }
+  }
+</style>

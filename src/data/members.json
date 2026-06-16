@@ -1,0 +1,96 @@
+{
+  "tokinosorach": { "name": "ときのそら", "nameEn": "Tokino Sora", "branch": "JP", "gen": "0", "status": "active", "color": "#0EA5E9" },
+  "robocosan": { "name": "ロボ子さん", "nameEn": "Roboco-san", "branch": "JP", "gen": "0", "status": "active", "color": "#94A3B8" },
+  "sakuramiko35": { "name": "さくらみこ", "nameEn": "Sakura Miko", "branch": "JP", "gen": "0", "status": "active", "color": "#F472B6" },
+  "SUISEI_HOSIMATI": { "name": "星街すいせい", "nameEn": "Hoshimachi Suisei", "branch": "JP", "gen": "0", "status": "active", "color": "#00B5E2", "aliases": ["Suisei_HONMONO"] },
+  "AZKi_": { "name": "AZKi", "nameEn": "AZKi", "branch": "JP", "gen": "0", "status": "active", "color": "#BE185D" },
+
+  "yozoramel": { "name": "夜空メル", "nameEn": "Yozora Mel", "branch": "JP", "gen": "1", "status": "graduated", "color": "#FBBF24" },
+  "akirosenthal": { "name": "アキ・ローゼンタール", "nameEn": "Aki Rosenthal", "branch": "JP", "gen": "1", "status": "active", "color": "#DC2626" },
+  "HAACHAMA810": { "name": "赤井はあと", "nameEn": "Akai Haato / HAACHAMA", "branch": "JP", "gen": "1", "status": "active", "color": "#EF4444", "aliases": ["imgreen1"] },
+  "shirakamifubuki": { "name": "白上フブキ", "nameEn": "Shirakami Fubuki", "branch": "JP", "gen": "1", "status": "active", "color": "#38BDF8" },
+  "natsuiromatsuri": { "name": "夏色まつり", "nameEn": "Natsuiro Matsuri", "branch": "JP", "gen": "1", "status": "active", "color": "#FB923C" },
+
+  "ookamimio": { "name": "大神ミオ", "nameEn": "Ookami Mio", "branch": "JP", "gen": "gamers", "status": "active", "color": "#DC2626" },
+  "nekomata_okayu": { "name": "猫又おかゆ", "nameEn": "Nekomata Okayu", "branch": "JP", "gen": "gamers", "status": "active", "color": "#A78BFA", "aliases": ["okayu_nekoneko22"] },
+  "inugamikorone": { "name": "戌神ころね", "nameEn": "Inugami Korone", "branch": "JP", "gen": "gamers", "status": "active", "color": "#FCD34D" },
+
+  "minatoaqua": { "name": "湊あくあ", "nameEn": "Minato Aqua", "branch": "JP", "gen": "2", "status": "graduated", "color": "#60A5FA" },
+  "murasakishion": { "name": "紫咲シオン", "nameEn": "Murasaki Shion", "branch": "JP", "gen": "2", "status": "active", "color": "#8B5CF6" },
+  "nakiriayame": { "name": "百鬼あやめ", "nameEn": "Nakiri Ayame", "branch": "JP", "gen": "2", "status": "active", "color": "#B91C1C" },
+  "yuzukichoco": { "name": "癒月ちょこ", "nameEn": "Yuzuki Choco", "branch": "JP", "gen": "2", "status": "active", "color": "#BE185D" },
+  "oozorasubaru": { "name": "大空スバル", "nameEn": "Oozora Subaru", "branch": "JP", "gen": "2", "status": "active", "color": "#06B6D4" },
+
+  "Usadapekora": { "name": "兎田ぺこら", "nameEn": "Usada Pekora", "branch": "JP", "gen": "3", "status": "active", "color": "#93C5FD" },
+  "uruharushia": { "name": "潤羽るしあ", "nameEn": "Uruha Rushia", "branch": "JP", "gen": "3", "status": "terminated", "color": "#10B981" },
+  "shiranuiflare": { "name": "不知火フレア", "nameEn": "Shiranui Flare", "branch": "JP", "gen": "3", "status": "active", "color": "#F97316" },
+  "shiroganenoel": { "name": "白銀ノエル", "nameEn": "Shirogane Noel", "branch": "JP", "gen": "3", "status": "active", "color": "#E5E7EB" },
+  "houshou_marine": { "name": "宝鐘マリン", "nameEn": "Houshou Marine", "branch": "JP", "gen": "3", "status": "active", "color": "#DC2626" },
+
+  "kiryucoco": { "name": "桐生ココ", "nameEn": "Kiryu Coco", "branch": "JP", "gen": "4", "status": "graduated", "color": "#FB923C" },
+  "Amane_Kanata": { "name": "天音かなた", "nameEn": "Amane Kanata", "branch": "JP", "gen": "4", "status": "active", "color": "#67E8F9" },
+  "Tsunomakiwatame": { "name": "角巻わため", "nameEn": "Tsunomaki Watame", "branch": "JP", "gen": "4", "status": "active", "color": "#FCD34D" },
+  "Towasama": { "name": "常闇トワ", "nameEn": "Tokoyami Towa", "branch": "JP", "gen": "4", "status": "active", "color": "#7C3AED" },
+  "HimemoriLuna": { "name": "姫森ルーナ", "nameEn": "Himemori Luna", "branch": "JP", "gen": "4", "status": "active", "color": "#C084FC" },
+
+  "Lamy_Yukihana": { "name": "雪花ラミィ", "nameEn": "Yukihana Lamy", "branch": "JP", "gen": "5", "status": "active", "color": "#BFDBFE" },
+  "supernenechii": { "name": "桃鈴ねね", "nameEn": "Momosuzu Nene", "branch": "JP", "gen": "5", "status": "active", "color": "#FB923C" },
+  "botaaan": { "name": "獅白ぼたん", "nameEn": "Shishiro Botan", "branch": "JP", "gen": "5", "status": "active", "color": "#84CC16" },
+  "omapol": { "name": "尾丸ポルカ", "nameEn": "Omaru Polka", "branch": "JP", "gen": "5", "status": "active", "color": "#DC2626" },
+
+  "Laplus_sama": { "name": "ラプラス・ダークネス", "nameEn": "La+ Darknesss", "branch": "JP", "gen": "6", "status": "active", "color": "#7C3AED" },
+  "takanelui61": { "name": "鷹嶺ルイ", "nameEn": "Takane Lui", "branch": "JP", "gen": "6", "status": "active", "color": "#D946EF" },
+  "KoyoriHakui315": { "name": "博衣こより", "nameEn": "Hakui Koyori", "branch": "JP", "gen": "6", "status": "active", "color": "#EC4899" },
+  "Kazama168": { "name": "風真いろは", "nameEn": "Kazama Iroha", "branch": "JP", "gen": "6", "status": "active", "color": "#16A34A" },
+  "matamatasakamata": { "name": "沙花叉クロヱ", "nameEn": "Sakamata Chloe", "branch": "JP", "gen": "6", "status": "active", "color": "#0EA5E9" },
+
+  "Hiodoshi_Ao": { "name": "火威青", "nameEn": "Hiodoshi Ao", "branch": "DEV_IS", "gen": "ReGLOSS", "status": "active", "color": "#2563EB" },
+  "Kanade_ReGLOSS": { "name": "音乃瀬奏", "nameEn": "Otonose Kanade", "branch": "DEV_IS", "gen": "ReGLOSS", "status": "active", "color": "#84CC16" },
+  "Ichijou_Ririka": { "name": "一条莉々華", "nameEn": "Ichijou Ririka", "branch": "DEV_IS", "gen": "ReGLOSS", "status": "active", "color": "#F59E0B" },
+  "juufuutei_raden": { "name": "儒烏風亭らでん", "nameEn": "Juufuutei Raden", "branch": "DEV_IS", "gen": "ReGLOSS", "status": "active", "color": "#E5E7EB" },
+  "todoroki_hajime": { "name": "轟はじめ", "nameEn": "Todoroki Hajime", "branch": "DEV_IS", "gen": "ReGLOSS", "status": "active", "color": "#EF4444" },
+
+  "isaki_riona": { "name": "一咲りおな", "nameEn": "Isaki Riona", "branch": "DEV_IS", "gen": "FLOWGLOW", "status": "active", "color": "#EC4899" },
+  "kikirara_vivi": { "name": "綺々羅々ヴィヴィ", "nameEn": "Kikirara Vivi", "branch": "DEV_IS", "gen": "FLOWGLOW", "status": "active", "color": "#FB923C" },
+  "mizumiya_su": { "name": "水宮枢", "nameEn": "Mizumiya Su", "branch": "DEV_IS", "gen": "FLOWGLOW", "status": "active", "color": "#06B6D4" },
+  "rindo_chihaya": { "name": "輪堂千速", "nameEn": "Rindo Chihaya", "branch": "DEV_IS", "gen": "FLOWGLOW", "status": "active", "color": "#6B7280" },
+
+  "Ayunda_Risu": { "name": "アユンダ・リス", "nameEn": "Ayunda Risu", "branch": "ID", "gen": "ID1", "status": "active", "color": "#92400E" },
+  "itsmoona": { "name": "ムーナ・ホシノヴァ", "nameEn": "Moona Hoshinova", "branch": "ID", "gen": "ID1", "status": "active", "color": "#581C87", "aliases": ["imoonya"] },
+  "IOFI15": { "name": "アイラニ・イオフィフティーン", "nameEn": "Airani Iofifteen", "branch": "ID", "gen": "ID1", "status": "active", "color": "#BE185D" },
+
+  "kureijiollie": { "name": "クレイジー・オリー", "nameEn": "Kureiji Ollie", "branch": "ID", "gen": "ID2", "status": "active", "color": "#BE185D" },
+  "anyaaaaam3lfi": { "name": "アーニャ・メルフィッサ", "nameEn": "Anya Melfissa", "branch": "ID", "gen": "ID2", "status": "active", "color": "#7C2D12" },
+  "reineeeee": { "name": "パヴォリア・レイネ", "nameEn": "Pavolia Reine", "branch": "ID", "gen": "ID2", "status": "active", "color": "#0E7490" },
+
+  "VestiaZeta_V7": { "name": "ヴェスティア・ゼータ", "nameEn": "Vestia Zeta", "branch": "ID", "gen": "ID3", "status": "active", "color": "#6B21A8" },
+  "KobokanAer": { "name": "こぼ・かなえる", "nameEn": "Kobo Kanaeru", "branch": "ID", "gen": "ID3", "status": "active", "color": "#0EA5E9" },
+  "lakaela": { "name": "カエラ・コヴァルスキア", "nameEn": "Kaela Kovalskia", "branch": "ID", "gen": "ID3", "status": "active", "color": "#FB923C" },
+
+  "moricalliopeEN": { "name": "森カリオペ", "nameEn": "Mori Calliope", "branch": "EN", "gen": "Myth", "status": "active", "color": "#BE185D" },
+  "Kiara_HOLOEN": { "name": "小鳥遊キアラ", "nameEn": "Takanashi Kiara", "branch": "EN", "gen": "Myth", "status": "active", "color": "#DC2626" },
+  "NinoIna": { "name": "一伊那尓栖", "nameEn": "Ninomae Ina'nis", "branch": "EN", "gen": "Myth", "status": "active", "color": "#8B5CF6" },
+  "GaaoGura": { "name": "がうる・ぐら", "nameEn": "Gawr Gura", "branch": "EN", "gen": "Myth", "status": "graduated", "color": "#FB7185" },
+  "amwatson": { "name": "アメリア・ワトソン", "nameEn": "Amelia Watson", "branch": "EN", "gen": "Myth", "status": "graduated", "color": "#FBBF24" },
+
+  "IRySuperGlue": { "name": "IRyS", "nameEn": "IRyS", "branch": "EN", "gen": "ProjectHOPE", "status": "active", "color": "#BE185D" },
+
+  "ourkronii": { "name": "オーロ・クロニー", "nameEn": "Ouro Kronii", "branch": "EN", "gen": "Promise", "status": "active", "color": "#1E40AF" },
+  "bigSANA": { "name": "九十九佐命", "nameEn": "Tsukumo Sana", "branch": "EN", "gen": "Promise", "status": "graduated", "color": "#FCD34D" },
+  "nana_mumei": { "name": "七詩ムメイ", "nameEn": "Nanashi Mumei", "branch": "EN", "gen": "Promise", "status": "active", "color": "#FBBF24" },
+  "faunaceres": { "name": "セレス・ファウナ", "nameEn": "Ceres Fauna", "branch": "EN", "gen": "Promise", "status": "graduated", "color": "#4ADE80" },
+  "whatabae": { "name": "ハコス・ベールズ", "nameEn": "Hakos Baelz", "branch": "EN", "gen": "Promise", "status": "active", "color": "#DC2626" },
+
+  "ShioriNyavella": { "name": "シオリ・ノヴェラ", "nameEn": "Shiori Novella", "branch": "EN", "gen": "Advent", "status": "active", "color": "#4338CA" },
+  "KosekiBijou": { "name": "古石ビジュー", "nameEn": "Koseki Bijou", "branch": "EN", "gen": "Advent", "status": "active", "color": "#06B6D4" },
+  "RissaRavencroft": { "name": "ネリッサ・レイヴンクロフト", "nameEn": "Nerissa Ravencroft", "branch": "EN", "gen": "Advent", "status": "active", "color": "#7C3AED" },
+  "fluffyFUWAWA": { "name": "フワワ・アビスガード", "nameEn": "Fuwawa Abyssgard", "branch": "EN", "gen": "Advent", "status": "active", "color": "#38BDF8" },
+  "fuzzyMOCOCO": { "name": "モココ・アビスガード", "nameEn": "Mococo Abyssgard", "branch": "EN", "gen": "Advent", "status": "active", "color": "#EC4899" },
+
+  "ERBloodflame": { "name": "エリザベス・ローズ・ブラッドフレイム", "nameEn": "Elizabeth Rose Bloodflame", "branch": "EN", "gen": "Justice", "status": "active", "color": "#DC2626" },
+  "gigigimurin": { "name": "ジジ・ムリン", "nameEn": "Gigi Murin", "branch": "EN", "gen": "Justice", "status": "active", "color": "#38BDF8" },
+  "achan_UGA": { "name": "セシリア・イマーグリーン", "nameEn": "Cecilia Immergreen", "branch": "EN", "gen": "Justice", "status": "active", "color": "#4ADE80" },
+  "Raoraaa": { "name": "ラオーラ・パンテーラ", "nameEn": "Raora Panthera", "branch": "EN", "gen": "Justice", "status": "active", "color": "#FB923C" },
+
+  "koganei_niko": { "name": "小金井ニコ?", "nameEn": "?", "branch": "OTHER", "gen": "?", "status": "unknown", "color": "#9CA3AF" }
+}

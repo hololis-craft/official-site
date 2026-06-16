@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "source": "https://hololiscraft-resources.f0reach.me/hololiscraft-merged-pack.zip",
+  "counts": {
+    "discs": 11,
+    "withTexture": 11
+  },
+  "discs": [
+    {
+      "namespace": "ridinondreamshololiveidolprojectone",
+      "title": "Ridin' on Dreams",
+      "author": "hololive IDOL PROJECT",
+      "durationSec": 267,
+      "modelData": 16,
+      "creeperDrop": false,
+      "lootTables": [],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAFqSURBVDiN3ZHBK4NxGMc/70Zv2wG5KRJNeXEg3oQTCyW0XNRil0UrjrKGJZcp7isXZU5OHCglpHaY3i07TLu95IBsTZSTtddB79v7sn+A7+33/T3fz/P8nh/8eQnlTJ/Pp/30YrFY2VrDNIfS8QyutibyL6/411ZYXtthtNNRFibo4ZRaIOCfwT81QTG0z0dkmoe7PPXvj1x8NiM+Z2jv6+B4b4vb+zcDYtPDAIIgsL5r4/TmmsnhERbnvXiWluhpgYHGZ+Y8s5TsIim1YExss7xHg0R0kO1iBgBFUZAkic3wKomUymXyDK3aZdlBhfkgijaW+4d56m0gnogjSRIAoYV5PN4Vxhc0NE37DehuriWlFhCTOVrGeug6OccXCnJU5aT1zUFOPcDtlrlK2xGE73rLEmVZ1vRuABulOmqGZCJVUYLOAJ/tlQTDh8Z9NptFURTB8o2yLBuzmWHmkC49bAGYZYaVC/0zfQFy6IKtE8OPOAAAAABJRU5ErkJggg=="
+    },
+    {
+      "namespace": "remixone",
+      "title": "デビュタントボール（remix）",
+      "author": "星街すいせい",
+      "durationSec": 348,
+      "modelData": 15,
+      "creeperDrop": true,
+      "lootTables": [
+        {
+          "table": "chests/village/village_desert_house",
+          "weight": 50
+        },
+        {
+          "table": "chests/village/village_snowy_house",
+          "weight": 50
+        },
+        {
+          "table": "chests/village/village_taiga_house",
+          "weight": 50
+        }
+      ],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAF+SURBVDiN3ZG/SxthHIef971LzWASKQVDGgsNRD1DYincFshUCkWlYzv0CgbqoJsIbh1cHPwbCr2hgwj+AYJTf1BuaEkpR9FWLYVqCKWktflxuXudclwk/4D9jJ/3fZ7v8IErHzGstCxLXe5s2x76Nyyj0Iu1VSqLz8jHfYRSHLQ0coXpoTLRh7eeVNEEKCHwfEm312Vzcx2Uh9vRafmKXhAQqB7F0p1QIizLUvcqVQSQlAHXhODV2/e4H3bCiwkpaQUKz/e50WnQiF9nplDEtm0hAdy/Hp/Ofd78gf2mCGHHcTAMg+zUFFKCruss3J9E07RQrgN8/fyDu0WPd8fj6FqMB/OPOTr8iGEYANxKtfk9OsLYrzalcpmEszcoGGnv83I3jWzVyM6m+Xb2k2RmltdfJI/mUtz8XuNftstJvE5M1cnczg2uYJqm6l8DaMYmeG4qtndO2VjKoz1c4Wl1OXx3XRfHccTAjKZphjNGZVGonz48IIgmKhsG/We5AAvdihy++GHbAAAAAElFTkSuQmCC"
+    },
+    {
+      "namespace": "onethree",
+      "title": "繭と心",
+      "author": "星街すいせい",
+      "durationSec": 350,
+      "modelData": 14,
+      "creeperDrop": true,
+      "lootTables": [
+        {
+          "table": "chests/village/village_plains_house",
+          "weight": 50
+        },
+        {
+          "table": "chests/village/village_savanna_house",
+          "weight": 50
+        }
+      ],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAGISURBVDiN3ZG/SxthGMc/9+aXNZJqoEOpYJoO+kJdhMvk3lAIFVpQlxekYEFKB9cOLh0qHTpKF4csdiiJuBQFBYdA6RGhlDYUqkGtWmiHmiaXxsvdOd31lPsH2u/08H2f74fnfR7456WFmUop97JXLBZDe30zGCqtjyLsHwj3jKjWBdHmbt4KhWleuFyyyKwt8fljEm35C928w8bzUV5O1PlUf4HT7hA3r9NrNhgrnPoQoZRyH9yfwRE2rexV7JV3XDl6jb71kKe5HD+PJ+l87+D8dulavxgYukZltelPLACmphfg7JC5lEvqyW1Gbq4DYBgGUkru5LsgoK8nS2lxnhvRY/87wisisQwHTYtW1KbyvoqUEqUUANs7cY6+vqHzZ5fFx6+oOyN/l+iNcsIzttIJ+mejmPc+EG9sImyTmNYEYZJMJXBbaUT7G+OFuL9MDUDXdVdK6VPLbwcZdk6pA5FIhEdzt9jfq/rvtVoNwzC0C2fUdd0/YxAWDHnywhcAQQVhYaH/TOevu5Tw+3jCmAAAAABJRU5ErkJggg=="
+    },
+    {
+      "namespace": "onefour",
+      "title": "ぽ",
+      "author": "尾丸ポルカ",
+      "durationSec": 143,
+      "modelData": 6,
+      "creeperDrop": true,
+      "lootTables": [
+        {
+          "table": "chests/abandoned_mineshaft",
+          "weight": 50
+        }
+      ],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAF5SURBVDiN3ZC9S1txFIaffBTa3bVFpSAX1FjIHTqIQwcHEQQFXfzFpVAx0LjV2alUWkFU0AzJBS1CoQri5CCtGcolLfgVkeKQDEUpSEGl2njfTveaaP4BfeHA4ZzzPudw4M4rVKtojNHNmuM4NWejtUzZTJamlj4mSjG6fnbyeW0DuO7fghljFPekwV8lSdLY8LIe19UrTFgQ1afsO02OLEjnJ9LVX1VdaIzRE8/TeFmSpPKJp9RYSrZtB+F9+6rV7l7p/I/mkh9V/u0GkDDAMB6dm1t8cN5y/P2Y3HoOANd1sSyLoel5upbSLC2vMPD8y+0fvAlFmBvN0GFHOOrbZfwixmLbJZZlAZAZecm/wyL9Pd1ouwEiD6oBiUSC9tMi5f1WSo0/6D9Ik5/a52mzx0OdcfWokejOHgCnF5ckX78PACEA27blbwMYcOJMJHKsz8zC2QH5Z6+YetEa9AuFAq7rhgKAD/HzSlilyZdvrgJUqhJWy3TP9B8zXbBZYIz4iQAAAABJRU5ErkJggg=="
+    },
+    {
+      "namespace": "colorriseharmony",
+      "title": "Color Rise Harmony",
+      "author": "hololive IDOL PROJECT",
+      "durationSec": 236,
+      "modelData": 17,
+      "creeperDrop": true,
+      "lootTables": [],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAFySURBVDiN3ZHNKwRxGMc/M7uzaIuQ5KVQih8nNKFIirQOe1AOpFFcSMkNJeFAlLhRDmquTiIHOXDUWO2WGpsc3JSX0pqD9sc4aNcu+w/wPT19ez7fnhf481IymYZhuD890zQz9ibNVGiqXuXazuHS18Kb+0Rkb4PKYGfGME8CjobidAUCDI4NkU824XgeQnSytTNPr+qlf2Wb55dHcv0VVFUVLUQikUUANQEDaIqLJmPEfMWY+7usbg1QUKJiHO2ztryEMRTEo0iioXhyYjV1H011yfd4GJmbAcCyLIQQLG8uMtxdR9aHxOumnyctwCcLeTs5pa+9AyEEhmEAMDs5QTh6iyol7rv8HVDTpAFwduyQ3drM5UUbNaWNjI8O8Hr/QJk/i4bqWhTtHO3jux/Aa5qmouu6K5oELodMr4Mjy1FkD15H5e7mAceJcXAV5uDqC7JtG8uylLQ36rqeXE4I8evftm0n6wScFpCq1LBM0D/TJ3AqhhmCupMVAAAAAElFTkSuQmCC"
+    },
+    {
+      "namespace": "capturethemoment",
+      "title": "Capture the Moment",
+      "author": "hololive IDOL PROJECT",
+      "durationSec": 272,
+      "modelData": 18,
+      "creeperDrop": true,
+      "lootTables": [],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAFhSURBVDiN3ZDNK0RRGIefOzE0yUeUZsH4Kt1MSZrByseQLJAmpYx700zUSLFixUpp1pqslLEjdposJgqFqzRRUxbXwsKCGqUo5Fqd253p/gP8Vqf3fZ/nnPPCn49kV1QUxcivJRIJ29kCO6hF7sMdGOZyO8bi6CBftbUAZt8qKxDwZ0pnYiXKaUUJc0US9z1LHBtXNG6s8w20dY1wW+2h++4CFAwhcQgYIPnwSIfbR/jkhdmWNHfeIvx+P2vjo/R3emgvr2P/KMtnSjdf7LD+Z6i+hqf0IfpZHABN05BlGd1VTmyrmGhvFWMDZfY7EJmenGAqGGZhSUWWZQBCoXmaf57Z3EtTnLdKB4Az0GAWDEPi7fyARo+f6kovkcgihU4XzqZmZoKtfL9mc+YlAJ/PZ4jbAFbHl3kv/WB3J07yOo12o6GqqtnPZDJomiaZAiERZ6vMCokIOEdgjVVmB/2z/AL2q3YmrxWWRQAAAABJRU5ErkJggg=="
+    },
+    {
+      "namespace": "ourbrightparade",
+      "title": "Our Bright Parade",
+      "author": "hololive IDOL PROJECT",
+      "durationSec": 270,
+      "modelData": 19,
+      "creeperDrop": true,
+      "lootTables": [],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAFpSURBVDiN3ZA9S0JxFIefe7PUKCrQ3gYlheISTWlIDUYfIBCnwJwaIoigIai2aCkICRoiwsQhgtqCWloaCuEigRQihWDRUBmBiXJ70aZ7udX9AvWbDuec5zn8//DnIxg1w+Fw9WcvHo8b7pqMoO1ojNToMPboLq0vCmanC0Cb62WiCicyOfyWbqY9vZQ/SxwFJ3FkK1TdDt6SF0SmFomuLFPKer4dE1UY4L22DncghPXpnsPNCAMzQfxDg6S6OlGu8uSppz8IiUxOk4j69xSsJhrb2xgKhACQZRlJkthYmGO5z4bZ1oyivBv/AcCzxYIoVDjbWmUisoMkSQB8LEUZq/tk/yRHsXT3W+DrcZLI5Cg0NSBUqoysjXMay/J6e02xxoW9VeD4pox8nqRFFPD1ODWBAOD1eqvqNYD53m6sE7N0mB7ZuzNzuX7AgyJr83Q6jSzLgiZQJWqtl+khNSr8TaCPXmYE/bN8Ac3Bg6IyLAQhAAAAAElFTkSuQmCC"
+    },
+    {
+      "namespace": "prismmelody",
+      "title": "Prism Melody",
+      "author": "hololive IDOL PROJECT",
+      "durationSec": 269,
+      "modelData": 20,
+      "creeperDrop": true,
+      "lootTables": [],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAFmSURBVDiN3ZHLK0RRHMc/d2aYiSRLZRZSxrWwMiIWHtl4LBRLJ4XBZsajkEfSNInMQsrMwmryWliwmCgrWR42LIaFEBHKFCLUjAX3dof5B/iuzvn+vt/P6ZwDf15KMlMIEf/phUKhpFlLslJgoR2PmGfUN0m2vYDr3XUAfW6EmbSyvIxSVlmLf6yX2P0FvvoBDrbeSXl+YG5tj+ahRa4OP1BLyhMOM2llAGtaOiuBMLfLdzQE3UyvuihtrKO7qRq5vc3O+jgA8jKqQ/QrAMTeXpEZNSxter6CUiKEYGpjg/O7F7zxKmzWlIQ3MCVsUs0MuwqZ8a6hqipCCAAG/UGU9Ew6XJ3sHx3/BjjtWQC8KTbCew+Yc3Nwe2c5u4ny/BjnCQsT/V20dnSR53Doefj+RqfTGVdVVTd7WtpQHPmM9A1RUVyE+STCaWpMn0ciEaSUig7QINraCDOWNGnlBIBRRliy0j/TJ+MsgQvHjlucAAAAAElFTkSuQmCC"
+    },
+    {
+      "namespace": "kiramekirider",
+      "title": "キラメキライダー☆",
+      "author": "hololive IDOL PROJECT",
+      "durationSec": 50,
+      "modelData": 21,
+      "creeperDrop": true,
+      "lootTables": [],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAF2SURBVDiN3ZC9SyNhEMZ/u1roKZJEhSts9DjICxZaxC8UxE5BDBwcXvNqIyIiCDYilmJjpY2fcLheYSdor6JBMXuKVcJdkRRBEDYmoAY9OBkLybLR/AP6VMMz8/xmGHj3MoqZWmt57VmWVXS2tFhodX2FsrtyBoP1/JgYpmd0HMDtv4FpraU/2CtzP3ckk3UkkUjJr62Y/Ll6FFlOy254U2TvvyRSIuvTy+JdVqq1lmzUAeBJTI4vP9H3Jc3i0hAsvQwd7Ud4TF7gL2ugKu0jG3XQWotlWYbpvcQ0hArzjo5vGgDbtlFKMTo+QiRTw9RGjpOb3wXXFwAqeUI1V3NwcIpSCq1fQN3XGTqb6ljreiBwH3j7RH9LLdmoQw6TVLKEi5zD18t/zOwv8GB8ZrZdk+mdpG1gmKoOH/5krQswAEKhkCilXHPse4CYb5rb7XMaw62czR/yt27X7cfjcWzbNlxAHpKvvTBvKK98uADglRdWLPTB9Az1X5PKKx6I1gAAAABJRU5ErkJggg=="
+    },
+    {
+      "namespace": "shinysmilystory",
+      "title": "Shiny Smily Story",
+      "author": "hololive IDOL PROJECT",
+      "durationSec": 256,
+      "modelData": 22,
+      "creeperDrop": true,
+      "lootTables": [],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAGYSURBVDiN3ZK/TxNhGMc/vdqKtIHeWAl2OpJL24BD+eliNTEICg41SEIh4EBIlzYGAxNNZGIyhk0dLg4mDsjCyWJ0ssmRNKem10qRQBo6gNYYDBogMPVyJfcP4Hd6n2+ez5PneZ8Hzr0cdmY8Hj856ymKYptrmlbo5UwQ54cKRwMPKKqTLL/7R+5SyLaYswpX9CzR6F1u7AWob/xFfe8wK19dRLpv8/OvzEzyPld+v6HO14bP3zyn63oaQKjCAPuHP4gu9LFxOUZX/yhPZke4NjBBUPpEx/Q9toUU5dI+FT1rdizUzLN7wNP0IqnkGACapiHLMvOv9vj46BkB/yEbO8WaP7hgDZokkaGpJOMLDhK5HWRZBuBx4iHHUjtf3i5RLu/isjACgNh6FYCLjX5eLy9xdKufgrGGKA1yc+I5UmuY653dvHiv4PV6zXwAp67rabfbPdccCpP/vkkxv07sTg/fSn/YOmghs5qhsydAIfcZscGDy+vBMAxUVXXUrDESiZhrrLZulWEY5lvTNJOzPQ5rMTvoP9MpbJCKB9a4rAUAAAAASUVORK5CYII="
+    },
+    {
+      "namespace": "blueclappertwilight",
+      "title": "BLUE CLAPPER （Twilight ver.）",
+      "author": "hololive IDOL PROJECT",
+      "durationSec": 414,
+      "modelData": 23,
+      "creeperDrop": true,
+      "lootTables": [],
+      "lores": [],
+      "texB64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAEZSURBVDiN3ZI9TsMwGIYfO00qBEyoYWVCCqhZkBcOwAgSB8jaq3CEjigTE1LLxgG6REKIoRE5QqRUTOUnStyh2I2SXABeyYNf+/n+bPjzEn1mFEW67cVx3HvXmk3o/DWnED8cSo+L6yte5s9kY783mDBwuVjiD/cZuXs4NZQOSA1aa2St0Y4EIP9e86FObBBpYKPJ45RKwtOgYOYWzL2VhaU3BKBcLG3Fst3T9HbCzC0ASJKEIAjIQp8KQfm17sxg0Dby6pMbjshCnyAIADh9ywHQspNvW4F7eWaNu4d7C5mF3M5sdXxA+74AUEppk83Aoqpt70II3scje56mKUmSCNvC72b39uEuWBMyMrCtoC2lVOcjNaF/pg05Fmuu1feR+QAAAABJRU5ErkJggg=="
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+---
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import "../styles/hololis.css";
+
+interface FooterLink {
+  href: string;
+  label: string;
+}
+interface Props {
+  title: string;
+  footerLinks?: FooterLink[];
+}
+const { title, footerLinks } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Baloo+2:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      (function () {
+        var KEY = "hololis-theme";
+        var saved = null;
+        try { saved = localStorage.getItem(KEY); } catch (e) {}
+        var theme = (saved === "light" || saved === "dark") ? saved : "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+
+        function sync() {
+          var cur = document.documentElement.getAttribute("data-theme");
+          var btns = document.querySelectorAll("[data-theme-btn]");
+          for (var i = 0; i < btns.length; i++) {
+            btns[i].classList.toggle("active", btns[i].getAttribute("data-theme-btn") === cur);
+          }
+        }
+
+        window.setTheme = function (t) {
+          if (t !== "light" && t !== "dark") return;
+          try { localStorage.setItem(KEY, t); } catch (e) {}
+          document.documentElement.setAttribute("data-theme", t);
+          sync();
+        };
+
+        window.toggleNav = function () {
+          var nav = document.querySelector(".nav");
+          if (!nav) return;
+          var btn = nav.querySelector(".nav-burger");
+          var open = nav.classList.toggle("open");
+          if (btn) btn.setAttribute("aria-expanded", open ? "true" : "false");
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", sync);
+        } else {
+          sync();
+        }
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <SiteNav />
+    <slot />
+    <SiteFooter links={footerLinks} />
+  </body>
+</html>

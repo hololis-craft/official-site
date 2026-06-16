@@ -1,0 +1,171 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const footerLinks = [
+  { href: "/", label: "トップ" },
+  { href: "/systems", label: "システム" },
+  { href: "#", label: "X (Twitter)" },
+];
+---
+<BaseLayout title="歴史 — ホロリスくらふと" footerLinks={footerLinks}>
+  <header class="dhero" data-screen-label="歴史ヒーロー">
+    <img src="/assets/bibidiba-castle.jpeg" alt="ワールドの大建築" />
+    <div class="dhero-tint"></div>
+    <div class="dhero-inner">
+      <div class="crumb"><a href="/">トップ</a> &nbsp;/&nbsp; 歴史</div>
+      <h1>ホロリスくらふとの歩み</h1>
+      <p>2025年2月、23時から始まった小さな友達作りが、300人を超えるコミュニティへ。これまでのシーズンを振り返ります。</p>
+    </div>
+  </header>
+
+  <section class="band">
+    <div class="sec" style="padding-bottom:40px">
+      <div class="facts">
+        <div class="fact"><div class="k">COMMUNITY</div><p>ホロライブリスナー限定の、ファン主導Minecraftサーバー。</p></div>
+        <div class="fact"><div class="k">CROSS PLAY</div><p>Java版・統合版の両対応サバイバル鯖。</p></div>
+        <div class="fact"><div class="k">MORE THAN A SERVER</div><p>単なる鯖ではなく、ホロリス同士の交流拠点。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="timeline" style="background:var(--bg-2)">
+    <div class="sec">
+      <div class="sec-head center">
+        <div class="sec-en dashed">TIMELINE</div>
+        <h2 class="sec-title">2025年2月、23時から始まった。</h2>
+      </div>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-date">2025.2 - 4</div>
+          <div class="tl-card">
+            <h3>Season 1 — はじまりの夜</h3>
+            <p class="desc">2025年2月6日ごろに始動。「23:00から」「ホロライブリスナー限定」「EXPOに向けての友達作り」という告知で集まったホロリスたち。翌日には、初日だけで150名が参加しました。</p>
+            <ul class="check">
+              <li><span><b>最初期からJava・統合版の両対応。</b>参加のハードルをできるだけ下げる方針でスタート。</span></li>
+              <li><span><b>勢力システムを採用。</b>コミュニティ内のサブコミュニティの誕生を容認し、Minecraftが交流のハブとして機能する形に。</span></li>
+            </ul>
+            <div class="img"><img src="/assets/castle.jpeg" alt="Season 1 のワールド" /></div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">2025.4</div>
+          <div class="tl-card">
+            <h3>Season 2 — 300人の鯖へ</h3>
+            <p class="desc">この時点で、Discord参加者は300人を超える規模に成長。シーズン1のワールドを終了し、新ワールドへ移行しました。ラグの改善や接続アドレスの変更など、快適に遊べる環境づくりも進みました。</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">2025.8</div>
+          <div class="tl-card">
+            <h3>金策Minecraft — ホロリス発の企画</h3>
+            <p class="desc">ホロライブ公式企画をオマージュし、ホロリスが自ら企画・運営した期間限定イベント。職業による役割分担やアイテムの売買など、ホロリス同士の交流を促す内容で好評を博しました。</p>
+            <ul class="check">
+              <li><span><b>「勢力」ではなく「会社」。</b>少人数でのチーム編成を促す形式を採用。</span></li>
+              <li><span><b>独自ルールも続々。</b>カジノや特殊アイテムの導入など、新しい要素を追加。</span></li>
+              <li><span><b>20名以上が完走。</b>好成績プレイヤーには、いさぴ先生によるアイコンイラストがプレゼントされた。</span></li>
+            </ul>
+            <div class="img"><img src="/assets/kinsaku-shop.jpeg" alt="金策Minecraftのショップ" /></div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">2025.9 - 2026.2</div>
+          <div class="tl-card">
+            <h3>Season 3 — 経済の導入</h3>
+            <p class="desc">経済システムを導入したサバイバルとして、2025年9月ごろに開始。小規模な初期リスポーンに建築がぎゅっと詰め込まれるなど、これまでとは異なる景色のワールドが生まれました。</p>
+            <div class="img"><img src="/assets/cafepon-recreation-exterior.jpg" alt="Season 3 の街並み" /></div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">2026.3 -</div>
+          <div class="tl-card">
+            <h3>Season 4 <span class="now-chip">開催中</span></h3>
+            <p class="desc">2026年3月13日ごろに開始。Season 3での経済の反省を踏まえ、サバイバルと経済を両立できるバランスへ調整。普段のMinecraftだけではエンドコンテンツにすぐ到達してしまうため、長く楽しめる要素を数多く追加しました。</p>
+            <ul class="check">
+              <li><span><b>やり込みの強化。</b>地形生成・Mob・ダンジョンを強化し、ネザー・エンドの解放イベントも実施。</span></li>
+              <li><span><b>お楽しみは継続。</b>カジノ・特殊アイテムはそのままに、さらに新要素も追加予定。</span></li>
+              <li><span><b>広がる景色。</b>拠点・タウン建築、釣りブーム、鉄道、ホロライブ関連スキン／モチーフ建築が拡大中。</span></li>
+            </ul>
+            <div class="img"><img src="/assets/season4-notify.jpg" alt="Season 4 告知" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band night endcta" data-screen-label="参加CTA">
+    <img src="/assets/floating-island-night.jpg" alt="" />
+    <div class="endcta-tint"></div>
+    <div class="endcta-inner">
+      <div class="sec-en dashed" style="justify-content:center">JOIN US</div>
+      <h2>次のシーズンは、あなたと一緒に。</h2>
+      <p>参加はDiscordから。ルールを確認してアドレスを入力すれば、今夜からあなたもホロリスくらふとの住人です。</p>
+      <div class="ctas">
+        <a class="btn btn-discord" href="/#join">Discordに参加する →</a>
+        <a class="btn btn-ghost" href="/systems">遊べるシステムを見る</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .dhero { position: relative; height: 360px; overflow: hidden; }
+  .dhero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
+  .dhero-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,38,.35) 0%, rgba(10,20,38,.92) 100%); }
+  :global([data-theme="light"]) .dhero-tint { background: linear-gradient(180deg, rgba(58,43,34,.22) 0%, rgba(58,43,34,.76) 100%); }
+  .dhero-inner { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 0 44px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .crumb { color: rgba(255,255,255,.78); font-size: 13px; font-weight: 700; }
+  .crumb a { color: var(--accent); }
+  .dhero h1 { font-size: 52px; font-weight: 900; color: #fff; line-height: 1.1; }
+  .dhero p { color: rgba(255,255,255,.85); font-weight: 700; font-size: 15px; max-width: 640px; line-height: 1.8; }
+
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .fact { background: var(--surface-grad); border: 1px solid var(--border); border-radius: 16px; padding: 24px 26px; }
+  .fact .k { font-family: var(--font-en); font-weight: 700; font-size: 12.5px; letter-spacing: .18em; color: var(--accent); }
+  .fact p { margin-top: 8px; font-size: 14.5px; font-weight: 700; color: var(--text); line-height: 1.7; }
+
+  .tl { position: relative; max-width: 880px; margin: 0 auto; padding-left: 46px; }
+  .tl::before { content: ""; position: absolute; left: 9px; top: 12px; bottom: 12px; width: 2px; background: linear-gradient(180deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 15%, transparent) 100%); }
+  .tl-item { position: relative; padding-bottom: 42px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before { content: ""; position: absolute; left: -45px; top: 5px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
+  .tl-date { font-family: var(--font-en); font-weight: 700; font-size: 14px; color: var(--accent); letter-spacing: .05em; }
+  .tl-card { background: var(--surface-grad); border: 1px solid var(--border); border-radius: 18px; padding: 26px 30px 28px; margin-top: 8px; box-shadow: var(--shadow-card); }
+  .tl-card h3 { font-size: 24px; font-weight: 900; display: flex; align-items: center; gap: 12px; color: var(--text); }
+  .tl-card .desc { font-size: 14.5px; color: var(--text-muted); font-weight: 500; line-height: 1.95; margin-top: 12px; }
+  .tl-card .img { margin-top: 18px; border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 7; border: 1px solid var(--border); }
+  .tl-card .img img { width: 100%; height: 100%; object-fit: cover; }
+  .tl-card .check { margin-top: 16px; }
+
+  .check { list-style: none; display: flex; flex-direction: column; gap: 9px; padding: 0; }
+  .check li { display: flex; gap: 12px; font-size: 13.5px; font-weight: 600; color: var(--text-muted); line-height: 1.7; }
+  .check li::before { content: ""; flex: 0 0 auto; width: 9px; height: 9px; margin-top: 5px; background: var(--accent); transform: rotate(45deg); box-shadow: 0 0 8px var(--accent-glow); }
+  .check li b { color: var(--text); font-weight: 800; }
+
+  .now-chip { background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 900; padding: 3px 11px; border-radius: 999px; }
+
+  .endcta { position: relative; overflow: hidden; clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%); }
+  .endcta img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .3; }
+  .endcta-tint { position: absolute; inset: 0; background: linear-gradient(100deg, rgba(10,20,38,.95) 38%, rgba(10,20,38,.5)); }
+  .endcta-inner { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 108px 44px 92px; text-align: center; }
+  .endcta h2 { font-size: 36px; font-weight: 900; color: #fff; margin: 14px 0; }
+  .endcta p { color: rgba(234,241,255,.8); font-weight: 500; font-size: 15px; line-height: 1.9; max-width: 560px; margin: 0 auto 26px; }
+  .endcta .ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 820px) {
+    .facts { grid-template-columns: 1fr; }
+    .dhero { height: 300px; }
+    .dhero-inner { padding: 0 22px; }
+    .dhero h1 { font-size: 32px; }
+    .dhero p { font-size: 14px; }
+    .tl { padding-left: 36px; }
+    .tl-card { padding: 22px 22px 24px; border-radius: 14px; }
+    .tl-card h3 { font-size: 19px; }
+    .tl-card .desc { font-size: 14px; }
+    .endcta-inner { padding: 80px 22px 70px; }
+    .endcta h2 { font-size: 26px; }
+  }
+</style>

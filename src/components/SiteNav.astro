@@ -1,0 +1,24 @@
+---
+const links = [
+  { href: "/systems", label: "システム" },
+  { href: "/guide", label: "ガイド" },
+  { href: "/history", label: "歴史" },
+  { href: "/#join", label: "参加方法" },
+];
+---
+<nav class="nav">
+  <a class="nav-logo" href="/"><span class="nav-mark"></span><span>ホロリスくらふと</span></a>
+  <div class="nav-menu" id="nav-menu">
+    <div class="nav-links">
+      {links.map((l) => (<a href={l.href}>{l.label}</a>))}
+    </div>
+    <a class="nav-cta" href="/#join">Discordに参加</a>
+  </div>
+  <div class="theme-toggle" role="group" aria-label="テーマ切替">
+    <button data-theme-btn="light" onclick="setTheme('light')" aria-label="夕焼けテーマ">夕</button>
+    <button data-theme-btn="dark" onclick="setTheme('dark')" aria-label="夜テーマ">夜</button>
+  </div>
+  <button class="nav-burger" aria-label="メニュー" aria-expanded="false" aria-controls="nav-menu" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>

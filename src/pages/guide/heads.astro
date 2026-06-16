@@ -1,0 +1,508 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MinecraftHead from "../../components/MinecraftHead.astro";
+import GuideCredits from "../../components/GuideCredits.astro";
+import headsData from "../../data/heads.json";
+import membersData from "../../data/members.json";
+
+interface Member {
+  name: string;
+  nameEn?: string;
+  branch: string;
+  gen: string;
+  status: string;
+  color: string;
+  aliases?: string[];
+}
+const members = membersData as Record<string, Member>;
+
+const slugToCanonical = new Map<string, string>();
+for (const [slug, m] of Object.entries(members)) {
+  slugToCanonical.set(slug, slug);
+  for (const a of m.aliases ?? []) slugToCanonical.set(a, slug);
+}
+
+interface Head { id: string; member: string; hash: string; b64: string }
+const heads = headsData.heads as Head[];
+
+const grouped = new Map<string, Head[]>();
+for (const h of heads) {
+  const canon = slugToCanonical.get(h.member) ?? h.member;
+  if (!grouped.has(canon)) grouped.set(canon, []);
+  grouped.get(canon)!.push(h);
+}
+
+const BRANCH_ORDER = ["JP", "DEV_IS", "ID", "EN", "OTHER"];
+const GEN_ORDER: Record<string, number> = {
+  "0": 0, "1": 1, "gamers": 2, "2": 3, "3": 4, "4": 5, "5": 6, "6": 7,
+  "ReGLOSS": 10, "FLOWGLOW": 11,
+  "ID1": 20, "ID2": 21, "ID3": 22,
+  "Myth": 30, "ProjectHOPE": 31, "Promise": 32, "Advent": 33, "Justice": 34,
+  "?": 99,
+};
+const GEN_LABEL: Record<string, string> = {
+  "0": "0期生", "1": "1期生", "gamers": "ゲーマーズ",
+  "2": "2期生", "3": "3期生", "4": "4期生", "5": "5期生", "6": "秘密結社ホロX",
+  "ReGLOSS": "ReGLOSS", "FLOWGLOW": "FLOW GLOW",
+  "ID1": "ID 1期", "ID2": "ID 2期", "ID3": "ID 3期",
+  "Myth": "Myth", "ProjectHOPE": "Project: HOPE",
+  "Promise": "Promise (Council)", "Advent": "Advent", "Justice": "Justice",
+  "?": "その他",
+};
+const BRANCH_LABEL: Record<string, string> = {
+  JP: "JP", DEV_IS: "DEV_IS", ID: "ID", EN: "EN", OTHER: "その他",
+};
+
+const memberRows = [...grouped.entries()]
+  .map(([slug, hs]) => {
+    const m = members[slug] ?? {
+      name: slug, nameEn: "", branch: "OTHER", gen: "?",
+      status: "unknown", color: "#9CA3AF",
+    };
+    return { slug, member: m, heads: hs };
+  })
+  .sort((a, b) => {
+    const bi = BRANCH_ORDER.indexOf(a.member.branch) - BRANCH_ORDER.indexOf(b.member.branch);
+    if (bi !== 0) return bi;
+    const gi = (GEN_ORDER[a.member.gen] ?? 50) - (GEN_ORDER[b.member.gen] ?? 50);
+    if (gi !== 0) return gi;
+    return a.member.name.localeCompare(b.member.name, "ja");
+  });
+
+const branchCounts = Object.fromEntries(
+  BRANCH_ORDER.map((b) => [b, memberRows.filter((r) => r.member.branch === b).reduce((s, r) => s + r.heads.length, 0)]),
+);
+
+const footerLinks = [
+  { href: "/", label: "トップ" },
+  { href: "/guide", label: "ガイド" },
+  { href: "/systems", label: "システム" },
+];
+---
+<BaseLayout title="頭ガチャ一覧 — ホロリスくらふと" footerLinks={footerLinks}>
+  <header class="dhero" data-screen-label="頭一覧ヒーロー">
+    <img src="/assets/hololive-head-gacha.jpeg" alt="ホロメン頭ガチャ" />
+    <div class="dhero-tint"></div>
+    <div class="dhero-inner">
+      <div class="crumb"><a href="/">トップ</a> &nbsp;/&nbsp; <a href="/guide">ガイド</a> &nbsp;/&nbsp; 頭</div>
+      <h1>ホロメン頭ガチャ<br />全 {heads.length} 種類</h1>
+      <p>{memberRows.length} 名のホロメンが持つ歴代スキンの頭をすべて確認できます。マウスを乗せると 3D で回転、クリックで詳細。</p>
+    </div>
+  </header>
+
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <div class="filter-chips" id="branch-chips">
+        <button class="chip active" data-branch="all">すべて <span class="chip-num">{heads.length}</span></button>
+        {BRANCH_ORDER.filter((b) => branchCounts[b] > 0).map((b) => (
+          <button class="chip" data-branch={b}>{BRANCH_LABEL[b]} <span class="chip-num">{branchCounts[b]}</span></button>
+        ))}
+      </div>
+      <input class="filter-search" id="search" type="search" placeholder="メンバー名で検索 (例: すいせい / suisei)" />
+      <div class="filter-count" id="count">{memberRows.length} メンバー / {heads.length} 種</div>
+    </div>
+  </div>
+
+  <section class="band heads-band">
+    <div class="sec">
+      <div class="member-list">
+        {memberRows.map((row) => (
+          <section
+            class="member-row"
+            data-branch={row.member.branch}
+            data-gen={row.member.gen}
+            data-name={`${row.member.name} ${row.member.nameEn ?? ""} ${row.slug}`.toLowerCase()}
+            data-status={row.member.status}
+            id={`m-${row.slug}`}
+            style={`--member-color:${row.member.color}`}
+          >
+            <header class="member-head">
+              <div class="member-name">
+                <span class="member-dot"></span>
+                <h3>{row.member.name}</h3>
+                <span class="member-en">{row.member.nameEn}</span>
+                {row.member.status !== "active" && (
+                  <span class="member-status">{row.member.status === "graduated" ? "卒業" : row.member.status === "terminated" ? "契約解除" : "確認中"}</span>
+                )}
+              </div>
+              <div class="member-meta">
+                <span class="member-branch">{BRANCH_LABEL[row.member.branch] ?? row.member.branch}</span>
+                <span class="member-gen">{GEN_LABEL[row.member.gen] ?? row.member.gen}</span>
+                <span class="member-count">{row.heads.length} 種</span>
+              </div>
+            </header>
+            <div class="head-grid">
+              {row.heads.map((h, i) => (
+                <button
+                  class="head-card"
+                  data-member={row.member.name}
+                  data-hash={h.hash}
+                  data-idx={i + 1}
+                  aria-label={`${row.member.name} の頭 ${i + 1}`}
+                >
+                  <MinecraftHead b64={h.b64} size={88} label={`${row.member.name} ${i + 1}`} />
+                  <span class="head-num">{String(i + 1).padStart(2, "0")}</span>
+                </button>
+              ))}
+            </div>
+          </section>
+        ))}
+        <p class="empty" id="empty" hidden>該当するメンバーがいません。フィルタを調整してください。</p>
+      </div>
+    </div>
+  </section>
+
+  <GuideCredits>
+    <h3>データ出典</h3>
+    <ul>
+      <li>頭スキン抽選表：<a href="https://github.com/hololis-craft/datapack/blob/master/datapacks/hololis/data/hololis/loot_table/holomem/player_heads.json" rel="noopener">hololis-craft/datapack</a></li>
+      <li>テクスチャ：textures.minecraft.net（Mojang CDN）</li>
+    </ul>
+    <h3>スキン制作</h3>
+    <p>掲載スキンは、ホロライブメンバー本人が配信中に使用したスキン、および有志のホロリスによる制作物が含まれます。個別の制作クレジット情報を整備中です。心当たりのある方、または「自分の作ったスキンが載っている」という方は、Discord までご連絡ください。</p>
+    <small>※ 表示順はデータパック内の登録順に基づき、レアリティや排出確率を表すものではありません。</small>
+  </GuideCredits>
+
+  <dialog id="head-modal" class="head-modal">
+    <div class="modal-inner">
+      <button class="modal-close" aria-label="閉じる" data-modal-close>✕</button>
+      <div class="modal-stage" id="modal-stage">
+        <div id="modal-head-wrap">
+          <MinecraftHead b64={heads[0].b64} size={280} hoverSpin={false} label="拡大表示" />
+        </div>
+      </div>
+      <div class="modal-info">
+        <div class="modal-member" id="modal-member"></div>
+        <div class="modal-sub" id="modal-sub"></div>
+        <div class="modal-hash" id="modal-hash"></div>
+        <button class="btn btn-ghost modal-copy" id="modal-copy" type="button">テクスチャURLをコピー</button>
+        <p class="modal-hint">マウスをドラッグして自由に回転できます。</p>
+      </div>
+    </div>
+  </dialog>
+
+  <script is:inline>
+    (function () {
+      const rows = Array.from(document.querySelectorAll(".member-row"));
+      const chips = Array.from(document.querySelectorAll("#branch-chips .chip"));
+      const search = document.getElementById("search");
+      const countEl = document.getElementById("count");
+      const emptyEl = document.getElementById("empty");
+
+      let activeBranch = "all";
+      let query = "";
+
+      function applyFilters() {
+        let visMembers = 0, visHeads = 0;
+        for (const row of rows) {
+          const branch = row.dataset.branch;
+          const name = row.dataset.name || "";
+          const matchBranch = activeBranch === "all" || branch === activeBranch;
+          const matchQuery = !query || name.includes(query);
+          const show = matchBranch && matchQuery;
+          row.hidden = !show;
+          if (show) {
+            visMembers++;
+            visHeads += row.querySelectorAll(".head-card").length;
+          }
+        }
+        countEl.textContent = visMembers + " メンバー / " + visHeads + " 種";
+        emptyEl.hidden = visMembers > 0;
+      }
+
+      for (const chip of chips) {
+        chip.addEventListener("click", () => {
+          activeBranch = chip.dataset.branch;
+          chips.forEach((c) => c.classList.toggle("active", c === chip));
+          applyFilters();
+        });
+      }
+      search.addEventListener("input", () => {
+        query = search.value.trim().toLowerCase();
+        applyFilters();
+      });
+
+      // --- modal ---
+      const modal = document.getElementById("head-modal");
+      const modalWrap = document.getElementById("modal-head-wrap");
+      const modalHead = modalWrap.querySelector(".mc-head");
+      const modalStage = modalWrap.querySelector(".mc-stage");
+      const modalMember = document.getElementById("modal-member");
+      const modalSub = document.getElementById("modal-sub");
+      const modalHash = document.getElementById("modal-hash");
+      const modalCopy = document.getElementById("modal-copy");
+      let currentHash = "";
+
+      function openModal(card) {
+        const sourceHead = card.querySelector(".mc-head");
+        const tex = sourceHead ? sourceHead.style.getPropertyValue("--mc-tex") : "";
+        const member = card.dataset.member;
+        const hash = card.dataset.hash;
+        const idx = card.dataset.idx;
+        modalHead.style.setProperty("--mc-tex", tex);
+        modalMember.textContent = member;
+        modalSub.textContent = "バリエーション #" + String(idx).padStart(2, "0");
+        modalHash.textContent = hash;
+        currentHash = hash;
+        rotX = -18; rotY = 25;
+        modalStage.style.transform = "rotateX(-18deg) rotateY(25deg)";
+        if (typeof modal.showModal === "function") modal.showModal();
+        else modal.setAttribute("open", "");
+      }
+
+      function closeModal() {
+        if (typeof modal.close === "function") modal.close();
+        else modal.removeAttribute("open");
+      }
+
+      document.addEventListener("click", (e) => {
+        const card = e.target.closest(".head-card");
+        if (card) { e.preventDefault(); openModal(card); return; }
+        if (e.target.closest("[data-modal-close]")) { closeModal(); return; }
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.open) closeModal();
+      });
+
+      modalCopy.addEventListener("click", async () => {
+        const url = "https://textures.minecraft.net/texture/" + currentHash;
+        try {
+          await navigator.clipboard.writeText(url);
+          modalCopy.textContent = "コピーしました!";
+          setTimeout(() => { modalCopy.textContent = "テクスチャURLをコピー"; }, 1500);
+        } catch (err) {
+          modalCopy.textContent = "コピーに失敗しました";
+        }
+      });
+
+      // --- drag rotation ---
+      let rotX = -18, rotY = 25;
+      let dragging = false, lx = 0, ly = 0;
+      modalHead.addEventListener("pointerdown", (e) => {
+        dragging = true; lx = e.clientX; ly = e.clientY;
+        modalHead.setPointerCapture(e.pointerId);
+      });
+      modalHead.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - lx, dy = e.clientY - ly;
+        lx = e.clientX; ly = e.clientY;
+        rotY += dx * 0.6;
+        rotX = Math.max(-80, Math.min(80, rotX - dy * 0.6));
+        modalStage.style.transform = "rotateX(" + rotX + "deg) rotateY(" + rotY + "deg)";
+      });
+      const endDrag = (e) => { dragging = false; try { modalHead.releasePointerCapture(e.pointerId); } catch (_) {} };
+      modalHead.addEventListener("pointerup", endDrag);
+      modalHead.addEventListener("pointercancel", endDrag);
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .dhero { position: relative; height: 320px; overflow: hidden; }
+  .dhero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .dhero-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,38,.45) 0%, rgba(10,20,38,.92) 100%); }
+  :global([data-theme="light"]) .dhero-tint { background: linear-gradient(180deg, rgba(58,43,34,.3) 0%, rgba(58,43,34,.78) 100%); }
+  .dhero-inner { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 0 44px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .crumb { color: rgba(255,255,255,.78); font-size: 13px; font-weight: 700; }
+  .crumb a { color: var(--accent); }
+  .dhero h1 { font-size: 46px; font-weight: 900; color: #fff; line-height: 1.12; }
+  .dhero p { color: rgba(255,255,255,.85); font-weight: 700; font-size: 14.5px; max-width: 620px; line-height: 1.8; }
+
+  .filter-bar {
+    position: sticky;
+    top: 74px;
+    z-index: 30;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .filter-inner {
+    max-width: 1180px; margin: 0 auto;
+    padding: 14px 44px;
+    display: flex; align-items: center; gap: 18px;
+    flex-wrap: wrap;
+  }
+  .filter-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    font-family: inherit; font-weight: 800; font-size: 13px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color .15s, background .15s, border-color .15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .chip:hover { color: var(--text); border-color: var(--border-strong); }
+  .chip.active {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+  .chip-num { font-family: var(--font-en); font-size: 11px; opacity: .8; }
+  .filter-search {
+    flex: 1; min-width: 200px;
+    font-family: inherit; font-weight: 600; font-size: 14px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-2);
+    color: var(--text);
+  }
+  .filter-search:focus { outline: none; border-color: var(--accent); }
+  .filter-count {
+    font-family: var(--font-en);
+    font-size: 12px; font-weight: 700;
+    color: var(--text-soft);
+    white-space: nowrap;
+  }
+
+  .heads-band { background: var(--bg); }
+  .member-list { display: flex; flex-direction: column; gap: 36px; }
+  .member-row { scroll-margin-top: 140px; }
+  .member-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 14px;
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .member-name { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .member-dot {
+    align-self: center;
+    width: 12px; height: 12px;
+    background: var(--member-color);
+    transform: rotate(45deg);
+    box-shadow: 0 0 14px var(--member-color);
+    flex: 0 0 auto;
+  }
+  .member-row h3 { font-size: 22px; font-weight: 900; color: var(--text); }
+  .member-en { font-family: var(--font-en); font-size: 13px; color: var(--text-soft); letter-spacing: .04em; }
+  .member-status {
+    font-size: 11px; font-weight: 800;
+    background: var(--surface-2);
+    color: var(--text-soft);
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+  .member-meta { display: flex; gap: 8px; font-size: 12px; font-weight: 800; color: var(--text-soft); }
+  .member-branch { color: var(--accent); }
+  .member-gen { color: var(--text-muted); }
+  .member-count { font-family: var(--font-en); }
+
+  .head-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 14px;
+  }
+  .head-card {
+    position: relative;
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 10px 10px;
+    cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px;
+    aspect-ratio: 1;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+    font-family: inherit; color: inherit;
+  }
+  .head-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(0,0,0,.32), 0 0 0 1px var(--accent-soft);
+  }
+  .head-num {
+    font-family: var(--font-en);
+    font-size: 11px; font-weight: 700;
+    color: var(--text-soft);
+    letter-spacing: .1em;
+  }
+  .empty {
+    text-align: center;
+    color: var(--text-soft);
+    padding: 60px 0;
+    font-weight: 700;
+  }
+
+  /* --- modal --- */
+  .head-modal {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: 92vw;
+    max-height: 92vh;
+  }
+  .head-modal::backdrop {
+    background: rgba(5, 10, 20, .82);
+    backdrop-filter: blur(6px);
+  }
+  .modal-inner {
+    background: var(--surface-grad);
+    border: 1px solid var(--border-strong);
+    border-radius: 22px;
+    padding: 36px 40px 32px;
+    color: var(--text);
+    display: grid;
+    grid-template-columns: 320px 280px;
+    gap: 32px;
+    align-items: center;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 12px; right: 14px;
+    width: 36px; height: 36px;
+    background: transparent; border: none;
+    color: var(--text-soft);
+    font-size: 18px; font-weight: 900;
+    cursor: pointer; border-radius: 999px;
+  }
+  .modal-close:hover { color: var(--text); background: var(--surface-2); }
+  .modal-stage {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 320px;
+  }
+  #modal-head-wrap :global(.mc-head) {
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+  }
+  #modal-head-wrap :global(.mc-head:active) { cursor: grabbing; }
+  .modal-info { display: flex; flex-direction: column; gap: 10px; }
+  .modal-member { font-size: 22px; font-weight: 900; color: var(--text); }
+  .modal-sub { font-family: var(--font-en); font-size: 13px; color: var(--accent); font-weight: 800; }
+  .modal-hash {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-soft);
+    word-break: break-all;
+    background: var(--surface-2);
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin: 8px 0 4px;
+  }
+  .modal-copy { font-size: 13px; padding: 10px 18px; align-self: flex-start; }
+  .modal-hint { font-size: 12px; color: var(--text-soft); margin-top: 6px; }
+
+  @media (max-width: 760px) {
+    .dhero { height: 260px; }
+    .dhero-inner { padding: 0 22px; }
+    .dhero h1 { font-size: 30px; }
+    .filter-bar { top: 64px; }
+    .filter-inner { padding: 12px 22px; gap: 12px; }
+    .filter-search { width: 100%; min-width: 0; }
+    .filter-count { width: 100%; text-align: right; }
+
+    .member-head { gap: 8px; margin-bottom: 14px; }
+    .head-grid { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px; }
+
+    .modal-inner { grid-template-columns: 1fr; padding: 24px 22px 26px; gap: 18px; }
+    .modal-stage { min-height: 260px; }
+    #modal-head-wrap :global(.mc-head) { --mc-size: 220px !important; }
+  }
+</style>

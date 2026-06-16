@@ -1,0 +1,278 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GuideCredits from "../../components/GuideCredits.astro";
+
+const jobs = [
+  {
+    name: "農家", en: "FARMER", color: "#84CC16",
+    desc: "作物を植えて収穫し、家畜を育てる。日々のコツコツが収入になるスタンダードな職業。",
+    income: ["小麦・ニンジン・ジャガイモなどの収穫", "家畜の繁殖と肉・卵の納品"],
+    fit: "建築や拠点整備が好きな人 / じっくり進めたい人",
+  },
+  {
+    name: "冒険者", en: "ADVENTURER", color: "#EF4444",
+    desc: "Mob を狩り、ダンジョンに潜り、未知の地形を探索。一攫千金を狙うアクティブ職。",
+    income: ["敵 Mob の討伐報酬", "ダンジョン攻略・レアドロップの売却"],
+    fit: "戦闘 / 探検が好きな人 / 一発の大きい当たりを狙いたい人",
+  },
+  {
+    name: "採掘士", en: "MINER", color: "#6B7280",
+    desc: "深く、もっと深く。鉱石を掘り、原石を加工して売る。安定して資源を回せる職業。",
+    income: ["鉱石・原石・古代の残骸の採掘", "鉱石ブロックの加工納品"],
+    fit: "黙々と作業するのが好きな人 / 拠点を地下に作りたい人",
+  },
+  {
+    name: "釣り人", en: "ANGLER", color: "#0EA5E9",
+    desc: "竿を垂らして魚を釣る。レアな釣果や宝物も。海・川・温泉で大物狙い。",
+    income: ["魚介の納品", "釣り上げた宝アイテム"],
+    fit: "のんびり遊びたい人 / 配信や雑談しながらやりたい人",
+  },
+  {
+    name: "商人", en: "MERCHANT", color: "#F59E0B",
+    desc: "プレイヤーショップを構え、需要のあるアイテムを並べる。立地と価格設定が腕の見せどころ。",
+    income: ["プレイヤーショップでの売上", "委託販売・買い取り業務"],
+    fit: "経済シミュレーションが好きな人 / 接客や交流が好きな人",
+  },
+  {
+    name: "建築家", en: "BUILDER", color: "#A78BFA",
+    desc: "他プレイヤーから建築や整地を受託。完成物の品質と納期が信頼に直結。",
+    income: ["建築・整地の受注報酬", "完成済み拠点の販売"],
+    fit: "設計や造形が得意な人 / クリエイティブが好きな人",
+  },
+];
+
+const footerLinks = [
+  { href: "/", label: "トップ" },
+  { href: "/guide", label: "ガイド" },
+  { href: "/systems", label: "システム" },
+];
+---
+<BaseLayout title="職業の選び方 — ホロリスくらふと" footerLinks={footerLinks}>
+  <header class="dhero" data-screen-label="職業ヒーロー">
+    <img src="/assets/bibidiba-castle.jpeg" alt="" />
+    <div class="dhero-tint"></div>
+    <div class="dhero-inner">
+      <div class="crumb"><a href="/">トップ</a> &nbsp;/&nbsp; <a href="/guide">ガイド</a> &nbsp;/&nbsp; 職業</div>
+      <h1>職業の選び方</h1>
+      <p>好きな生き方で、ワールドに居場所を。自分にあったスタイルで稼ぎながら、サーバーの一員になろう。</p>
+    </div>
+  </header>
+
+  <div class="draft-banner">
+    <strong>DRAFT</strong>
+    <span>このページは記載内容が調整中です。実装中の仕様と差異がある場合があります。最新は Discord でご確認ください。</span>
+  </div>
+
+  <section class="band">
+    <div class="sec">
+      <div class="sec-head center">
+        <div class="sec-en dashed">CATALOG</div>
+        <h2 class="sec-title">職業カタログ</h2>
+        <p class="sec-lead">複数の職業を兼業できる場合もあります。詳細は転職ルール欄を参照してください。</p>
+      </div>
+      <div class="job-grid">
+        {jobs.map((j) => (
+          <article class="job-card" style={`--job-color:${j.color}`}>
+            <header>
+              <div class="sec-en"><span>{j.en}</span></div>
+              <h3>{j.name}</h3>
+            </header>
+            <p class="job-desc">{j.desc}</p>
+            <div class="job-section">
+              <span class="job-label">主な収入源</span>
+              <ul>
+                {j.income.map((i) => (<li>{i}</li>))}
+              </ul>
+            </div>
+            <div class="job-section">
+              <span class="job-label">向いてる人</span>
+              <p class="job-fit">{j.fit}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>RULES</span></div>
+        <h2 class="sec-title">転職・兼業のルール（ドラフト）</h2>
+      </div>
+      <ul class="check">
+        <li><span><b>初期は無職スタート。</b>サーバー内の転職窓口で好きな職業を選んでください。</span></li>
+        <li><span><b>兼業は最大 2 つまで（仮）。</b>同時に複数の収入源を持てますが、転職にはクールタイムあり。</span></li>
+        <li><span><b>レベルアップで報酬アップ。</b>同じ職業を続けるほど、各アクションの報酬が上昇します。</span></li>
+        <li><span><b>転職コマンドは <code>/jobs</code> 系を予定。</b>正確な書式はサーバー内ヘルプを参照してください。</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>TIMELINE</span></div>
+        <h2 class="sec-title">稼ぎ方の進め方</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-when">1 日目</div>
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <h4>まずは食料と寝床</h4>
+            <p>農家か採掘士からスタートするのが安定。食料の確保と簡易拠点を作って、夜を越えましょう。</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-when">最初の 1 週間</div>
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <h4>装備と職業の方向性</h4>
+            <p>鉄装備・ベッド・かまど周りを整える。並行して、自分が「楽しい」と感じる作業に近い職業に転職。</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-when">中期</div>
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <h4>収益化の柱を立てる</h4>
+            <p>プレイヤーショップを開く、レア素材集めに特化する、依頼を受ける、など。"自分の商売" を作る段階。</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-when">長期</div>
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <h4>勢力や大型プロジェクト</h4>
+            <p>稼いだお金で大規模建築や勢力の運営に参加。経済を回す側に。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="sec center-block">
+      <h3 class="link-h3">使い道は経済ガイドへ</h3>
+      <p class="link-p">職業で稼いだお金の使い道は、経済ガイドで詳しく解説しています。</p>
+      <a class="btn btn-primary" href="/guide/economy">経済ガイドを見る →</a>
+    </div>
+  </section>
+
+  <GuideCredits>
+    <h3>参考・実装</h3>
+    <ul>
+      <li>職業プラグイン：（後日記載）</li>
+      <li>仕様調整：ホロリスくらふと運営</li>
+    </ul>
+    <small>※ このページの内容は調整中のドラフトです。職業数・収入源・転職ルールはサーバー内仕様が正となります。</small>
+  </GuideCredits>
+</BaseLayout>
+
+<style>
+  .dhero { position: relative; height: 320px; overflow: hidden; }
+  .dhero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .dhero-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,38,.45) 0%, rgba(10,20,38,.92) 100%); }
+  :global([data-theme="light"]) .dhero-tint { background: linear-gradient(180deg, rgba(58,43,34,.3) 0%, rgba(58,43,34,.78) 100%); }
+  .dhero-inner { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 0 44px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .crumb { color: rgba(255,255,255,.78); font-size: 13px; font-weight: 700; }
+  .crumb a { color: var(--accent); }
+  .dhero h1 { font-size: 46px; font-weight: 900; color: #fff; line-height: 1.12; }
+  .dhero p { color: rgba(255,255,255,.85); font-weight: 700; font-size: 14.5px; max-width: 620px; line-height: 1.8; }
+
+  .draft-banner {
+    background: rgba(252, 211, 77, .12);
+    border-top: 1px solid rgba(252, 211, 77, .3);
+    border-bottom: 1px solid rgba(252, 211, 77, .3);
+    color: #FCD34D;
+    padding: 14px 44px;
+    text-align: center;
+    font-size: 13.5px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+  }
+  .draft-banner strong {
+    font-family: var(--font-en);
+    font-size: 11px;
+    letter-spacing: .14em;
+    background: #FCD34D;
+    color: #422006;
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+  .draft-banner code { font-family: var(--font-mono); font-size: 12px; }
+
+  .band.alt { background: var(--bg-2); }
+
+  .job-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .job-card {
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px 24px 24px;
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .job-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--job-color);
+    box-shadow: 0 0 12px var(--job-color);
+  }
+  .job-card header h3 { font-size: 22px; font-weight: 900; color: var(--text); margin-top: 10px; }
+  .job-desc { font-size: 13.5px; color: var(--text-muted); font-weight: 500; line-height: 1.9; }
+  .job-section { padding-top: 10px; border-top: 1px dashed var(--border); }
+  .job-label {
+    display: block;
+    font-family: var(--font-en);
+    font-size: 11px; font-weight: 800;
+    color: var(--job-color);
+    letter-spacing: .12em;
+    margin-bottom: 8px;
+  }
+  .job-section ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .job-section li {
+    font-size: 12.5px; color: var(--text-muted); font-weight: 600;
+    line-height: 1.7; padding-left: 14px; position: relative;
+  }
+  .job-section li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px;
+    background: var(--job-color); transform: rotate(45deg);
+  }
+  .job-fit { font-size: 13px; color: var(--text); font-weight: 700; line-height: 1.7; }
+
+  .check { list-style: none; display: flex; flex-direction: column; gap: 11px; padding: 0; }
+  .check li { display: flex; gap: 13px; font-size: 14px; font-weight: 600; color: var(--text-muted); line-height: 1.85; }
+  .check li::before { content: ""; flex: 0 0 auto; width: 10px; height: 10px; margin-top: 6px; background: var(--accent); transform: rotate(45deg); box-shadow: 0 0 10px var(--accent-glow); }
+  .check li b { color: var(--text); font-weight: 800; }
+  .check code { font-family: var(--font-mono); font-size: 12.5px; background: var(--surface-2); padding: 2px 8px; border-radius: 4px; color: var(--accent); font-weight: 700; }
+
+  .timeline { display: flex; flex-direction: column; }
+  .tl-item { display: grid; grid-template-columns: 140px 24px 1fr; gap: 20px; padding: 18px 0; }
+  .tl-item + .tl-item { border-top: 1px solid var(--border); }
+  .tl-when { font-size: 14px; font-weight: 900; color: var(--accent); padding-top: 3px; }
+  .tl-dot { position: relative; }
+  .tl-dot::before { content: ""; position: absolute; top: 9px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 11px; height: 11px; background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+  .tl-body h4 { font-size: 17px; font-weight: 900; color: var(--text); }
+  .tl-body p { font-size: 13.5px; color: var(--text-muted); font-weight: 500; margin-top: 5px; line-height: 1.9; }
+
+  .center-block { text-align: center; }
+  .link-h3 { font-size: 24px; font-weight: 900; color: var(--text); }
+  .link-p { font-size: 14px; color: var(--text-muted); font-weight: 600; line-height: 1.9; margin: 12px 0 24px; }
+
+  @media (max-width: 760px) {
+    .dhero { height: 260px; }
+    .dhero-inner { padding: 0 22px; }
+    .dhero h1 { font-size: 30px; }
+    .draft-banner { padding: 12px 22px; font-size: 12.5px; }
+    .job-grid { grid-template-columns: 1fr; }
+    .tl-item { grid-template-columns: 80px 16px 1fr; gap: 10px; padding: 16px 0; }
+    .tl-when { font-size: 12.5px; }
+  }
+</style>

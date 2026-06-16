@@ -1,0 +1,74 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = "クレジット" } = Astro.props;
+---
+<section class="band alt credits">
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-en"><span>CREDITS</span></div>
+      <h2 class="sec-title">{title}</h2>
+      <p class="sec-lead">スキン・楽曲・データパックの制作者の皆さま、ありがとうございます。掲載漏れや修正のご連絡は Discord までお気軽に。</p>
+    </div>
+    <div class="credits-body">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .credits-body {
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.95;
+    font-weight: 500;
+  }
+  .credits-body :global(h3) {
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 900;
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+  .credits-body :global(h3):first-child { margin-top: 0; }
+  .credits-body :global(ul) {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 24px;
+  }
+  .credits-body :global(li) {
+    padding-left: 18px;
+    position: relative;
+  }
+  .credits-body :global(li)::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 11px;
+    width: 7px; height: 7px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .credits-body :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .credits-body :global(p) { margin-top: 8px; }
+  .credits-body :global(small) {
+    display: block;
+    color: var(--text-soft);
+    font-size: 12.5px;
+    margin-top: 14px;
+  }
+  @media (max-width: 760px) {
+    .credits-body { padding: 22px 22px; }
+    .credits-body :global(ul) { grid-template-columns: 1fr; }
+  }
+</style>
