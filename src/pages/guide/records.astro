@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GuideCredits from "../../components/GuideCredits.astro";
+import PageHero from "../../components/PageHero.astro";
 import discsData from "../../data/discs.json";
 
 const LOOT_LABEL: Record<string, string> = {
@@ -27,15 +28,11 @@ const footerLinks = [
 ];
 ---
 <BaseLayout title="レコード一覧 — ホロリスくらふと" footerLinks={footerLinks}>
-  <header class="dhero" data-screen-label="レコードヒーロー">
-    <img src="/assets/miko-suisei-shrine-with-gomoku.jpg" alt="" />
-    <div class="dhero-tint"></div>
-    <div class="dhero-inner">
-      <div class="crumb"><a href="/">トップ</a> &nbsp;/&nbsp; <a href="/guide">ガイド</a> &nbsp;/&nbsp; レコード</div>
-      <h1>レコード一覧<br />全 {discs.length} 種類</h1>
-      <p>歴代 hololive EXPO / fes. のテーマソングをはじめ、ホロライブ関連曲のアレンジをレコード化。入手場所もまとめてチェック。</p>
-    </div>
-  </header>
+  <PageHero image="/assets/miko-suisei-shrine-with-gomoku.jpg" screenLabel="レコードヒーロー">
+    <div slot="crumb" class="crumb"><a href="/">トップ</a> &nbsp;/&nbsp; <a href="/guide">ガイド</a> &nbsp;/&nbsp; レコード</div>
+    <h1 slot="title">レコード一覧<br />全 {discs.length} 種類</h1>
+    <p slot="lead">歴代 hololive EXPO / fes. のテーマソングをはじめ、ホロライブ関連曲のアレンジをレコード化。入手場所もまとめてチェック。</p>
+  </PageHero>
 
   <section class="band records-band">
     <div class="sec">
@@ -104,16 +101,6 @@ const footerLinks = [
 </BaseLayout>
 
 <style>
-  .dhero { position: relative; height: 320px; overflow: hidden; }
-  .dhero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .dhero-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,38,.45) 0%, rgba(10,20,38,.92) 100%); }
-  :global([data-theme="light"]) .dhero-tint { background: linear-gradient(180deg, rgba(58,43,34,.3) 0%, rgba(58,43,34,.78) 100%); }
-  .dhero-inner { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 0 44px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-  .crumb { color: rgba(255,255,255,.78); font-size: 13px; font-weight: 700; }
-  .crumb a { color: var(--accent); }
-  .dhero h1 { font-size: 46px; font-weight: 900; color: #fff; line-height: 1.12; }
-  .dhero p { color: rgba(255,255,255,.85); font-weight: 700; font-size: 14.5px; max-width: 620px; line-height: 1.8; }
-
   .records-band { background: var(--bg); }
 
   .disc-grid {
@@ -256,9 +243,6 @@ const footerLinks = [
   code { font-family: var(--font-mono); font-size: 12.5px; background: var(--surface-2); padding: 2px 6px; border-radius: 4px; }
 
   @media (max-width: 760px) {
-    .dhero { height: 260px; }
-    .dhero-inner { padding: 0 22px; }
-    .dhero h1 { font-size: 30px; }
     .disc-grid { grid-template-columns: 1fr; gap: 16px; }
   }
 </style>
