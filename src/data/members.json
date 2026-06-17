@@ -122,7 +122,7 @@
     "nameEn": "Murasaki Shion",
     "branch": "JP",
     "gen": "2",
-    "status": "active",
+    "status": "graduated",
     "color": "#8B5CF6"
   },
   "nakiriayame": {
@@ -204,7 +204,7 @@
     "nameEn": "Amane Kanata",
     "branch": "JP",
     "gen": "4",
-    "status": "active",
+    "status": "graduated",
     "color": "#67E8F9"
   },
   "Tsunomakiwatame": {
@@ -302,7 +302,7 @@
     "nameEn": "Sakamata Chloe",
     "branch": "JP",
     "gen": "6",
-    "status": "active",
+    "status": "graduated",
     "color": "#0EA5E9"
   },
 
@@ -311,7 +311,7 @@
     "nameEn": "Hiodoshi Ao",
     "branch": "DEV_IS",
     "gen": "ReGLOSS",
-    "status": "active",
+    "status": "graduated",
     "color": "#2563EB"
   },
   "Kanade_ReGLOSS": {
@@ -348,7 +348,7 @@
   },
 
   "isaki_riona": {
-    "name": "一咲りおな",
+    "name": "響咲リオナ",
     "nameEn": "Isaki Riona",
     "branch": "DEV_IS",
     "gen": "FLOWGLOW",
@@ -378,6 +378,14 @@
     "gen": "FLOWGLOW",
     "status": "active",
     "color": "#6B7280"
+  },
+  "koganei_niko": {
+    "name": "虎金妃笑虎",
+    "nameEn": "Koganei Niko",
+    "branch": "DEV_IS",
+    "gen": "FLOW GLOW",
+    "status": "active",
+    "color": "#9CA3AF"
   },
 
   "Ayunda_Risu": {
@@ -432,7 +440,7 @@
   },
 
   "VestiaZeta_V7": {
-    "name": "ヴェスティア・ゼータ",
+    "name": "ベスティア・ゼータ",
     "nameEn": "Vestia Zeta",
     "branch": "ID",
     "gen": "ID3",
@@ -489,8 +497,8 @@
     "color": "#FB7185"
   },
   "amwatson": {
-    "name": "アメリア・ワトソン",
-    "nameEn": "Amelia Watson",
+    "name": "ワトソン・アメリア",
+    "nameEn": "Watson Amelia",
     "branch": "EN",
     "gen": "Myth",
     "status": "graduated",
@@ -501,7 +509,7 @@
     "name": "IRyS",
     "nameEn": "IRyS",
     "branch": "EN",
-    "gen": "ProjectHOPE",
+    "gen": "Promise",
     "status": "active",
     "color": "#BE185D"
   },
@@ -527,7 +535,7 @@
     "nameEn": "Nanashi Mumei",
     "branch": "EN",
     "gen": "Promise",
-    "status": "active",
+    "status": "graduated",
     "color": "#FBBF24"
   },
   "faunaceres": {
@@ -619,14 +627,5 @@
     "gen": "Justice",
     "status": "active",
     "color": "#FB923C"
-  },
-
-  "koganei_niko": {
-    "name": "小金井ニコ?",
-    "nameEn": "?",
-    "branch": "OTHER",
-    "gen": "?",
-    "status": "unknown",
-    "color": "#9CA3AF"
   }
 }

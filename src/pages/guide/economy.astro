@@ -23,11 +23,6 @@ const footerLinks = [
     </p>
   </PageHero>
 
-  <DraftBanner
-    >このページは記載内容が調整中です。最新仕様はサーバー内 <code>/help</code> または
-    Discord をご確認ください。</DraftBanner
-  >
-
   <section class="band">
     <div class="sec">
       <div class="sec-head center">
@@ -80,26 +75,10 @@ const footerLinks = [
           <p>残高ランキングをチェック。</p>
         </div>
         <div class="cmd">
-          <code>/pay &lt;名前&gt; &lt;額&gt;</code>
+          <code>/money pay &lt;名前&gt; &lt;額&gt;</code>
           <p>指定プレイヤーに送金。</p>
         </div>
-        <div class="cmd">
-          <code>/shop</code>
-          <p>サーバーショップ（システム店）を開く。</p>
-        </div>
-        <div class="cmd">
-          <code>/sell hand</code>
-          <p>手に持ったアイテムをサーバーに即売。</p>
-        </div>
-        <div class="cmd">
-          <code>/casino</code>
-          <p>カジノメダルの残高や交換メニュー。</p>
-        </div>
       </div>
-      <p class="cmd-note">
-        ※
-        上記はドラフトの目安です。実装の有無や正確な書式はサーバー内で確認してください。
-      </p>
     </div>
   </section>
 
@@ -236,14 +215,19 @@ const footerLinks = [
   <GuideCredits>
     <h3>参考・実装</h3>
     <ul>
-      <li>経済プラグイン：（後日記載）</li>
-      <li>チェストショップ：（後日記載）</li>
+      <li>
+        経済プラグイン：<a
+          href="https://github.com/hololis-craft/Jecon"
+          rel="noopener">Jecon (forked)</a
+        >
+      </li>
+      <li>
+        チェストショップ：<a
+          href="https://www.spigotmc.org/resources/villager-market-the-ultimate-shop-plugin.82965/"
+          rel="noopener">Villager Market</a
+        >
+      </li>
     </ul>
-    <small
-      >※
-      このページの内容は調整中のドラフトです。正確な情報はサーバー内コマンドおよび
-      Discord アナウンスをご確認ください。</small
-    >
   </GuideCredits>
 </BaseLayout>
 

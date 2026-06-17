@@ -4,6 +4,7 @@ import GuideCredits from "../../components/GuideCredits.astro";
 import PageHero from "../../components/PageHero.astro";
 import headsData from "../../data/heads.json";
 import membersData from "../../data/members.json";
+import headsCreditData from "../../data/heads-credit.json";
 
 interface Member {
   name: string;
@@ -245,22 +246,29 @@ const footerLinks = [
     <h3>データ出典</h3>
     <ul>
       <li>
-        頭スキン抽選表：<a
-          href="https://github.com/hololis-craft/datapack/blob/master/datapacks/hololis/data/hololis/loot_table/holomem/player_heads.json"
-          rel="noopener">hololis-craft/datapack</a
+        <a href="https://namemc.com/" rel="noopener">NameMC</a>
+      </li>
+      <li>
+        <a href="https://seesaawiki.jp/hololivetv/d/Minecraft" rel="noopener"
+          >ホロライブ非公式wiki</a
         >
       </li>
-      <li>テクスチャ：textures.minecraft.net（Mojang CDN）</li>
     </ul>
     <h3>スキン制作</h3>
     <p>
-      掲載スキンは、ホロライブメンバー本人が配信中に使用したスキン、および有志のホロリスによる制作物が含まれます。個別の制作クレジット情報を整備中です。心当たりのある方、または「自分の作ったスキンが載っている」という方は、Discord
-      までご連絡ください。
+      スキン制作に関わった方々です。過不足や誤りがある場合、削除依頼などはご連絡ください。
     </p>
-    <small
-      >※
-      表示順はデータパック内の登録順に基づき、レアリティや排出確率を表すものではありません。</small
-    >
+    <ul>
+      {
+        headsCreditData.map((credit) => (
+          <li>
+            <a href={credit.url} rel="noopener">
+              {credit.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </GuideCredits>
 
   <dialog id="head-modal" class="head-modal">
@@ -274,9 +282,9 @@ const footerLinks = [
         <div class="modal-member" id="modal-member"></div>
         <div class="modal-sub" id="modal-sub"></div>
         <div class="modal-hash" id="modal-hash"></div>
-        <button class="btn btn-ghost modal-copy" id="modal-copy" type="button"
-          >テクスチャURLをコピー</button
-        >
+        <button class="btn btn-ghost modal-copy" id="modal-copy" type="button">
+          テクスチャURLをコピー
+        </button>
         <p class="modal-hint">ドラッグで回転、ホイールでズーム。</p>
       </div>
     </div>
