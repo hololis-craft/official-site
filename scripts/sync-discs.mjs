@@ -6,7 +6,8 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 
-const PACK_URL = "https://hololiscraft-resources.f0reach.me/hololiscraft-merged-pack.zip";
+const PACK_URL =
+  "https://hololiscraft-resources.f0reach.me/hololiscraft-merged-pack.zip";
 const OUT_PATH = resolve(ROOT, "src/data/discs.json");
 
 async function main() {
@@ -45,7 +46,10 @@ async function main() {
   const out = {
     schemaVersion: 1,
     source: PACK_URL,
-    counts: { discs: discs.length, withTexture: discs.filter((d) => d.texB64).length },
+    counts: {
+      discs: discs.length,
+      withTexture: discs.filter((d) => d.texB64).length,
+    },
     discs,
   };
   await mkdir(dirname(OUT_PATH), { recursive: true });
@@ -58,7 +62,10 @@ function readZip(buf) {
   const sig = 0x06054b50;
   let eocd = -1;
   for (let i = buf.length - 22; i >= Math.max(0, buf.length - 65557); i--) {
-    if (buf.readUInt32LE(i) === sig) { eocd = i; break; }
+    if (buf.readUInt32LE(i) === sig) {
+      eocd = i;
+      break;
+    }
   }
   if (eocd === -1) throw new Error("EOCD not found");
   const cdSize = buf.readUInt32LE(eocd + 12);
@@ -80,7 +87,8 @@ function readZip(buf) {
 
     if (name.endsWith("/")) continue;
     const lh = localOff;
-    if (buf.readUInt32LE(lh) !== 0x04034b50) throw new Error(`bad LFH for ${name}`);
+    if (buf.readUInt32LE(lh) !== 0x04034b50)
+      throw new Error(`bad LFH for ${name}`);
     const lNameLen = buf.readUInt16LE(lh + 26);
     const lExtraLen = buf.readUInt16LE(lh + 28);
     const dataStart = lh + 30 + lNameLen + lExtraLen;

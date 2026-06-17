@@ -29,7 +29,9 @@ function b64ToDataUrl(b64: string) {
 
 // --- filters ---
 const rows = Array.from(document.querySelectorAll<HTMLElement>(".member-row"));
-const chips = Array.from(document.querySelectorAll<HTMLButtonElement>("#branch-chips .chip"));
+const chips = Array.from(
+  document.querySelectorAll<HTMLButtonElement>("#branch-chips .chip"),
+);
 const search = document.getElementById("search") as HTMLInputElement;
 const countEl = document.getElementById("count")!;
 const emptyEl = document.getElementById("empty")!;
@@ -38,7 +40,8 @@ let activeBranch = "all";
 let query = "";
 
 function applyFilters() {
-  let visMembers = 0, visHeads = 0;
+  let visMembers = 0,
+    visHeads = 0;
   for (const row of rows) {
     const branch = row.dataset.branch;
     const name = row.dataset.name || "";
@@ -74,7 +77,11 @@ let activationTimer: number | null = null;
 
 function deactivateCard() {
   if (activeViewer) {
-    try { activeViewer.dispose(); } catch { /* ignore */ }
+    try {
+      activeViewer.dispose();
+    } catch {
+      /* ignore */
+    }
     activeViewer = null;
   }
   if (activeCard) {
@@ -145,7 +152,9 @@ document.addEventListener("pointerout", (e) => {
 
 // --- modal (skinview3d w/ orbit controls) ---
 const modal = document.getElementById("head-modal") as HTMLDialogElement;
-const modalCanvas = document.getElementById("modal-canvas") as HTMLCanvasElement;
+const modalCanvas = document.getElementById(
+  "modal-canvas",
+) as HTMLCanvasElement;
 const modalMember = document.getElementById("modal-member")!;
 const modalSub = document.getElementById("modal-sub")!;
 const modalHash = document.getElementById("modal-hash")!;
@@ -188,7 +197,8 @@ async function openModal(card: HTMLElement) {
   viewer.renderPaused = false;
 
   modalMember.textContent = card.dataset.member ?? "";
-  modalSub.textContent = "バリエーション #" + String(card.dataset.idx ?? "").padStart(2, "0");
+  modalSub.textContent =
+    "バリエーション #" + String(card.dataset.idx ?? "").padStart(2, "0");
   modalHash.textContent = card.dataset.hash ?? "";
   currentHash = card.dataset.hash ?? "";
 
@@ -205,8 +215,15 @@ function closeModal() {
 document.addEventListener("click", (e) => {
   const target = e.target as Element | null;
   const card = target?.closest<HTMLElement>(".head-card");
-  if (card) { e.preventDefault(); void openModal(card); return; }
-  if (target?.closest("[data-modal-close]")) { closeModal(); return; }
+  if (card) {
+    e.preventDefault();
+    void openModal(card);
+    return;
+  }
+  if (target?.closest("[data-modal-close]")) {
+    closeModal();
+    return;
+  }
   if (target === modal) closeModal();
 });
 document.addEventListener("keydown", (e) => {
@@ -218,7 +235,9 @@ modalCopy.addEventListener("click", async () => {
   try {
     await navigator.clipboard.writeText(url);
     modalCopy.textContent = "コピーしました!";
-    window.setTimeout(() => { modalCopy.textContent = "テクスチャURLをコピー"; }, 1500);
+    window.setTimeout(() => {
+      modalCopy.textContent = "テクスチャURLをコピー";
+    }, 1500);
   } catch {
     modalCopy.textContent = "コピーに失敗しました";
   }

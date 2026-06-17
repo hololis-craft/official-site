@@ -15,7 +15,8 @@ const CONCURRENCY = 8;
 async function main() {
   console.log(`▸ fetch ${LOOT_URL}`);
   const lootRes = await fetch(LOOT_URL);
-  if (!lootRes.ok) throw new Error(`loot table fetch failed: ${lootRes.status}`);
+  if (!lootRes.ok)
+    throw new Error(`loot table fetch failed: ${lootRes.status}`);
   const loot = await lootRes.json();
   const entries = loot.pools.flatMap((p) => p.entries);
   console.log(`▸ ${entries.length} loot entries`);

@@ -10,10 +10,25 @@
     "preview": "astro preview",
     "astro": "astro",
     "sync:heads": "node scripts/sync-heads.mjs",
-    "sync:discs": "node scripts/sync-discs.mjs"
+    "sync:discs": "node scripts/sync-discs.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "*.{astro,ts,tsx,js,jsx,mjs,cjs,json,md,css,html,yml,yaml}": "prettier --write"
   },
   "dependencies": {
     "astro": "^5.0.0",
     "skinview3d": "^3.4.2"
+  },
+  "devDependencies": {
+    "lint-staged": "^17.0.7",
+    "prettier": "^3.8.4",
+    "prettier-plugin-astro": "^0.14.1",
+    "simple-git-hooks": "^2.13.1"
   }
 }

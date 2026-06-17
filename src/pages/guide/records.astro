@@ -27,63 +27,91 @@ const footerLinks = [
   { href: "/systems", label: "システム" },
 ];
 ---
+
 <BaseLayout title="レコード一覧 — ホロリスくらふと" footerLinks={footerLinks}>
-  <PageHero image="/assets/miko-suisei-shrine-with-gomoku.jpg" screenLabel="レコードヒーロー">
-    <div slot="crumb" class="crumb"><a href="/">トップ</a> &nbsp;/&nbsp; <a href="/guide">ガイド</a> &nbsp;/&nbsp; レコード</div>
+  <PageHero
+    image="/assets/miko-suisei-shrine-with-gomoku.jpg"
+    screenLabel="レコードヒーロー"
+  >
+    <div slot="crumb" class="crumb">
+      <a href="/">トップ</a> &nbsp;/&nbsp; <a href="/guide">ガイド</a> &nbsp;/&nbsp;
+      レコード
+    </div>
     <h1 slot="title">レコード一覧<br />全 {discs.length} 種類</h1>
-    <p slot="lead">歴代 hololive EXPO / fes. のテーマソングをはじめ、ホロライブ関連曲のアレンジをレコード化。入手場所もまとめてチェック。</p>
+    <p slot="lead">
+      歴代 hololive EXPO / fes.
+      のテーマソングをはじめ、ホロライブ関連曲のアレンジをレコード化。入手場所もまとめてチェック。
+    </p>
   </PageHero>
 
   <section class="band records-band">
     <div class="sec">
       <div class="disc-grid">
-        {discs.map((d, i) => (
-          <article class="disc-card" style={`--note-delay:${((i * 0.83) % 4.2).toFixed(2)}s`}>
-            <div class="disc-art">
-              <div class="jukebox">
-                <div class="jb-vinyl" style={`background-image:url(data:image/png;base64,${d.texB64});`}></div>
-                <div class="jb-front"></div>
+        {
+          discs.map((d, i) => (
+            <article
+              class="disc-card"
+              style={`--note-delay:${((i * 0.83) % 4.2).toFixed(2)}s`}
+            >
+              <div class="disc-art">
+                <div class="jukebox">
+                  <div
+                    class="jb-vinyl"
+                    style={`background-image:url(data:image/png;base64,${d.texB64});`}
+                  />
+                  <div class="jb-front" />
+                </div>
+                <span class="note n1" aria-hidden="true">
+                  ♪
+                </span>
+                <span class="note n2" aria-hidden="true">
+                  ♫
+                </span>
+                <span class="note n3" aria-hidden="true">
+                  ♩
+                </span>
               </div>
-              <span class="note n1" aria-hidden="true">♪</span>
-              <span class="note n2" aria-hidden="true">♫</span>
-              <span class="note n3" aria-hidden="true">♩</span>
-            </div>
-            <div class="disc-body">
-              <div class="disc-meta-top">
-                <span class="disc-num">#{String(d.modelData).padStart(2, "0")}</span>
-                <span class="disc-time">{formatDuration(d.durationSec)}</span>
-              </div>
-              <h3 class="disc-title">{d.title}</h3>
-              <p class="disc-author">{d.author}</p>
+              <div class="disc-body">
+                <div class="disc-meta-top">
+                  <span class="disc-num">
+                    #{String(d.modelData).padStart(2, "0")}
+                  </span>
+                  <span class="disc-time">{formatDuration(d.durationSec)}</span>
+                </div>
+                <h3 class="disc-title">{d.title}</h3>
+                <p class="disc-author">{d.author}</p>
 
-              <div class="disc-loot">
-                {d.lootTables.length > 0 ? (
-                  <>
-                    <span class="disc-loot-label">入手場所</span>
-                    <div class="disc-loot-items">
-                      {d.lootTables.map((lt) => (
-                        <span class="loot-chip">
-                          <b>{LOOT_LABEL[lt.table] ?? lt.table}</b>
-                          <em>重み {lt.weight}</em>
-                        </span>
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  <span class="disc-loot-none">入手は別の経路（イベント・店舗等）</span>
-                )}
-              </div>
+                <div class="disc-loot">
+                  {d.lootTables.length > 0 ? (
+                    <>
+                      <span class="disc-loot-label">入手場所</span>
+                      <div class="disc-loot-items">
+                        {d.lootTables.map((lt) => (
+                          <span class="loot-chip">
+                            <b>{LOOT_LABEL[lt.table] ?? lt.table}</b>
+                            <em>重み {lt.weight}</em>
+                          </span>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <span class="disc-loot-none">
+                      入手は別の経路（イベント・店舗等）
+                    </span>
+                  )}
+                </div>
 
-              <div class="disc-flags">
-                {d.creeperDrop ? (
-                  <span class="flag flag-creeper">Creeper Drop ✓</span>
-                ) : (
-                  <span class="flag flag-no">Creeper Drop なし</span>
-                )}
+                <div class="disc-flags">
+                  {d.creeperDrop ? (
+                    <span class="flag flag-creeper">Creeper Drop ✓</span>
+                  ) : (
+                    <span class="flag flag-no">Creeper Drop なし</span>
+                  )}
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -91,17 +119,30 @@ const footerLinks = [
   <GuideCredits>
     <h3>データ出典</h3>
     <ul>
-      <li>レコード定義：リソースパック内 <code>jext.json</code>（<a href="https://hololiscraft-resources.f0reach.me/hololiscraft-merged-pack.zip" rel="noopener">merged-pack</a>）</li>
+      <li>
+        レコード定義：リソースパック内 <code>jext.json</code>（<a
+          href="https://hololiscraft-resources.f0reach.me/hololiscraft-merged-pack.zip"
+          rel="noopener">merged-pack</a
+        >）
+      </li>
       <li>jext (Jukebox Extension) ライブラリを使用</li>
     </ul>
     <h3>楽曲</h3>
-    <p>収録曲はすべてホロライブ関連の楽曲をベースに、サーバー有志がレコード向けに編集・調整したものです。各曲の原作・アレンジ情報は順次整備中。心当たりのある方は Discord までご連絡ください。</p>
-    <small>※ 「重み」は同一チェストでの相対的な出現確率の重み付け。値が同じでも別レコードと並んだときの当選率は分母により変わります。</small>
+    <p>
+      収録曲はすべてホロライブ関連の楽曲をベースに、サーバー有志がレコード向けに編集・調整したものです。各曲の原作・アレンジ情報は順次整備中。心当たりのある方は
+      Discord までご連絡ください。
+    </p>
+    <small
+      >※
+      「重み」は同一チェストでの相対的な出現確率の重み付け。値が同じでも別レコードと並んだときの当選率は分母により変わります。</small
+    >
   </GuideCredits>
 </BaseLayout>
 
 <style>
-  .records-band { background: var(--bg); }
+  .records-band {
+    background: var(--bg);
+  }
 
   .disc-grid {
     display: grid;
@@ -113,24 +154,52 @@ const footerLinks = [
     border: 1px solid var(--border);
     border-radius: 18px;
     overflow: hidden;
-    display: flex; flex-direction: column;
-    transition: transform .18s, border-color .18s;
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.18s,
+      border-color 0.18s;
   }
-  .disc-card:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+  .disc-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+  }
 
   .disc-art {
     aspect-ratio: 16 / 10;
-    background: radial-gradient(ellipse 70% 80% at 50% 75%, rgba(255,180,84,.16) 0%, rgba(10,20,38,.95) 70%);
+    background: radial-gradient(
+      ellipse 70% 80% at 50% 75%,
+      rgba(255, 180, 84, 0.16) 0%,
+      rgba(10, 20, 38, 0.95) 70%
+    );
     position: relative;
     overflow: hidden;
   }
   .disc-art::before {
-    content: ""; position: absolute; inset: 0;
+    content: "";
+    position: absolute;
+    inset: 0;
     background:
-      radial-gradient(1px 1px at 18% 32%, rgba(255,255,255,.32), transparent 60%),
-      radial-gradient(1px 1px at 72% 22%, rgba(255,255,255,.24), transparent 60%),
-      radial-gradient(1px 1px at 44% 14%, rgba(255,255,255,.28), transparent 60%),
-      radial-gradient(1.5px 1.5px at 88% 46%, rgba(255,255,255,.18), transparent 60%);
+      radial-gradient(
+        1px 1px at 18% 32%,
+        rgba(255, 255, 255, 0.32),
+        transparent 60%
+      ),
+      radial-gradient(
+        1px 1px at 72% 22%,
+        rgba(255, 255, 255, 0.24),
+        transparent 60%
+      ),
+      radial-gradient(
+        1px 1px at 44% 14%,
+        rgba(255, 255, 255, 0.28),
+        transparent 60%
+      ),
+      radial-gradient(
+        1.5px 1.5px at 88% 46%,
+        rgba(255, 255, 255, 0.18),
+        transparent 60%
+      );
   }
 
   /* Jukebox: 150px, only the top 2/3 (100px) is visible — bottom 1/3 sits
@@ -152,8 +221,8 @@ const footerLinks = [
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     box-shadow:
-      inset 0 -2px 0 rgba(0, 0, 0, .25),
-      0 6px 10px rgba(0, 0, 0, .45);
+      inset 0 -2px 0 rgba(0, 0, 0, 0.25),
+      0 6px 10px rgba(0, 0, 0, 0.45);
     z-index: 2;
   }
   .jb-vinyl {
@@ -169,7 +238,7 @@ const footerLinks = [
     background-repeat: no-repeat;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
-    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .55));
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.55));
     z-index: 1;
   }
 
@@ -178,46 +247,117 @@ const footerLinks = [
     font-family: var(--font-en);
     font-weight: 900;
     color: var(--accent);
-    text-shadow: 0 0 10px var(--accent-glow), 0 0 4px rgba(0,0,0,.5);
+    text-shadow:
+      0 0 10px var(--accent-glow),
+      0 0 4px rgba(0, 0, 0, 0.5);
     opacity: 0;
     pointer-events: none;
     user-select: none;
     animation: note-float 6s ease-in-out infinite;
     animation-delay: var(--note-delay, 0s);
   }
-  .note.n1 { left: 24%; bottom: 52%; font-size: 20px; }
-  .note.n2 { left: 62%; bottom: 38%; font-size: 16px; animation-delay: calc(var(--note-delay, 0s) + 2.1s); }
-  .note.n3 { left: 44%; bottom: 64%; font-size: 17px; animation-delay: calc(var(--note-delay, 0s) + 4s); }
+  .note.n1 {
+    left: 24%;
+    bottom: 52%;
+    font-size: 20px;
+  }
+  .note.n2 {
+    left: 62%;
+    bottom: 38%;
+    font-size: 16px;
+    animation-delay: calc(var(--note-delay, 0s) + 2.1s);
+  }
+  .note.n3 {
+    left: 44%;
+    bottom: 64%;
+    font-size: 17px;
+    animation-delay: calc(var(--note-delay, 0s) + 4s);
+  }
 
   @keyframes note-float {
-    0%, 6%   { opacity: 0; transform: translateY(8px) rotate(-12deg) scale(.65); }
-    14%      { opacity: 1; transform: translateY(-8px) rotate(4deg) scale(1); }
-    40%      { opacity: 1; transform: translateY(-26px) rotate(-6deg) scale(1); }
-    68%      { opacity: .85; transform: translateY(-46px) rotate(6deg) scale(.95); }
-    88%, 100% { opacity: 0; transform: translateY(-66px) rotate(-3deg) scale(.8); }
+    0%,
+    6% {
+      opacity: 0;
+      transform: translateY(8px) rotate(-12deg) scale(0.65);
+    }
+    14% {
+      opacity: 1;
+      transform: translateY(-8px) rotate(4deg) scale(1);
+    }
+    40% {
+      opacity: 1;
+      transform: translateY(-26px) rotate(-6deg) scale(1);
+    }
+    68% {
+      opacity: 0.85;
+      transform: translateY(-46px) rotate(6deg) scale(0.95);
+    }
+    88%,
+    100% {
+      opacity: 0;
+      transform: translateY(-66px) rotate(-3deg) scale(0.8);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .note { animation: none; opacity: 0; }
+    .note {
+      animation: none;
+      opacity: 0;
+    }
   }
 
-  .disc-body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 6px; }
-  .disc-meta-top { display: flex; justify-content: space-between; font-family: var(--font-en); font-size: 12px; font-weight: 700; color: var(--accent); }
-  .disc-num { letter-spacing: .08em; }
-  .disc-time { color: var(--text-soft); }
-  .disc-title { font-size: 19px; font-weight: 900; color: var(--text); margin-top: 4px; line-height: 1.35; }
-  .disc-author { font-size: 13px; color: var(--text-muted); font-weight: 700; }
+  .disc-body {
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .disc-meta-top {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-en);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .disc-num {
+    letter-spacing: 0.08em;
+  }
+  .disc-time {
+    color: var(--text-soft);
+  }
+  .disc-title {
+    font-size: 19px;
+    font-weight: 900;
+    color: var(--text);
+    margin-top: 4px;
+    line-height: 1.35;
+  }
+  .disc-author {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
 
-  .disc-loot { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
+  .disc-loot {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+  }
   .disc-loot-label {
     display: block;
     font-family: var(--font-en);
-    font-size: 11px; font-weight: 800;
+    font-size: 11px;
+    font-weight: 800;
     color: var(--text-soft);
-    letter-spacing: .12em;
+    letter-spacing: 0.12em;
     margin-bottom: 8px;
   }
-  .disc-loot-items { display: flex; flex-wrap: wrap; gap: 7px; }
+  .disc-loot-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
   .loot-chip {
     background: var(--surface-2);
     border: 1px solid var(--border);
@@ -228,21 +368,58 @@ const footerLinks = [
     align-items: center;
     gap: 8px;
   }
-  .loot-chip b { font-weight: 800; color: var(--text); }
-  .loot-chip em { font-style: normal; font-family: var(--font-en); font-size: 10.5px; color: var(--accent); font-weight: 700; }
-  .disc-loot-none { font-size: 12.5px; color: var(--text-soft); font-style: italic; }
-
-  .disc-flags { margin-top: 14px; display: flex; gap: 6px; flex-wrap: wrap; }
-  .flag {
-    font-size: 11px; font-weight: 800;
-    padding: 4px 9px; border-radius: 999px;
+  .loot-chip b {
+    font-weight: 800;
+    color: var(--text);
   }
-  .flag-creeper { background: rgba(34,197,94,.16); color: #4ADE80; border: 1px solid rgba(34,197,94,.3); }
-  .flag-no { background: var(--surface-2); color: var(--text-soft); border: 1px solid var(--border); }
+  .loot-chip em {
+    font-style: normal;
+    font-family: var(--font-en);
+    font-size: 10.5px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .disc-loot-none {
+    font-size: 12.5px;
+    color: var(--text-soft);
+    font-style: italic;
+  }
 
-  code { font-family: var(--font-mono); font-size: 12.5px; background: var(--surface-2); padding: 2px 6px; border-radius: 4px; }
+  .disc-flags {
+    margin-top: 14px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .flag {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 9px;
+    border-radius: 999px;
+  }
+  .flag-creeper {
+    background: rgba(34, 197, 94, 0.16);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+  }
+  .flag-no {
+    background: var(--surface-2);
+    color: var(--text-soft);
+    border: 1px solid var(--border);
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
 
   @media (max-width: 760px) {
-    .disc-grid { grid-template-columns: 1fr; gap: 16px; }
+    .disc-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
   }
 </style>

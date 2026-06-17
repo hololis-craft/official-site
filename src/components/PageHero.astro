@@ -6,6 +6,7 @@ interface Props {
 }
 const { image, imageAlt = "", screenLabel } = Astro.props;
 ---
+
 <header class="dhero" data-screen-label={screenLabel}>
   <img src={image} alt={imageAlt} />
   <div class="dhero-tint"></div>
@@ -17,19 +18,77 @@ const { image, imageAlt = "", screenLabel } = Astro.props;
 </header>
 
 <style>
-  .dhero { position: relative; height: 320px; overflow: hidden; }
-  .dhero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .dhero-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,38,.45) 0%, rgba(10,20,38,.92) 100%); }
-  :global([data-theme="light"]) .dhero-tint { background: linear-gradient(180deg, rgba(58,43,34,.3) 0%, rgba(58,43,34,.78) 100%); }
-  .dhero-inner { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 0 44px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-  .dhero-inner :global(.crumb) { color: rgba(255,255,255,.78); font-size: 13px; font-weight: 700; }
-  .dhero-inner :global(.crumb a) { color: var(--accent); }
-  .dhero-inner :global(h1) { font-size: 46px; font-weight: 900; color: #fff; line-height: 1.12; }
-  .dhero-inner :global(p) { color: rgba(255,255,255,.85); font-weight: 700; font-size: 14.5px; max-width: 620px; line-height: 1.8; }
+  .dhero {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+  }
+  .dhero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dhero-tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 20, 38, 0.45) 0%,
+      rgba(10, 20, 38, 0.92) 100%
+    );
+  }
+  :global([data-theme="light"]) .dhero-tint {
+    background: linear-gradient(
+      180deg,
+      rgba(58, 43, 34, 0.3) 0%,
+      rgba(58, 43, 34, 0.78) 100%
+    );
+  }
+  .dhero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 44px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+  }
+  .dhero-inner :global(.crumb) {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .dhero-inner :global(.crumb a) {
+    color: var(--accent);
+  }
+  .dhero-inner :global(h1) {
+    font-size: 46px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.12;
+  }
+  .dhero-inner :global(p) {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 700;
+    font-size: 14.5px;
+    max-width: 620px;
+    line-height: 1.8;
+  }
 
   @media (max-width: 760px) {
-    .dhero { height: 260px; }
-    .dhero-inner { padding: 0 22px; }
-    .dhero-inner :global(h1) { font-size: 30px; }
+    .dhero {
+      height: 260px;
+    }
+    .dhero-inner {
+      padding: 0 22px;
+    }
+    .dhero-inner :global(h1) {
+      font-size: 30px;
+    }
   }
 </style>

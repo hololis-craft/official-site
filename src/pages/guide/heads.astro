@@ -22,7 +22,12 @@ for (const [slug, m] of Object.entries(members)) {
   for (const a of m.aliases ?? []) slugToCanonical.set(a, slug);
 }
 
-interface Head { id: string; member: string; hash: string; b64: string }
+interface Head {
+  id: string;
+  member: string;
+  hash: string;
+  b64: string;
+}
 const heads = headsData.heads as Head[];
 
 const grouped = new Map<string, Head[]>();
@@ -34,43 +39,85 @@ for (const h of heads) {
 
 const BRANCH_ORDER = ["JP", "DEV_IS", "ID", "EN", "OTHER"];
 const GEN_ORDER: Record<string, number> = {
-  "0": 0, "1": 1, "gamers": 2, "2": 3, "3": 4, "4": 5, "5": 6, "6": 7,
-  "ReGLOSS": 10, "FLOWGLOW": 11,
-  "ID1": 20, "ID2": 21, "ID3": 22,
-  "Myth": 30, "ProjectHOPE": 31, "Promise": 32, "Advent": 33, "Justice": 34,
+  "0": 0,
+  "1": 1,
+  gamers: 2,
+  "2": 3,
+  "3": 4,
+  "4": 5,
+  "5": 6,
+  "6": 7,
+  ReGLOSS: 10,
+  FLOWGLOW: 11,
+  ID1: 20,
+  ID2: 21,
+  ID3: 22,
+  Myth: 30,
+  ProjectHOPE: 31,
+  Promise: 32,
+  Advent: 33,
+  Justice: 34,
   "?": 99,
 };
 const GEN_LABEL: Record<string, string> = {
-  "0": "0期生", "1": "1期生", "gamers": "ゲーマーズ",
-  "2": "2期生", "3": "3期生", "4": "4期生", "5": "5期生", "6": "秘密結社ホロX",
-  "ReGLOSS": "ReGLOSS", "FLOWGLOW": "FLOW GLOW",
-  "ID1": "ID 1期", "ID2": "ID 2期", "ID3": "ID 3期",
-  "Myth": "Myth", "ProjectHOPE": "Project: HOPE",
-  "Promise": "Promise (Council)", "Advent": "Advent", "Justice": "Justice",
+  "0": "0期生",
+  "1": "1期生",
+  gamers: "ゲーマーズ",
+  "2": "2期生",
+  "3": "3期生",
+  "4": "4期生",
+  "5": "5期生",
+  "6": "秘密結社ホロX",
+  ReGLOSS: "ReGLOSS",
+  FLOWGLOW: "FLOW GLOW",
+  ID1: "ID 1期",
+  ID2: "ID 2期",
+  ID3: "ID 3期",
+  Myth: "Myth",
+  ProjectHOPE: "Project: HOPE",
+  Promise: "Promise (Council)",
+  Advent: "Advent",
+  Justice: "Justice",
   "?": "その他",
 };
 const BRANCH_LABEL: Record<string, string> = {
-  JP: "JP", DEV_IS: "DEV_IS", ID: "ID", EN: "EN", OTHER: "その他",
+  JP: "JP",
+  DEV_IS: "DEV_IS",
+  ID: "ID",
+  EN: "EN",
+  OTHER: "その他",
 };
 
 const memberRows = [...grouped.entries()]
   .map(([slug, hs]) => {
     const m = members[slug] ?? {
-      name: slug, nameEn: "", branch: "OTHER", gen: "?",
-      status: "unknown", color: "#9CA3AF",
+      name: slug,
+      nameEn: "",
+      branch: "OTHER",
+      gen: "?",
+      status: "unknown",
+      color: "#9CA3AF",
     };
     return { slug, member: m, heads: hs };
   })
   .sort((a, b) => {
-    const bi = BRANCH_ORDER.indexOf(a.member.branch) - BRANCH_ORDER.indexOf(b.member.branch);
+    const bi =
+      BRANCH_ORDER.indexOf(a.member.branch) -
+      BRANCH_ORDER.indexOf(b.member.branch);
     if (bi !== 0) return bi;
-    const gi = (GEN_ORDER[a.member.gen] ?? 50) - (GEN_ORDER[b.member.gen] ?? 50);
+    const gi =
+      (GEN_ORDER[a.member.gen] ?? 50) - (GEN_ORDER[b.member.gen] ?? 50);
     if (gi !== 0) return gi;
     return a.member.name.localeCompare(b.member.name, "ja");
   });
 
 const branchCounts = Object.fromEntries(
-  BRANCH_ORDER.map((b) => [b, memberRows.filter((r) => r.member.branch === b).reduce((s, r) => s + r.heads.length, 0)]),
+  BRANCH_ORDER.map((b) => [
+    b,
+    memberRows
+      .filter((r) => r.member.branch === b)
+      .reduce((s, r) => s + r.heads.length, 0),
+  ]),
 );
 
 const footerLinks = [
@@ -79,81 +126,117 @@ const footerLinks = [
   { href: "/systems", label: "システム" },
 ];
 ---
+
 <BaseLayout title="頭ガチャ一覧 — ホロリスくらふと" footerLinks={footerLinks}>
   <PageHero
     image="/assets/hololive-head-gacha.jpeg"
     imageAlt="ホロメン頭ガチャ"
     screenLabel="頭一覧ヒーロー"
   >
-    <div slot="crumb" class="crumb"><a href="/">トップ</a> &nbsp;/&nbsp; <a href="/guide">ガイド</a> &nbsp;/&nbsp; 頭</div>
+    <div slot="crumb" class="crumb">
+      <a href="/">トップ</a> &nbsp;/&nbsp; <a href="/guide">ガイド</a> &nbsp;/&nbsp;
+      頭
+    </div>
     <h1 slot="title">ホロメン頭ガチャ<br />全 {heads.length} 種類</h1>
-    <p slot="lead">{memberRows.length} 名のホロメンが持つ歴代スキンの頭をすべて確認できます。マウスを乗せると 3D で回転、クリックで拡大表示。</p>
+    <p slot="lead">
+      {memberRows.length} 名のホロメンが持つ歴代スキンの頭をすべて確認できます。マウスを乗せると
+      3D で回転、クリックで拡大表示。
+    </p>
   </PageHero>
 
   <div class="filter-bar">
     <div class="filter-inner">
       <div class="filter-chips" id="branch-chips">
-        <button class="chip active" data-branch="all">すべて <span class="chip-num">{heads.length}</span></button>
-        {BRANCH_ORDER.filter((b) => branchCounts[b] > 0).map((b) => (
-          <button class="chip" data-branch={b}>{BRANCH_LABEL[b]} <span class="chip-num">{branchCounts[b]}</span></button>
-        ))}
+        <button class="chip active" data-branch="all"
+          >すべて <span class="chip-num">{heads.length}</span></button
+        >
+        {
+          BRANCH_ORDER.filter((b) => branchCounts[b] > 0).map((b) => (
+            <button class="chip" data-branch={b}>
+              {BRANCH_LABEL[b]} <span class="chip-num">{branchCounts[b]}</span>
+            </button>
+          ))
+        }
       </div>
-      <input class="filter-search" id="search" type="search" placeholder="メンバー名で検索 (例: すいせい / suisei)" />
-      <div class="filter-count" id="count">{memberRows.length} メンバー / {heads.length} 種</div>
+      <input
+        class="filter-search"
+        id="search"
+        type="search"
+        placeholder="メンバー名で検索 (例: すいせい / suisei)"
+      />
+      <div class="filter-count" id="count">
+        {memberRows.length} メンバー / {heads.length} 種
+      </div>
     </div>
   </div>
 
   <section class="band heads-band">
     <div class="sec">
       <div class="member-list">
-        {memberRows.map((row) => (
-          <section
-            class="member-row"
-            data-branch={row.member.branch}
-            data-gen={row.member.gen}
-            data-name={`${row.member.name} ${row.member.nameEn ?? ""} ${row.slug}`.toLowerCase()}
-            data-status={row.member.status}
-            id={`m-${row.slug}`}
-            style={`--member-color:${row.member.color}`}
-          >
-            <header class="member-head">
-              <div class="member-name">
-                <span class="member-dot"></span>
-                <h3>{row.member.name}</h3>
-                <span class="member-en">{row.member.nameEn}</span>
-                {row.member.status !== "active" && (
-                  <span class="member-status">{row.member.status === "graduated" ? "卒業" : row.member.status === "terminated" ? "契約解除" : "確認中"}</span>
-                )}
+        {
+          memberRows.map((row) => (
+            <section
+              class="member-row"
+              data-branch={row.member.branch}
+              data-gen={row.member.gen}
+              data-name={`${row.member.name} ${row.member.nameEn ?? ""} ${row.slug}`.toLowerCase()}
+              data-status={row.member.status}
+              id={`m-${row.slug}`}
+              style={`--member-color:${row.member.color}`}
+            >
+              <header class="member-head">
+                <div class="member-name">
+                  <span class="member-dot" />
+                  <h3>{row.member.name}</h3>
+                  <span class="member-en">{row.member.nameEn}</span>
+                  {row.member.status !== "active" && (
+                    <span class="member-status">
+                      {row.member.status === "graduated"
+                        ? "卒業"
+                        : row.member.status === "terminated"
+                          ? "契約解除"
+                          : "確認中"}
+                    </span>
+                  )}
+                </div>
+                <div class="member-meta">
+                  <span class="member-branch">
+                    {BRANCH_LABEL[row.member.branch] ?? row.member.branch}
+                  </span>
+                  <span class="member-gen">
+                    {GEN_LABEL[row.member.gen] ?? row.member.gen}
+                  </span>
+                  <span class="member-count">{row.heads.length} 種</span>
+                </div>
+              </header>
+              <div class="head-grid">
+                {row.heads.map((h, i) => (
+                  <button
+                    class="head-card"
+                    data-member={row.member.name}
+                    data-hash={h.hash}
+                    data-idx={i + 1}
+                    data-b64={h.b64}
+                    style={`--mc-tex:url(data:image/png;base64,${h.b64});`}
+                    aria-label={`${row.member.name} の頭 ${i + 1}`}
+                  >
+                    <div class="head-thumb">
+                      <div class="head-thumb-face" />
+                      <div class="head-thumb-hat" />
+                      <canvas class="head-3d" hidden />
+                    </div>
+                    <span class="head-num">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </button>
+                ))}
               </div>
-              <div class="member-meta">
-                <span class="member-branch">{BRANCH_LABEL[row.member.branch] ?? row.member.branch}</span>
-                <span class="member-gen">{GEN_LABEL[row.member.gen] ?? row.member.gen}</span>
-                <span class="member-count">{row.heads.length} 種</span>
-              </div>
-            </header>
-            <div class="head-grid">
-              {row.heads.map((h, i) => (
-                <button
-                  class="head-card"
-                  data-member={row.member.name}
-                  data-hash={h.hash}
-                  data-idx={i + 1}
-                  data-b64={h.b64}
-                  style={`--mc-tex:url(data:image/png;base64,${h.b64});`}
-                  aria-label={`${row.member.name} の頭 ${i + 1}`}
-                >
-                  <div class="head-thumb">
-                    <div class="head-thumb-face"></div>
-                    <div class="head-thumb-hat"></div>
-                    <canvas class="head-3d" hidden></canvas>
-                  </div>
-                  <span class="head-num">{String(i + 1).padStart(2, "0")}</span>
-                </button>
-              ))}
-            </div>
-          </section>
-        ))}
-        <p class="empty" id="empty" hidden>該当するメンバーがいません。フィルタを調整してください。</p>
+            </section>
+          ))
+        }
+        <p class="empty" id="empty" hidden>
+          該当するメンバーがいません。フィルタを調整してください。
+        </p>
       </div>
     </div>
   </section>
@@ -161,17 +244,29 @@ const footerLinks = [
   <GuideCredits>
     <h3>データ出典</h3>
     <ul>
-      <li>頭スキン抽選表：<a href="https://github.com/hololis-craft/datapack/blob/master/datapacks/hololis/data/hololis/loot_table/holomem/player_heads.json" rel="noopener">hololis-craft/datapack</a></li>
+      <li>
+        頭スキン抽選表：<a
+          href="https://github.com/hololis-craft/datapack/blob/master/datapacks/hololis/data/hololis/loot_table/holomem/player_heads.json"
+          rel="noopener">hololis-craft/datapack</a
+        >
+      </li>
       <li>テクスチャ：textures.minecraft.net（Mojang CDN）</li>
     </ul>
     <h3>スキン制作</h3>
-    <p>掲載スキンは、ホロライブメンバー本人が配信中に使用したスキン、および有志のホロリスによる制作物が含まれます。個別の制作クレジット情報を整備中です。心当たりのある方、または「自分の作ったスキンが載っている」という方は、Discord までご連絡ください。</p>
-    <small>※ 表示順はデータパック内の登録順に基づき、レアリティや排出確率を表すものではありません。</small>
+    <p>
+      掲載スキンは、ホロライブメンバー本人が配信中に使用したスキン、および有志のホロリスによる制作物が含まれます。個別の制作クレジット情報を整備中です。心当たりのある方、または「自分の作ったスキンが載っている」という方は、Discord
+      までご連絡ください。
+    </p>
+    <small
+      >※
+      表示順はデータパック内の登録順に基づき、レアリティや排出確率を表すものではありません。</small
+    >
   </GuideCredits>
 
   <dialog id="head-modal" class="head-modal">
     <div class="modal-inner">
-      <button class="modal-close" aria-label="閉じる" data-modal-close>✕</button>
+      <button class="modal-close" aria-label="閉じる" data-modal-close>✕</button
+      >
       <div class="modal-stage" id="modal-stage">
         <canvas id="modal-canvas" class="modal-canvas"></canvas>
       </div>
@@ -179,7 +274,9 @@ const footerLinks = [
         <div class="modal-member" id="modal-member"></div>
         <div class="modal-sub" id="modal-sub"></div>
         <div class="modal-hash" id="modal-hash"></div>
-        <button class="btn btn-ghost modal-copy" id="modal-copy" type="button">テクスチャURLをコピー</button>
+        <button class="btn btn-ghost modal-copy" id="modal-copy" type="button"
+          >テクスチャURLをコピー</button
+        >
         <p class="modal-hint">ドラッグで回転、ホイールでズーム。</p>
       </div>
     </div>
@@ -201,79 +298,146 @@ const footerLinks = [
     -webkit-backdrop-filter: blur(10px);
   }
   .filter-inner {
-    max-width: 1180px; margin: 0 auto;
+    max-width: 1180px;
+    margin: 0 auto;
     padding: 14px 44px;
-    display: flex; align-items: center; gap: 18px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
     flex-wrap: wrap;
   }
-  .filter-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
   .chip {
-    font-family: inherit; font-weight: 800; font-size: 13px;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 13px;
     border: 1px solid var(--border);
     background: transparent;
     color: var(--text-muted);
     padding: 7px 14px;
     border-radius: 999px;
     cursor: pointer;
-    transition: color .15s, background .15s, border-color .15s;
-    display: inline-flex; align-items: center; gap: 8px;
+    transition:
+      color 0.15s,
+      background 0.15s,
+      border-color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
-  .chip:hover { color: var(--text); border-color: var(--border-strong); }
+  .chip:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
   .chip.active {
     background: var(--accent);
     color: var(--accent-ink);
     border-color: var(--accent);
   }
-  .chip-num { font-family: var(--font-en); font-size: 11px; opacity: .8; }
+  .chip-num {
+    font-family: var(--font-en);
+    font-size: 11px;
+    opacity: 0.8;
+  }
   .filter-search {
-    flex: 1; min-width: 200px;
-    font-family: inherit; font-weight: 600; font-size: 14px;
+    flex: 1;
+    min-width: 200px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
     padding: 10px 14px;
     border: 1px solid var(--border);
     border-radius: 10px;
     background: var(--surface-2);
     color: var(--text);
   }
-  .filter-search:focus { outline: none; border-color: var(--accent); }
+  .filter-search:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
   .filter-count {
     font-family: var(--font-en);
-    font-size: 12px; font-weight: 700;
+    font-size: 12px;
+    font-weight: 700;
     color: var(--text-soft);
     white-space: nowrap;
   }
 
-  .heads-band { background: var(--bg); }
-  .member-list { display: flex; flex-direction: column; gap: 36px; }
-  .member-row { scroll-margin-top: 140px; }
+  .heads-band {
+    background: var(--bg);
+  }
+  .member-list {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .member-row {
+    scroll-margin-top: 140px;
+  }
   .member-head {
-    display: flex; align-items: baseline; justify-content: space-between;
-    flex-wrap: wrap; gap: 14px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
     padding-bottom: 14px;
     margin-bottom: 18px;
     border-bottom: 1px solid var(--border);
   }
-  .member-name { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .member-name {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
   .member-dot {
     align-self: center;
-    width: 12px; height: 12px;
+    width: 12px;
+    height: 12px;
     background: var(--member-color);
     transform: rotate(45deg);
     box-shadow: 0 0 14px var(--member-color);
     flex: 0 0 auto;
   }
-  .member-row h3 { font-size: 22px; font-weight: 900; color: var(--text); }
-  .member-en { font-family: var(--font-en); font-size: 13px; color: var(--text-soft); letter-spacing: .04em; }
+  .member-row h3 {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--text);
+  }
+  .member-en {
+    font-family: var(--font-en);
+    font-size: 13px;
+    color: var(--text-soft);
+    letter-spacing: 0.04em;
+  }
   .member-status {
-    font-size: 11px; font-weight: 800;
+    font-size: 11px;
+    font-weight: 800;
     background: var(--surface-2);
     color: var(--text-soft);
     padding: 3px 9px;
     border-radius: 999px;
   }
-  .member-meta { display: flex; gap: 8px; font-size: 12px; font-weight: 800; color: var(--text-soft); }
-  .member-branch { color: var(--accent); }
-  .member-gen { color: var(--text-muted); }
-  .member-count { font-family: var(--font-en); }
+  .member-meta {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-soft);
+  }
+  .member-branch {
+    color: var(--accent);
+  }
+  .member-gen {
+    color: var(--text-muted);
+  }
+  .member-count {
+    font-family: var(--font-en);
+  }
 
   .head-grid {
     display: grid;
@@ -287,22 +451,32 @@ const footerLinks = [
     border-radius: 14px;
     padding: 6px 6px 8px;
     cursor: pointer;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 2px;
     aspect-ratio: 1;
-    transition: transform .15s, border-color .15s, box-shadow .15s;
-    font-family: inherit; color: inherit;
+    transition:
+      transform 0.15s,
+      border-color 0.15s,
+      box-shadow 0.15s;
+    font-family: inherit;
+    color: inherit;
   }
   .head-card:hover {
     transform: translateY(-3px);
     border-color: var(--accent);
-    box-shadow: 0 8px 24px rgba(0,0,0,.32), 0 0 0 1px var(--accent-soft);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.32),
+      0 0 0 1px var(--accent-soft);
   }
   .head-num {
     font-family: var(--font-en);
-    font-size: 11px; font-weight: 700;
+    font-size: 11px;
+    font-weight: 700;
     color: var(--text-soft);
-    letter-spacing: .1em;
+    letter-spacing: 0.1em;
   }
   .empty {
     text-align: center;
@@ -321,7 +495,8 @@ const footerLinks = [
   }
   .head-thumb-face,
   .head-thumb-hat {
-    position: absolute; inset: 0;
+    position: absolute;
+    inset: 0;
     background-image: var(--mc-tex);
     background-repeat: no-repeat;
     /* 64×64 source scaled to 8× container → 1 face (8 src px) = 1 container size.
@@ -332,23 +507,34 @@ const footerLinks = [
     image-rendering: -moz-crisp-edges;
   }
   /* Face: 8×8 starting at source (8, 8) → shift by 1 face = -100cqw. */
-  .head-thumb-face { background-position: -100cqw -100cqw; }
+  .head-thumb-face {
+    background-position: -100cqw -100cqw;
+  }
   /* Hat: 8×8 starting at source (40, 8) → shift by (-500cqw, -100cqw), scaled out slightly. */
-  .head-thumb-hat { background-position: -500cqw -100cqw; transform: scale(1.10); transform-origin: center; }
+  .head-thumb-hat {
+    background-position: -500cqw -100cqw;
+    transform: scale(1.1);
+    transform-origin: center;
+  }
 
   .head-3d {
     /* skinview3d inline-sets canvas.style.width/height to the value passed to
        its renderer. We size it to match the thumb in JS and just centre it
        here so any subpixel rounding doesn't push the head off-centre. */
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     display: block;
   }
-  .head-3d[hidden] { display: none; }
+  .head-3d[hidden] {
+    display: none;
+  }
   /* When 3D is active, hide the 2D thumb */
   .head-card.is-3d .head-thumb-face,
-  .head-card.is-3d .head-thumb-hat { visibility: hidden; }
+  .head-card.is-3d .head-thumb-hat {
+    visibility: hidden;
+  }
 
   /* --- modal --- */
   .head-modal {
@@ -364,7 +550,7 @@ const footerLinks = [
     max-height: 92vh;
   }
   .head-modal::backdrop {
-    background: rgba(5, 10, 20, .82);
+    background: rgba(5, 10, 20, 0.82);
     backdrop-filter: blur(6px);
   }
   .modal-inner {
@@ -380,16 +566,27 @@ const footerLinks = [
     position: relative;
   }
   .modal-close {
-    position: absolute; top: 12px; right: 14px;
-    width: 36px; height: 36px;
-    background: transparent; border: none;
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
     color: var(--text-soft);
-    font-size: 18px; font-weight: 900;
-    cursor: pointer; border-radius: 999px;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    border-radius: 999px;
   }
-  .modal-close:hover { color: var(--text); background: var(--surface-2); }
+  .modal-close:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
   .modal-stage {
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-height: 360px;
   }
   .modal-canvas {
@@ -397,10 +594,25 @@ const footerLinks = [
     touch-action: none;
     cursor: grab;
   }
-  .modal-canvas:active { cursor: grabbing; }
-  .modal-info { display: flex; flex-direction: column; gap: 10px; }
-  .modal-member { font-size: 22px; font-weight: 900; color: var(--text); }
-  .modal-sub { font-family: var(--font-en); font-size: 13px; color: var(--accent); font-weight: 800; }
+  .modal-canvas:active {
+    cursor: grabbing;
+  }
+  .modal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .modal-member {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--text);
+  }
+  .modal-sub {
+    font-family: var(--font-en);
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 800;
+  }
   .modal-hash {
     font-family: var(--font-mono);
     font-size: 10.5px;
@@ -412,19 +624,50 @@ const footerLinks = [
     border: 1px solid var(--border);
     margin: 8px 0 4px;
   }
-  .modal-copy { font-size: 13px; padding: 10px 18px; align-self: flex-start; }
-  .modal-hint { font-size: 12px; color: var(--text-soft); margin-top: 6px; }
+  .modal-copy {
+    font-size: 13px;
+    padding: 10px 18px;
+    align-self: flex-start;
+  }
+  .modal-hint {
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-top: 6px;
+  }
 
   @media (max-width: 760px) {
-    .filter-bar { top: 64px; }
-    .filter-inner { padding: 12px 22px; gap: 12px; }
-    .filter-search { width: 100%; min-width: 0; }
-    .filter-count { width: 100%; text-align: right; }
+    .filter-bar {
+      top: 64px;
+    }
+    .filter-inner {
+      padding: 12px 22px;
+      gap: 12px;
+    }
+    .filter-search {
+      width: 100%;
+      min-width: 0;
+    }
+    .filter-count {
+      width: 100%;
+      text-align: right;
+    }
 
-    .member-head { gap: 8px; margin-bottom: 14px; }
-    .head-grid { grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 10px; }
+    .member-head {
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .head-grid {
+      grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+      gap: 10px;
+    }
 
-    .modal-inner { grid-template-columns: 1fr; padding: 24px 22px 26px; gap: 18px; }
-    .modal-stage { min-height: 240px; }
+    .modal-inner {
+      grid-template-columns: 1fr;
+      padding: 24px 22px 26px;
+      gap: 18px;
+    }
+    .modal-stage {
+      min-height: 240px;
+    }
   }
 </style>

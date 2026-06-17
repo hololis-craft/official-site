@@ -13,7 +13,8 @@ interface Props {
 }
 const { title, footerLinks } = Astro.props;
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="ja" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
@@ -29,21 +30,28 @@ const { title, footerLinks } = Astro.props;
       (function () {
         var KEY = "hololis-theme";
         var saved = null;
-        try { saved = localStorage.getItem(KEY); } catch (e) {}
-        var theme = (saved === "light" || saved === "dark") ? saved : "dark";
+        try {
+          saved = localStorage.getItem(KEY);
+        } catch (e) {}
+        var theme = saved === "light" || saved === "dark" ? saved : "dark";
         document.documentElement.setAttribute("data-theme", theme);
 
         function sync() {
           var cur = document.documentElement.getAttribute("data-theme");
           var btns = document.querySelectorAll("[data-theme-btn]");
           for (var i = 0; i < btns.length; i++) {
-            btns[i].classList.toggle("active", btns[i].getAttribute("data-theme-btn") === cur);
+            btns[i].classList.toggle(
+              "active",
+              btns[i].getAttribute("data-theme-btn") === cur,
+            );
           }
         }
 
         window.setTheme = function (t) {
           if (t !== "light" && t !== "dark") return;
-          try { localStorage.setItem(KEY, t); } catch (e) {}
+          try {
+            localStorage.setItem(KEY, t);
+          } catch (e) {}
           document.documentElement.setAttribute("data-theme", t);
           sync();
         };
