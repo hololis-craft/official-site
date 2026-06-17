@@ -9,9 +9,22 @@ interface FooterLink {
 }
 interface Props {
   title: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: "website" | "article";
   footerLinks?: FooterLink[];
 }
-const { title, footerLinks } = Astro.props;
+const {
+  title,
+  description = "ホロリスくらふとは、ホロライブリスナー同士が交流するファン運営のMinecraftサーバー。Java・統合版クロスプレイ対応で、独自のホロメン頭ガチャや経済システム、ミニゲームなどが楽しめます。",
+  ogImage = "/assets/floating-island-night.jpg",
+  ogType = "website",
+  footerLinks,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageUrl = new URL(ogImage, Astro.site).toString();
+const siteName = "ホロリスくらふと";
 ---
 
 <!doctype html>
@@ -20,6 +33,19 @@ const { title, footerLinks } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
