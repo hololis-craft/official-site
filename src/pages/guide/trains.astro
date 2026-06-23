@@ -1,0 +1,961 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GuideCredits from "../../components/GuideCredits.astro";
+import PageHero from "../../components/PageHero.astro";
+import DraftBanner from "../../components/DraftBanner.astro";
+
+const footerLinks = [
+  { href: "/", label: "トップ" },
+  { href: "/guide", label: "ガイド" },
+  { href: "/systems", label: "システム" },
+];
+---
+
+<BaseLayout
+  title="鉄道の使い方 — ホロリスくらふと"
+  description="ホロリスくらふとの鉄道システム (Train_Carts) の使い方ガイド。看板の書式、駅・行き先、速度、自動経路計算、チケットなど、線路を敷いて運行を始めるまでに必要なことをまとめました。"
+  ogImage="/assets/suisei-pixel-art-wide.jpg"
+  footerLinks={footerLinks}
+>
+  <PageHero
+    image="/assets/suisei-pixel-art-wide.jpg"
+    screenLabel="鉄道ヒーロー"
+  >
+    <div slot="crumb" class="crumb">
+      <a href="/">トップ</a> &nbsp;/&nbsp; <a href="/guide">ガイド</a> &nbsp;/&nbsp;
+      鉄道
+    </div>
+    <h1 slot="title">鉄道の使い方</h1>
+    <p slot="lead">
+      Train_Carts
+      で動く列車を、看板ひとつで止めたり、走らせたり、行き先を決めたり。線路敷設から運行までの基本を
+      1 ページで。
+    </p>
+  </PageHero>
+
+  <DraftBanner>
+    Train_Carts
+    の標準機能をベースにまとめています。サーバー独自の運用ルール（共有路線の規約、許可されている看板の種類など）は順次反映予定です。
+  </DraftBanner>
+
+  <section class="band">
+    <div class="sec">
+      <div class="sec-head center">
+        <div class="sec-en dashed">OVERVIEW</div>
+        <h2 class="sec-title">鉄道のしくみ</h2>
+        <p class="sec-lead">
+          バニラのトロッコでは無理な、長距離・自動運行・分岐切替・運賃徴収まで。Train_Carts
+          はぜんぶ「看板」で制御します。
+        </p>
+      </div>
+      <div class="step-grid">
+        <div class="step">
+          <span class="step-num">1</span>
+          <h3>敷く</h3>
+          <p>
+            レールを敷いて、駅・分岐・終点に看板を置く。看板はレールの真横、または線路の下のブロックに付けて使います。
+          </p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <h3>走らせる</h3>
+          <p>
+            スポナー看板やセーブ済み列車から出発。プレイヤーが乗っていれば乗車中の列車として、無人なら回送として動きます。
+          </p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <h3>制御する</h3>
+          <p>
+            駅で止める、行き先を設定する、速度を変える、分岐を自動で切り替える。すべて看板の組み合わせで実現できます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>SIGN BASICS</span></div>
+        <h2 class="sec-title">看板の基本書式</h2>
+        <p class="sec-lead">
+          すべての Train_Carts 看板は、1
+          行目に対象とレッドストーンの動作モードを書き、2
+          行目以降で内容を指定します。
+        </p>
+      </div>
+      <div class="sign-info">
+        <div class="sign-card">
+          <h4>1 行目：対象とモード</h4>
+          <ul class="kv">
+            <li>
+              <code>[train]</code><span
+                >列車全体を制御。レッドストーン信号が必要。</span
+              >
+            </li>
+            <li>
+              <code>[cart]</code><span>1 両単位で制御。</span>
+            </li>
+            <li>
+              <code>[+train]</code><span
+                >常時 ON モード。レッドストーンなしで常に有効。</span
+              >
+            </li>
+            <li>
+              <code>[!train]</code><span>信号反転（信号 OFF で有効）。</span>
+            </li>
+            <li>
+              <code>[/train]</code> /
+              <code>[\train]</code><span
+                >立ち上がり / 立ち下がりエッジでのみ動作。</span
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="sign-card">
+          <h4>2〜4 行目：アクション内容</h4>
+          <p>
+            看板の種類によって書き方が変わります。<code>station</code> /
+            <code>destination</code> / <code>switcher</code> / <code
+              >launch</code
+            >
+            / <code>property</code> / <code>spawn</code> など。詳細は以下の各セクションで。
+          </p>
+          <p class="hint">
+            ※
+            看板はレール本体ではなく、レールの直下／側面のブロックに取り付けます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>STATION</span></div>
+        <h2 class="sec-title">駅で止める・発車させる</h2>
+        <p class="sec-lead">
+          <code>station</code>
+          看板を置いた地点で列車を停止させ、指定秒数後に発車させられます。経路ネットワークの「目印」にもなります。
+        </p>
+      </div>
+
+      <div class="sign-examples">
+        <article class="sign-ex">
+          <h4>基本：レッドストーンで止める／発進</h4>
+          <pre class="signbox">
+[train]
+station
+0
+</pre>
+          <p>
+            信号 ON
+            の間だけ停止し、信号が切れたら現在の進行方向にそのまま発車します。
+          </p>
+        </article>
+
+        <article class="sign-ex">
+          <h4>3 秒停車してから右方向に発車</h4>
+          <pre class="signbox">
+[train]
+station 5
+3
+right
+</pre>
+          <p>
+            2 行目末尾の数字は発車距離（大きいほどゆっくり加速）、3
+            行目は停車秒数、4 行目は発車方向（<code>left</code> /
+            <code>right</code> / <code>reverse</code> /
+            <code>continue</code>）。
+          </p>
+        </article>
+
+        <article class="sign-ex">
+          <h4>経路ネットワーク用の駅</h4>
+          <pre class="signbox">
+[+train]
+station
+route continue
+</pre>
+          <p>
+            常時 ON にしておくと、駅の名前は他の <code>destination</code>
+            看板から経路探索の目的地として参照できます。<code
+              >route continue</code
+            >
+            にすると、停車後に行き先方向へ自動的に発車します。
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>DESTINATION &amp; ROUTING</span></div>
+        <h2 class="sec-title">行き先と自動経路</h2>
+        <p class="sec-lead">
+          列車に「行き先」を持たせると、分岐の <code>switcher</code> 看板が自動で最短ルートに切り替えてくれます。複雑な路線網でも、行き先を決めるだけで到着できます。
+        </p>
+      </div>
+
+      <div class="sign-examples">
+        <article class="sign-ex">
+          <h4>destination 看板：行き先の登録地</h4>
+          <pre class="signbox">
+[train]
+destination
+shrine
+</pre>
+          <p>
+            列車がこの看板を通過すると行き先が <b>shrine</b>
+            に設定される、または「shrine という行き先名は、この場所のこと」とネットワークに登録されます。4
+            行目に次の行き先を書くと、到着後に自動で再設定することもできます。
+          </p>
+        </article>
+
+        <article class="sign-ex">
+          <h4>switcher 看板：自動分岐</h4>
+          <pre class="signbox">
+[+train]
+switcher
+</pre>
+          <p>
+            3・4 行目を空にして常時 ON にしておくだけで
+            OK。列車の行き先に応じてレールを最短側に切り替えてくれます。<br />
+            条件分岐したい場合は、3 行目 = 左に切り替える条件、4 行目 = 右に切り替える条件を書きます（例：<code
+              >t@express</code
+            >
+            で「<code>express</code> タグを持つ列車は左へ」）。
+          </p>
+        </article>
+
+        <article class="sign-ex">
+          <h4>行き先をプレイヤーが指定する</h4>
+          <pre class="signbox">/train destination shrine</pre>
+          <p>
+            乗車中の列車に対し、コマンドで直接行き先を入れられます。プロパティ看板で自動セットすることも可能：
+          </p>
+          <pre class="signbox">
+[+train]
+property
+destination
+shrine
+</pre>
+        </article>
+      </div>
+
+      <div class="callout">
+        <h4>経路ネットワークを動かすコツ</h4>
+        <ul>
+          <li>
+            各駅・分岐先に <code>destination</code> 看板（あるいは命名済みの
+            <code>station</code> 看板）を置いて、行き先名を登録する。
+          </li>
+          <li>分岐の入口には常時 ON の <code>switcher</code> 看板を置く。</li>
+          <li>
+            一方通行にしたい区間は <code>blocker</code>
+            看板を使う。経路計算はブロッカーで塞がれた向きを自動的に避けてくれる。
+          </li>
+          <li>
+            ネットワークがおかしくなった時はサーバー管理者に
+            <code>/train reroute</code> を依頼。
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>SPEED</span></div>
+        <h2 class="sec-title">速度のコントロール</h2>
+        <p class="sec-lead">
+          加速・減速・停止は <code>launch</code>
+          看板で。最高速度の上限は <code>property speedlimit</code> で設定します。
+        </p>
+      </div>
+      <div class="sign-examples">
+        <article class="sign-ex">
+          <h4>速度 0.4 へ加速</h4>
+          <pre class="signbox">
+[train]
+launch
+0.4
+continue
+</pre>
+          <p>3 行目が目標速度（ブロック/tick）、4 行目が方向。</p>
+        </article>
+
+        <article class="sign-ex">
+          <h4>5 ブロックかけて速度 0.4 まで加速</h4>
+          <pre class="signbox">
+[train]
+launch 5
+0.4
+continue
+</pre>
+          <p>
+            2 行目に距離を書くと、その区間で滑らかに加減速します。<code
+              >launch 20s</code
+            >
+            で時間指定、<code>launch 2.2G</code> で加速度指定も可。
+          </p>
+        </article>
+
+        <article class="sign-ex">
+          <h4>停車（速度 0）</h4>
+          <pre class="signbox">
+[train]
+launch
+0
+continue
+</pre>
+          <p>
+            目標速度に <code>0</code>
+            を指定すれば、緊急停止ではなく自然減速で停まります。
+          </p>
+        </article>
+
+        <article class="sign-ex">
+          <h4>最高速度を上書きする</h4>
+          <pre class="signbox">
+[+train]
+property
+speedlimit
+0.6
+</pre>
+          <p>
+            プロパティ看板で <code>speedlimit</code>
+            を設定すると、その列車の最高速度を変更できます。バニラのトロッコは 0.4
+            ブロック/tick が上限ですが、Train_Carts ではこの値を超えられます。
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>PROPERTY</span></div>
+        <h2 class="sec-title">プロパティ看板でできること</h2>
+        <p class="sec-lead">
+          <code>property</code>
+          看板は、列車のあらゆる設定をその場で書き換えるための万能スイッチです。3
+          行目に項目、4 行目に値を書きます。
+        </p>
+      </div>
+      <div class="mini-grid">
+        <div class="mini">
+          <h4>destination</h4>
+          <p>列車の行き先を設定。例：<code>shrine</code></p>
+          <span class="tag">行き先</span>
+        </div>
+        <div class="mini">
+          <h4>speedlimit</h4>
+          <p>最高速度を ブロック/tick で指定。例：<code>0.6</code></p>
+          <span class="tag">速度</span>
+        </div>
+        <div class="mini">
+          <h4>addtag / settag</h4>
+          <p>
+            列車にタグを付ける（<code>switcher</code> の条件で使える）。例：<code
+              >express</code
+            >
+          </p>
+          <span class="tag">識別</span>
+        </div>
+        <div class="mini">
+          <h4>rename</h4>
+          <p>列車に固有名をつける。例：<code>Intercity#A</code></p>
+          <span class="tag">名前</span>
+        </div>
+        <div class="mini">
+          <h4>playerenter</h4>
+          <p>乗客の乗車可否。例：<code>true</code> / <code>false</code></p>
+          <span class="tag">アクセス</span>
+        </div>
+        <div class="mini">
+          <h4>addticket / clrticket</h4>
+          <p>列車に有効なチケットを登録／全削除。</p>
+          <span class="tag">改札</span>
+        </div>
+      </div>
+      <p class="cmd-note">
+        ※ プロパティ看板の対象は通常「通過した列車」だが、1 行目を <code
+          >[train myname]</code
+        > のようにすると、名前で指定した別の列車を遠隔操作することもできます。
+      </p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>SPAWN</span></div>
+        <h2 class="sec-title">列車を生成する</h2>
+        <p class="sec-lead">
+          <code>spawn</code>
+          看板を置けば、レール上に列車を発生させられます。空のレールに対してレッドストーン信号を入れると発車。
+        </p>
+      </div>
+      <div class="sign-examples">
+        <article class="sign-ex">
+          <h4>バニラのトロッコ 3 両を生成</h4>
+          <pre class="signbox">
+[train]
+spawn
+mmm
+</pre>
+          <p>
+            3・4 行目は編成パターン。<code>m</code> = 普通トロッコ、<code
+              >p</code
+            >
+            = ホッパー付き、<code>s</code> = 荷物用、など（記号は実装に依存）。セーブ済み列車を呼び出す場合は名前を書きます。
+          </p>
+        </article>
+
+        <article class="sign-ex">
+          <h4>1 分 20 秒ごとに自動スポーン</h4>
+          <pre class="signbox">
+[+train]
+spawn 1:20 0.5
+mmm
+</pre>
+          <p>
+            常時 ON
+            にして時刻を指定すると、無人駅でも定期発車する自動運行になります。0.5
+            は初速。
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>TICKETS</span></div>
+        <h2 class="sec-title">チケット（運賃と改札）</h2>
+        <p class="sec-lead">
+          Train_Carts
+          のチケットは「乗車許可証」の役割を持つマップアイテム。改札の代わりに、列車にチケットを登録しておくと、そのチケットを持ったプレイヤーだけ乗れるようになります。
+        </p>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd">
+          <code>/train ticket create &lt;name&gt;</code>
+          <p>新しいチケットを作成し、編集モードに入る。</p>
+        </div>
+        <div class="cmd">
+          <code>/train ticket edit &lt;name&gt;</code>
+          <p>既存チケットの設定を変更する。</p>
+        </div>
+        <div class="cmd">
+          <code>/train ticket give &lt;name&gt; &lt;player&gt;</code>
+          <p>指定プレイヤーにチケットを配布。</p>
+        </div>
+        <div class="cmd">
+          <code>/train addticket &lt;name&gt;</code>
+          <p>乗っている列車に、有効なチケットとして登録。</p>
+        </div>
+        <div class="cmd">
+          <code>/train remticket &lt;name&gt;</code>
+          <p>列車から特定のチケットを除外。</p>
+        </div>
+        <div class="cmd">
+          <code>/train clrticket</code>
+          <p>列車に登録された全チケットをクリア。</p>
+        </div>
+      </div>
+
+      <div class="sign-examples">
+        <article class="sign-ex">
+          <h4>看板でチケット登録（プロパティ看板）</h4>
+          <pre class="signbox">
+[+train]
+property
+addticket
+day-pass
+</pre>
+          <p>
+            コマンドの代わりに、停車時に踏ませる位置へ置くだけで自動的にチケットが登録されます。<code
+              >clrticket</code
+            > と組み合わせれば、駅ごとに有効券を切り替える運用も可能。
+          </p>
+        </article>
+      </div>
+
+      <p class="cmd-note">
+        ※
+        運賃を実際に「お金」として徴収する仕組みは経済プラグイン側との連携で実装されます。サーバーでの料金設定は<a
+          href="/guide/economy">経済ガイド</a
+        >も参照。
+      </p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>COMMANDS</span></div>
+        <h2 class="sec-title">乗車中によく使うコマンド</h2>
+        <p class="sec-lead">
+          乗っているとき / オーナーが管理するときに使う頻度の高いコマンド。
+        </p>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd">
+          <code>/train destination &lt;name&gt;</code>
+          <p>行き先を変更（自動経路計算が走る）。</p>
+        </div>
+        <div class="cmd">
+          <code>/train speedlimit &lt;値&gt;</code>
+          <p>最高速度を一時的に変更。</p>
+        </div>
+        <div class="cmd">
+          <code>/train launch &lt;値&gt;</code>
+          <p>今の列車を指定速度まで加速。</p>
+        </div>
+        <div class="cmd">
+          <code>/train stop</code>
+          <p>列車を停止。</p>
+        </div>
+        <div class="cmd">
+          <code>/train info</code>
+          <p>現在の速度・行き先・乗員などを表示。</p>
+        </div>
+        <div class="cmd">
+          <code>/train reroute</code>
+          <p>経路ネットワークを再計算（管理用）。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-en"><span>FAQ</span></div>
+        <h2 class="sec-title">よくある質問</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>看板を置いたのに反応しません。</summary>
+          <p>
+            1 行目が <code>[train]</code> のままだと、レッドストーン信号が必要です。常時動かしたい看板は
+            <code>[+train]</code> に変えてください。<br />
+            また、看板はレールに直接ではなく、レールが乗っているブロックの側面・下面、あるいは線路脇のブロックに取り付けます。
+          </p>
+        </details>
+        <details>
+          <summary>分岐が思った方向に切り替わりません。</summary>
+          <p>
+            列車に行き先が設定されているかを <code>/train info</code> で確認。経路ネットワークが更新されていない可能性もあるので、管理者に
+            <code>/train reroute</code>
+            を依頼してください。一方通行区間には <code>blocker</code> 看板を置くと安定します。
+          </p>
+        </details>
+        <details>
+          <summary>他の人の線路に勝手に列車を走らせて良いですか？</summary>
+          <p>
+            原則として、自分の管理外の路線では事前に持ち主の許可を取りましょう。共有路線の利用規約はサーバー
+            Discord
+            のアナウンスを参照してください。詳細はサーバー独自ルールとして本ページに追記予定です。
+          </p>
+        </details>
+        <details>
+          <summary>チケットを持っていないのに乗れてしまうのは？</summary>
+          <p>
+            列車に <code>addticket</code>
+            で有効チケットが 1 件も登録されていない場合は、改札なしの「フリー乗車」状態になります。改札を機能させるには最低
+            1 つチケットを登録してください。
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <GuideCredits>
+    <h3>参考・実装</h3>
+    <ul>
+      <li>
+        プラグイン：<a
+          href="https://wiki.traincarts.net/p/TrainCarts"
+          rel="noopener">Train_Carts 公式 Wiki (英語)</a
+        >
+      </li>
+      <li>
+        看板リファレンス：<a
+          href="https://wiki.traincarts.net/p/TrainCarts/Signs"
+          rel="noopener">TrainCarts / Signs</a
+        >
+      </li>
+      <li>
+        自動経路：<a
+          href="https://wiki.traincarts.net/p/Special:MyLanguage/TrainCarts/PathFinding"
+          rel="noopener">TrainCarts / PathFinding</a
+        >
+      </li>
+      <li>
+        チケット：<a
+          href="https://wiki.traincarts.net/p/Special:MyLanguage/TrainCarts/Tickets"
+          rel="noopener">TrainCarts / Tickets</a
+        >
+      </li>
+    </ul>
+  </GuideCredits>
+</BaseLayout>
+
+<style>
+  .band.alt {
+    background: var(--bg-2);
+  }
+
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .step {
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px 26px;
+    position: relative;
+  }
+  .step::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 26px;
+    width: 52px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 0 16px var(--accent-glow);
+  }
+  .step-num {
+    font-family: var(--font-en);
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+    margin-top: 8px;
+  }
+  .step h3 {
+    font-size: 20px;
+    font-weight: 900;
+    margin: 10px 0 8px;
+    color: var(--text);
+  }
+  .step p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.9;
+  }
+
+  .sign-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .sign-card {
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 26px;
+  }
+  .sign-card h4 {
+    font-size: 15.5px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .sign-card p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.9;
+  }
+  .sign-card .hint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--text-soft);
+  }
+  .sign-card .kv {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .sign-card .kv li {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-weight: 500;
+  }
+  .sign-card .kv code {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    background: var(--surface-2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 8px;
+  }
+  .sign-card code {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .sign-examples {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .sign-ex {
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sign-ex h4 {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--text);
+  }
+  .sign-ex p {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.85;
+  }
+  .sign-ex code {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .signbox {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.65;
+    white-space: pre;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  .callout {
+    margin-top: 22px;
+    background: var(--accent-soft);
+    border: 1px solid var(--pill-border);
+    border-radius: 14px;
+    padding: 20px 26px;
+  }
+  .callout h4 {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .callout ul {
+    list-style: disc;
+    padding-left: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .callout li {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.85;
+  }
+  .callout code {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .cmd-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .cmd {
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .cmd code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--surface-2);
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 8px;
+    word-break: break-all;
+  }
+  .cmd p {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.8;
+  }
+  .cmd-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text-soft);
+  }
+  .cmd-note a {
+    color: var(--accent);
+  }
+  .cmd-note code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--surface-2);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .mini {
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+  }
+  .mini h4 {
+    font-size: 16px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+  .mini p {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.85;
+  }
+  .mini code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--surface-2);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .mini .tag {
+    margin-top: 14px;
+  }
+
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .faq details {
+    background: var(--surface-grad);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 22px;
+  }
+  .faq details[open] {
+    border-color: var(--accent);
+  }
+  .faq summary {
+    font-weight: 800;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 14.5px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq summary::after {
+    content: "+";
+    color: var(--accent);
+    font-family: var(--font-en);
+    font-size: 18px;
+  }
+  .faq details[open] summary::after {
+    content: "−";
+  }
+  .faq p {
+    margin-top: 10px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.9;
+  }
+  .faq code {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    background: var(--surface-2);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 920px) {
+    .step-grid {
+      grid-template-columns: 1fr;
+    }
+    .sign-info {
+      grid-template-columns: 1fr;
+    }
+    .sign-examples {
+      grid-template-columns: 1fr;
+    }
+    .cmd-grid {
+      grid-template-columns: 1fr;
+    }
+    .mini-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
