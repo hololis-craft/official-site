@@ -1,0 +1,198 @@
+---
+import EarningsLayout from "../../layouts/EarningsLayout.astro";
+import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
+---
+
+<EarningsLayout
+  title="株(Stock)ガイド — 金策サバイバル 2026"
+  description="Stock プラグインの使い方。国営株・会社株の売買、配当、会社設立、大口取引までまとめた金策サバイバル公式ガイド。"
+  ogImage="/assets/suisei-observatory.jpg"
+  active="guides"
+>
+  <section class="guide-hero">
+    <div class="earn-container">
+      <div class="guide-crumb">
+        <a href="/earnings">TOP</a> / <a href="/earnings#guides">GUIDES</a> /
+        <span class="current">STOCK</span>
+      </div>
+      <div class="guide-label">03 — HOW TO EARN / STOCK</div>
+      <h1 class="guide-title">株で稼ぐ。</h1>
+      <div class="guide-underline"></div>
+      <p class="guide-lead">
+        国営銘柄と会社株のトレード、日次配当、そして最終日の特別配当。値動きと配当の両輪で資産を膨らませます。
+      </p>
+    </div>
+  </section>
+
+  <section class="guide-body earn-container">
+    <div class="guide-body-inner">
+      <h2>株式市場の流れ</h2>
+      <ul>
+        <li>
+          <b>Day 1</b>:
+          国営5銘柄(採掘・討伐・鍛冶・釣り・農業)に投資可能。会社の設立はまだできません。
+        </li>
+        <li>
+          <b>Day 2 以降</b>:
+          会社の設立・上場が可能に。プレイヤー会社株にも投資できます。
+        </li>
+        <li>
+          <b>Day 15 (Week 3) 以降</b>: 国営株の配当率がアップ (0.2%/日 →
+          0.5%/日)。
+        </li>
+        <li>
+          <b>Day 21 24:00</b>: 最終処理。会社財布残高の 100%
+          が最終特別配当として全株主に分配され、その後すべての銘柄が
+          <b>強制現金化</b>されます。
+        </li>
+      </ul>
+      <p>
+        期間中に稼ぐ手段は
+        <b
+          >「株の値上がり益」「配当」「(会社所属時の)ジョブ収入と自社株自動付与」</b
+        >
+        の3つです。
+      </p>
+
+      <h2>銘柄を見る</h2>
+      <div class="guide-cmd-list">
+        <div class="row">
+          <code>/stock list</code>
+          <div class="desc">
+            現在上場中のすべての銘柄と価格。ホバーで内部コードを確認。
+          </div>
+        </div>
+        <div class="row">
+          <code>/stock info &lt;銘柄名&gt;</code>
+          <div class="desc">
+            個別銘柄の現在価格・当日始値・発行株数・推定日次配当。
+          </div>
+        </div>
+        <div class="row">
+          <code>/stock history &lt;銘柄名&gt;</code>
+          <div class="desc">過去24時間の株価履歴。</div>
+        </div>
+      </div>
+
+      <h2>株を売買する</h2>
+      <p>
+        対話ダイアログでの取引が推奨です。<code>/stock</code>を実行し、
+      </p>
+      <ol>
+        <li>銘柄一覧から売買したい銘柄を選択</li>
+        <li>「購入」または「売却」を選択</li>
+        <li>株数を入力</li>
+        <li>確認画面で数量・単価・合計を確認して確定</li>
+      </ol>
+
+      <div class="guide-callout">
+        <div class="cal-label">手数料</div>
+        <p>
+          すべての売買は1%程度の手数料がかかります。取引の合計金額から自動で差し引かれます。
+        </p>
+      </div>
+
+      <h3>売買の重要ルール</h3>
+      <ul>
+        <li>
+          <b>保有上限は発行株数の 10%</b>:
+          これを超える買い注文は拒否されます(自社株自動付与は対象外)。
+        </li>
+      </ul>
+
+      <h2>保有株を確認する</h2>
+      <p><code>/stock holdings</code> で保有一覧が表示されます。</p>
+      <pre><code>=== 保有銘柄 ===
+岩盤クラブ         168株  時価 252G  取得 245G  評価 42,336G  +1,176G (+2.9%)
+夜勤組              40株  時価 174G  取得 200G  評価  6,960G  −1,040G (−13.0%)
+────────────────────
+合計評価額: 49,296G   投下 G 相当: 49,160G   含み益: +136G (+0.3%)</code></pre>
+      <ul>
+        <li>
+          <b>時価</b>: 現在の市場価格。今すぐ売れば受け取れる単価。
+        </li>
+        <li><b>取得</b>: これまでの取引の加重平均取得価格。</li>
+        <li>
+          <b>含み益</b>:
+          <code>(時価 − 取得) × 保有株数</code>。緑=プラス、赤=マイナス。
+        </li>
+      </ul>
+
+      <h2>配当</h2>
+      <p>2種類の配当が毎日 24:00 に自動入金されます。</p>
+      <ul>
+        <li>
+          <b>国営株の配当</b>: 毎日 0.2% (Day 15 以降は 0.5%)。全保有者が対象。
+        </li>
+        <li>
+          <b>会社株の配当</b>: 会社財布残高の 50%
+          を「社外株主」(=その会社の社員でない株主)に持株比例で分配。
+          <b>社員は自社株の配当対象外</b>です。
+        </li>
+      </ul>
+
+      <h2>会社に所属する</h2>
+      <p>
+        会社への参加は<b>代表者からの招待制</b>です。
+        代表者に招待してもらい、承認ダイアログで承認すると社員になります。
+      </p>
+      <p>参加中は次のことが起こります。</p>
+      <ul>
+        <li>ジョブ収入の 10% が会社財布に自動振替(配当原資)</li>
+        <li>
+          さらにジョブ収入の 10% を原資に、<b>運営奨励金 100% 上乗せ</b
+          >で自社株が毎時付与（つまり、20%分の自社株が毎時付与される）。
+        </li>
+        <li>会社の拠点ワープ <code>/company warp</code> が使える</li>
+        <li>自社株の配当は受けられません(社外株主のみ対象)</li>
+      </ul>
+      <!-- <div class="guide-callout is-warn">
+        <div class="cal-label">LEAVE</div>
+        <p>
+          退社 (<code>/company leave</code>) すると自社株保有分がすべて MM
+          買取価格で<b>強制現金化</b
+          >されます。確認ダイアログでおおよその受取額が表示されるので、必要ならタイミングを見て。
+        </p>
+      </div> -->
+
+      <h2>会社を設立する(Day 3 以降)</h2>
+      <p><code>/company incorporate</code> で対話ダイアログが進行します。</p>
+      <ul>
+        <li>
+          <b>設立費 15,000G</b>: 発起人の人数で均等負担(例: 4人なら1人 3,750G)。
+        </li>
+        <li>発起人は2〜4名(自分を含む)。全員がオンラインで承認する必要。</li>
+        <li>設立費はそのまま会社財布の初期残高になります。</li>
+        <li>発起人には合計 400 株の自社株が均等配布。</li>
+        <li>設立から<b>24時間後に自動で上場</b>(取引可能に)。</li>
+      </ul>
+
+      <div class="guide-callout">
+        <div class="cal-label">ブースト</div>
+        <p>
+          会社で働いていた日数に応じて、発起人は社員をブーストできます。
+          ブースト発動中は仕事の報酬が 1.2 倍になります。
+        </p>
+      </div>
+
+      <h2>株価の動きを知る</h2>
+      <ul>
+        <li>
+          <b>毎時 HH:00</b>: 各銘柄の変動がチャットに流れます。
+        </li>
+        <li>
+          <b>オフライン中の変動</b>: ログイン時にまとめて受信(保有銘柄のみ)。
+        </li>
+        <li><b>会社設立・上場・ブースト発動</b>: 全体通知されます。</li>
+      </ul>
+    </div>
+  </section>
+
+  <EarningsGuideRelated current="stock" />
+</EarningsLayout>
+
+<style>
+  .guide-body-inner {
+    max-width: 820px;
+  }
+</style>

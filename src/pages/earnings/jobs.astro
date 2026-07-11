@@ -1,0 +1,124 @@
+---
+import EarningsLayout from "../../layouts/EarningsLayout.astro";
+import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
+---
+
+<EarningsLayout
+  title="仕事(Jobs)ガイド — 金策サバイバル 2026"
+  description="仕事プラグインの使い方。専業の選び方、/jobs コマンド、報酬とクールダウン、単調性ペナルティ対策までまとめた金策サバイバル公式ガイド。"
+  ogImage="/assets/haloween-structure.jpeg"
+  active="guides"
+>
+  <section class="guide-hero">
+    <div class="earn-container">
+      <div class="guide-crumb">
+        <a href="/earnings">TOP</a> / <a href="/earnings#guides">GUIDES</a> /
+        <span class="current">JOBS</span>
+      </div>
+      <div class="guide-label">01 — HOW TO EARN / JOBS</div>
+      <h1 class="guide-title">仕事で稼ぐ。</h1>
+      <div class="guide-underline"></div>
+      <p class="guide-lead">
+        仕事は「専業」を1つ選び、その職業に対応する行動をとると報酬が入る仕組み。
+        全金策の土台となる、いちばん安定した収入源です。
+      </p>
+    </div>
+  </section>
+
+  <section class="guide-body earn-container">
+    <div class="guide-body-inner">
+      <h2>まず覚えること</h2>
+      <ul>
+        <li>
+          <b>専業は1つだけ。</b
+          >同時に複数の職業には就けず、専業外の行動には報酬もログも出ません。
+        </li>
+        <li>
+          <b>変更にはクールダウン。</b
+          >イベント期間中は短く、通常期は数日、といった運用が多いです。
+        </li>
+        <li>
+          <b>報酬は自動入金。</b>対象アクションを行うと通貨口座に加算されます。
+        </li>
+      </ul>
+
+      <h2>最初にすること: 専業を選ぶ</h2>
+      <p>サーバに入ったらまず次を実行しましょう。</p>
+      <pre><code>/jobs select</code></pre>
+      <ul>
+        <li><b>未選択のとき</b>: 職業一覧のダイアログが開く。</li>
+        <li><b>選択済み・変更可能なとき</b>: 職業変更のダイアログが開く。</li>
+        <li>
+          <b>選択済み・クールダウン中のとき</b>:
+          次回変更可能な時刻を示すダイアログが開く。
+        </li>
+      </ul>
+
+      <div class="guide-callout is-warn">
+        <div class="cal-label">NOTE</div>
+        <p>
+          ダイアログを閉じただけでは何も選ばれません。
+          <b>専業未選択の間は何をしても報酬0</b>
+          なので、必ず「この職業を選ぶ」まで押し切ってください。
+        </p>
+      </div>
+
+      <h2>自分の状態を確認する</h2>
+      <p><code>/jobs status</code> で現在の状態が見えます。</p>
+      <ul>
+        <li><b>現在の専業</b></li>
+        <li>
+          <b>本日の獲得額と日次キャップ</b>: <code>amount / cap</code>
+          の形式。上限に達すると以降その日は報酬0。
+        </li>
+        <li>
+          <b>進捗バー</b>: <code>[■■■■□□□□□□]</code> で上限までの進捗を可視化。
+        </li>
+        <li>
+          <b>次回変更可能時刻</b>: クールダウンが残っていれば表示される。
+        </li>
+      </ul>
+
+      <h2>コマンドまとめ</h2>
+      <div class="guide-cmd-list">
+        <div class="row">
+          <code>/jobs</code><div class="desc">専業の選択・変更。</div>
+        </div>
+        <div class="row">
+          <code>/jobs info</code>
+          <div class="desc">職業一覧を閲覧(読むだけ)。</div>
+        </div>
+        <div class="row">
+          <code>/jobs status</code>
+          <div class="desc">自分の現状を表示。</div>
+        </div>
+      </div>
+
+      <h2>知っておくべき仕組み</h2>
+      <h3>単調性ペナルティ</h3>
+      <p>
+        同じアクションを連続で繰り返すと、報酬が段階的に減衰します。多様な行動をしたほうが総収入は伸びる設計です。
+        <code>/jobs status</code>
+        で作動状況が見えます。職業によっては適用されないアクションもあります。
+      </p>
+      <h3>日次キャップ</h3>
+      <p>
+        1日あたりに獲得できる報酬に上限があります。到達すると以降その日は報酬0。翌日0時にリセットされます。
+      </p>
+      <h3>自動化対策</h3>
+      <p>
+        放置マクロや外部ツールによる自動化は
+        <a href="/earnings/rules">ルール</a>
+        上禁止されています。装置についても制限があります。
+      </p>
+    </div>
+  </section>
+
+  <EarningsGuideRelated current="jobs" />
+
+  <style>
+    .guide-body-inner {
+      max-width: 820px;
+    }
+  </style>
+</EarningsLayout>

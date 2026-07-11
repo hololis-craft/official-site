@@ -1,0 +1,480 @@
+---
+import EarningsLayout from "../../layouts/EarningsLayout.astro";
+
+const basicRules = [
+  {
+    no: "RULE 01",
+    title: "全員、同じ資金から。",
+    body: "開始時に全参加者へ同額の初期資金を支給。持ち込み資産はなし、全員ゼロからのスタートです。",
+  },
+  {
+    no: "RULE 02",
+    title: "稼ぎ方は、自由。",
+    body: "仕事・取引・株・カジノ、期間中はどの金策手段をどう組み合わせてもOK。戦略に正解はありません。",
+  },
+  {
+    no: "RULE 03",
+    title: "最終日の総資産で決着。",
+    body: "期間終了時点の所持金を集計してランキングを確定。結果発表はDiscordで行います。",
+  },
+];
+
+const scoring = [
+  {
+    name: "所持金(通貨残高)",
+    note: null,
+    verdict: "カウントする",
+    yes: true,
+  },
+  {
+    name: "保有中の株",
+    note: "終了時に自動売却",
+    verdict: "カウントする",
+    yes: true,
+  },
+  {
+    name: "アイテム・建築物・在庫",
+    note: null,
+    verdict: "カウントしない",
+    yes: false,
+  },
+];
+
+const prohibited = [
+  {
+    no: "NG 01",
+    title: "バグ・不正増殖の利用",
+    body: "アイテム増殖やシステムの穴を突いた金策は禁止。発見したら運営へ報告を。悪用した場合は資産没収や失格の対象になります。",
+  },
+  {
+    no: "NG 02",
+    title: "窃盗・妨害・破壊行為",
+    body: "他プレイヤーのチェストからの窃盗、ショップや作業の意図的な妨害、建築物の破壊は禁止です。予告なくBANされることがあります。",
+  },
+  {
+    no: "NG 03",
+    title: "放置・自動化による稼ぎ",
+    body: "放置マクロや外部ツールによる無人金策は禁止。トラップは敵Mobスポナーを利用した自動化と1人1村までのゴーレムトラップがOKです。",
+  },
+  {
+    no: "NG 04",
+    title: "順位操作のための資産移動",
+    body: "対価のない大口送金など、談合による順位操作は禁止。通常の取引・雇用はOKです。",
+  },
+];
+---
+
+<EarningsLayout
+  title="ルール説明 — 金策サバイバル 2026"
+  description="金策サバイバル 2026 の公式ルールブック。基本ルール、集計方法、禁止事項をまとめて掲載。"
+  ogImage="/assets/kinsaku-player-shop.jpg"
+  active="rules"
+>
+  <!-- HERO -->
+  <section class="rules-hero">
+    <div class="earn-container">
+      <div class="crumb earn-mono">
+        <a href="/earnings">TOP</a> / <span>RULES</span>
+      </div>
+      <div class="earn-mono earn-eyebrow-mono">OFFICIAL RULEBOOK</div>
+      <h1 class="rules-title">ルール説明</h1>
+      <div class="earn-hero-underline"></div>
+      <p class="rules-lead">
+        競うのはただひとつ、最終日の総資産。<br
+        />ここに書いていないことは、だいたい自由です。
+      </p>
+    </div>
+  </section>
+
+  <!-- BASIC RULES -->
+  <section class="earn-block">
+    <div class="earn-container">
+      <div class="earn-section-eyebrow">
+        <span class="label">BASIC RULES</span><span class="rule"></span>
+      </div>
+      <h2 class="earn-h2">基本ルールは、3つだけ。</h2>
+      <div class="rules-grid-3">
+        {
+          basicRules.map((r) => (
+            <div class="rules-cell">
+              <div class="rules-cell-no earn-mono">{r.no}</div>
+              <div class="rules-cell-title">{r.title}</div>
+              <p class="rules-cell-body">{r.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- SCORING -->
+  <section class="earn-block earn-block-dark">
+    <div class="earn-container earn-two-col">
+      <div>
+        <div class="earn-section-eyebrow">
+          <span class="label">SCORING</span><span class="rule"></span>
+        </div>
+        <h2 class="earn-sub-h">
+          何が「資産」に<br />カウントされるのか。
+        </h2>
+        <p class="earn-p">
+          集計対象は期間終了時点の
+          <b class="earn-gold-text">所持金(通貨残高)</b>のみ。
+          アイテムや建築物は資産に含まれません。売り抜けるタイミングも戦略のうちです。
+        </p>
+      </div>
+      <div class="score-list">
+        {
+          scoring.map((s) => (
+            <div class="score-row">
+              <div class="score-name">
+                <div class="name">{s.name}</div>
+                {s.note && <div class="note">{s.note}</div>}
+              </div>
+              <div
+                class={
+                  "score-verdict earn-mono " + (s.yes ? "is-yes" : "is-no")
+                }
+              >
+                {s.verdict}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- PROHIBITED -->
+  <section class="earn-block">
+    <div class="earn-container">
+      <div class="earn-section-eyebrow">
+        <span class="label">PROHIBITED</span><span class="rule"></span>
+      </div>
+      <h2 class="earn-h2">禁止事項。</h2>
+      <p class="earn-p earn-p-lead">
+        全員が気持ちよく競うための最低限のライン。違反が確認された場合、資産の没収や失格となることがあります。
+      </p>
+      <div class="ng-grid">
+        {
+          prohibited.map((p) => (
+            <div class="ng-cell">
+              <span class="ng-no earn-mono">{p.no}</span>
+              <div>
+                <div class="ng-title">{p.title}</div>
+                <p class="ng-body">{p.body}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTOMATION -->
+  <section class="earn-block">
+    <div class="earn-container">
+      <div class="earn-section-eyebrow">
+        <span class="label">AUTOMATION</span><span class="rule"></span>
+      </div>
+      <h2 class="earn-h2">自動化ルール。</h2>
+      <p class="earn-p earn-p-lead">
+        Mobトラップ・自動農場などについてのルール。
+      </p>
+      <div class="automation-list">
+        <div class="automation-row">
+          <div class="pos earn-mono">01</div>
+          <div class="body">
+            Mobスポナーを利用した自動化はOK、自然湧きを利用した自動化は禁止
+          </div>
+        </div>
+        <div class="automation-row">
+          <div class="pos earn-mono">02</div>
+          <div class="body">
+            ゴーレムトラップは1人1村までOK。複数の村を使った自動化は禁止
+          </div>
+        </div>
+        <div class="automation-row">
+          <div class="pos earn-mono">03</div>
+          <div class="body">
+            ピストンを利用した自動化はOKですが、装置全体で1000ブロックに収まる必要があります
+          </div>
+        </div>
+        <div class="automation-row">
+          <div class="pos earn-mono">04</div>
+          <div class="body">放置マクロや外部ツールによる無人金策は禁止</div>
+        </div>
+        <div class="automation-row">
+          <div class="pos earn-mono">05</div>
+          <div class="body">
+            X-RayやFreeCameraなど、
+            バニラのMinecraftで出来ないことができるModやツールの使用は禁止
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- CTA -->
+  <section class="earn-block earn-block-join">
+    <div class="earn-container earn-center">
+      <h2 class="earn-cta-h">
+        ルールは以上。<span class="earn-gold-text">あとは稼ぐだけ。</span>
+      </h2>
+      <div class="earn-join-ctas">
+        <a class="earn-btn-primary" href="/earnings#guides"
+          >金策手段のガイドを見る →</a
+        >
+        <a class="earn-btn-outline" href="https://discord.gg/hololiscraft"
+          >エントリーする</a
+        >
+      </div>
+    </div>
+  </section>
+</EarningsLayout>
+
+<style>
+  .rules-hero {
+    padding: 76px 0 60px;
+    border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+  }
+  .crumb {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(232, 226, 212, 0.45);
+    letter-spacing: 0.1em;
+  }
+  .crumb a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .crumb a:hover {
+    color: var(--earn-gold);
+  }
+  .crumb span {
+    color: var(--earn-gold);
+  }
+  .earn-eyebrow-mono {
+    margin-top: 34px;
+  }
+  .rules-title {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin: 16px 0 0;
+  }
+  .rules-lead {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 2.15;
+    color: rgba(232, 226, 212, 0.72);
+    margin: 20px 0 0;
+  }
+
+  /* basic rules */
+  .rules-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(201, 162, 39, 0.25);
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    margin-top: 34px;
+  }
+  .rules-cell {
+    background: var(--earn-bg);
+    padding: 34px 32px;
+  }
+  .rules-cell-no {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--earn-gold);
+  }
+  .rules-cell-title {
+    font-size: 22px;
+    font-weight: 900;
+    margin-top: 14px;
+  }
+  .rules-cell-body {
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 2.05;
+    color: rgba(232, 226, 212, 0.68);
+    margin: 10px 0 0;
+  }
+
+  /* two col shared */
+  .earn-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .earn-two-col-flip {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+  }
+  .earn-sub-h {
+    font-size: 30px;
+    font-weight: 900;
+    margin: 16px 0 0;
+    line-height: 1.4;
+  }
+  .earn-p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 2.1;
+    color: rgba(232, 226, 212, 0.68);
+    margin: 14px 0 0;
+  }
+  .earn-p-lead {
+    max-width: 640px;
+    margin-top: 12px;
+  }
+
+  /* scoring */
+  .score-list {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--earn-line-hair);
+  }
+  .score-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 16px 4px;
+    border-top: 1px solid var(--earn-line-hair);
+  }
+  .score-name .name {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .score-name .note {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(232, 226, 212, 0.5);
+    margin-top: 2px;
+  }
+  .score-verdict {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .score-verdict.is-yes {
+    color: var(--earn-gold);
+  }
+  .score-verdict.is-no {
+    color: rgba(232, 226, 212, 0.45);
+  }
+  .earn-note {
+    font-size: 11.5px;
+    color: rgba(232, 226, 212, 0.4);
+    margin: 14px 0 0;
+    line-height: 1.8;
+  }
+
+  /* prohibited */
+  .ng-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(201, 162, 39, 0.25);
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    margin-top: 34px;
+  }
+  .ng-cell {
+    background: var(--earn-bg);
+    padding: 28px 30px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .ng-no {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--earn-gold);
+    flex: 0 0 auto;
+    margin-top: 3px;
+  }
+  .ng-title {
+    font-size: 17px;
+    font-weight: 900;
+  }
+  .ng-body {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.95;
+    color: rgba(232, 226, 212, 0.62);
+    margin: 6px 0 0;
+  }
+
+  /* automation */
+  .automation-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 22px;
+    border-bottom: 1px solid var(--earn-line-hair);
+  }
+  .automation-row {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 16px;
+    align-items: baseline;
+    padding: 15px 4px;
+    border-top: 1px solid var(--earn-line-hair);
+  }
+  .automation-row .pos {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--earn-gold);
+  }
+  .automation-row .body {
+    font-size: 14.5px;
+    font-weight: 700;
+  }
+
+  /* CTA */
+  .earn-cta-h {
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1.4;
+  }
+  .earn-join-ctas {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  .earn-block {
+    padding: 30px 0;
+  }
+  .earn-block-join {
+    border-top: 1px solid rgba(201, 162, 39, 0.3);
+  }
+  .earn-center {
+    text-align: center;
+  }
+
+  @media (max-width: 820px) {
+    .rules-title {
+      font-size: 40px;
+    }
+    .rules-grid-3 {
+      grid-template-columns: 1fr;
+    }
+    .ng-grid {
+      grid-template-columns: 1fr;
+    }
+    .earn-two-col {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .rules-photo {
+      height: 220px;
+    }
+    .earn-cta-h {
+      font-size: 26px;
+    }
+  }
+</style>

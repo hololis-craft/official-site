@@ -1,0 +1,709 @@
+---
+import EarningsLayout from "../../layouts/EarningsLayout.astro";
+
+const earnMethods = [
+  {
+    no: "01",
+    risk: "●○○",
+    name: "仕事",
+    desc: "農業・鍛冶・討伐など、行動そのものに応じて自動で報酬が入る安定収入。すべての資産形成の土台。",
+    href: "/earnings/jobs",
+    tag: null,
+  },
+  {
+    no: "02",
+    risk: "●●○",
+    name: "取引",
+    desc: "村人ショップを開いて売買。プレイヤー同士の相場観と商才が問われる。",
+    href: "/earnings/shop",
+    tag: null,
+  },
+  {
+    no: "03",
+    risk: "●●○",
+    name: "株",
+    desc: "国営株と会社株のトレード。日次配当と値動きで資産を最大化。会社は社員の行動に関連して株価が変動する。",
+    href: "/earnings/stock",
+    tag: null,
+  },
+  {
+    no: "04",
+    risk: "●●●",
+    name: "経済",
+    desc: "所持金の残し方、送金、法人口座。「稼ぐ」の裏側にあるお金のインフラ。",
+    href: "/earnings/economy",
+    tag: null,
+  },
+];
+
+const guides = [
+  {
+    label: "JOBS",
+    title: "仕事の始め方",
+    lead: "仕事を1つ選び、対象アクションで自動収入。/jobs から。",
+    href: "/earnings/jobs",
+  },
+  {
+    label: "SHOP",
+    title: "村人ショップ",
+    lead: "販売・買取ができる村人ショップ。",
+    href: "/earnings/shop",
+  },
+  {
+    label: "STOCK",
+    title: "株と会社",
+    lead: "国営株に会社設立、一時間1回の株価変動。",
+    href: "/earnings/stock",
+  },
+  {
+    label: "ECONOMY",
+    title: "お金の基本",
+    lead: "残高確認 /money、送金 /money pay、税や手数料の見え方。",
+    href: "/earnings/economy",
+  },
+];
+---
+
+<EarningsLayout
+  title="金策サバイバル 2026 — ホロリスくらふと特設サイト"
+  description="ホロリスくらふとの特別企画「金策サバイバル 2026」公式特設サイト。仕事・取引・株・カジノを駆使し、最終日の総資産で頂点を競う。"
+  ogImage="/assets/kinsaku-shop.jpeg"
+  active="top"
+>
+  <!-- HERO -->
+  <section class="earn-hero" id="overview">
+    <div class="earn-hero-grid" aria-hidden="true">
+      <div class="pixel-grid">
+        {
+          Array.from({ length: 64 }).map((_, i) => {
+            const row = Math.floor(i / 8);
+            const col = i % 8;
+            const d = Math.max(Math.abs(row - 3.5), Math.abs(col - 3.5));
+            const cls =
+              d < 1 ? "b" : d < 2 ? "c" : d < 3 ? "d" : d < 4 ? "e" : "f";
+            return <span class={"px " + cls} />;
+          })
+        }
+      </div>
+    </div>
+    <div class="earn-hero-inner earn-container">
+      <div class="earn-eyebrow-mono">SPECIAL EVENT</div>
+      <h1 class="earn-hero-title">金策<br />サバイバル</h1>
+      <div class="earn-hero-underline"></div>
+      <p class="earn-hero-lead">
+        ホロライブ「金策サバイバル」をホロリスで再現。<br />
+        仕事・取引・株・カジノを駆使し、豪華景品を手に入れよう
+      </p>
+      <div class="earn-hero-ctas">
+        <a class="earn-btn-primary" href="https://discord.gg/hololiscraft">
+          参加する →
+        </a>
+        <a class="earn-btn-ghost" href="#earn">金策手段を見る</a>
+        <span class="earn-hero-date">DATE: <b>2026/07/20-2026/08/12</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 数字ストリップ -->
+  <section class="earn-strip">
+    <div class="cell">
+      <div class="num">21日間</div>
+      <div class="cap">いつでも参加</div>
+    </div>
+    <div class="cell">
+      <div class="num">1時間に1回</div>
+      <div class="cap">株の変動頻度UP</div>
+    </div>
+    <div class="cell">
+      <div class="num">FREE</div>
+      <div class="cap">参加費無料</div>
+    </div>
+    <div class="cell">
+      <div class="num">景品</div>
+      <div class="cap">オリジナルSNSアイコン</div>
+    </div>
+  </section>
+
+  <!-- 金策手段 -->
+  <section class="earn-block" id="earn">
+    <div class="earn-container">
+      <div class="earn-section-eyebrow">
+        <span class="label">HOW TO EARN</span><span class="rule"></span>
+      </div>
+      <h2 class="earn-h2">稼ぎ方は、4つ。</h2>
+      <div class="earn-grid-4">
+        {
+          earnMethods.map((m) => (
+            <a class="earn-card" href={m.href}>
+              <div class="earn-card-top">
+                <span class="earn-card-no earn-mono">{m.no}</span>
+                <span class="earn-card-risk earn-mono">RISK {m.risk}</span>
+              </div>
+              <div class="earn-card-title">
+                {m.name}
+                {m.tag && <span class="earn-card-tag">{m.tag}</span>}
+              </div>
+              <p class="earn-card-desc">{m.desc}</p>
+              <span class="earn-card-arrow">詳しく見る →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERBOARD + COMPANY -->
+  <section class="earn-block earn-block-dark">
+    <div class="earn-container earn-two-col">
+      <div>
+        <div class="earn-section-eyebrow">
+          <span class="label">LEADERBOARD</span><span class="rule"></span>
+        </div>
+        <h2 class="earn-sub-h">
+          資産ランキング<span class="earn-mono earn-annot">SAMPLE</span>
+        </h2>
+        <div class="earn-rank">
+          <div class="earn-rank-row is-top">
+            <span class="pos earn-mono">01</span>
+            <div class="name">星屑ホールディングス</div>
+            <div class="amount earn-mono">1,284,500 G</div>
+          </div>
+          <div class="earn-rank-row">
+            <span class="pos earn-mono">02</span>
+            <div class="name">よなよな商会</div>
+            <div class="amount earn-mono">1,102,300 G</div>
+          </div>
+          <div class="earn-rank-row">
+            <span class="pos earn-mono">03</span>
+            <div class="name">桜浪漫堂</div>
+            <div class="amount earn-mono">986,750 G</div>
+          </div>
+          <div class="earn-rank-row is-muted">
+            <span class="pos earn-mono">04</span>
+            <div class="name">金ぴか組</div>
+            <div class="amount earn-mono">874,200 G</div>
+          </div>
+        </div>
+        <p class="earn-note">
+          ※ 開催中はワールド内とWebでリアルタイム更新予定。
+        </p>
+      </div>
+      <div>
+        <div class="earn-section-eyebrow">
+          <span class="label">COMPANY</span><span class="rule"></span>
+        </div>
+        <h2 class="earn-sub-h">
+          「会社」で挑むか、<br />独りで勝つか。
+        </h2>
+        <p class="earn-p">
+          前回好評だった少人数チーム「会社」制。仕事にランダムに連動する株価変動で、より大きな資産形成が可能です。
+        </p>
+        <figure class="earn-photo">
+          <img
+            src="/assets/kinsaku-shop.jpeg"
+            alt="前回の職業ショップ"
+            loading="lazy"
+          />
+          <figcaption class="earn-mono">2025.8 — 前回の運営ショップ</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDES -->
+  <section class="earn-block" id="guides">
+    <div class="earn-container">
+      <div class="earn-section-eyebrow">
+        <span class="label">GUIDES</span><span class="rule"></span>
+      </div>
+      <h2 class="earn-h2">
+        使い方は、<span class="earn-gold-text">ここに全部。</span>
+      </h2>
+      <p class="earn-p earn-p-lead">
+        4つの金策手段それぞれについて、コマンドと立ち回りを実用ガイドにまとめました。ルールの確認は
+        <a href="/earnings/rules">ルール説明</a> から。
+      </p>
+      <div class="earn-guide-grid">
+        {
+          guides.map((g) => (
+            <a class="earn-guide-card" href={g.href}>
+              <div class="earn-guide-label earn-mono">{g.label}</div>
+              <div class="earn-guide-title">{g.title}</div>
+              <div class="earn-guide-lead">{g.lead}</div>
+              <div class="earn-guide-arrow">READ →</div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section class="earn-block earn-block-join">
+    <div class="earn-container earn-center">
+      <div class="earn-mono earn-eyebrow-mono">JOIN</div>
+      <h2 class="earn-join-h">
+        最終日、いちばん<span class="earn-gold-text">富める者</span>は誰だ。
+      </h2>
+      <p class="earn-p earn-p-center">
+        日程・エントリー方法はDiscordで発表します。
+      </p>
+      <div class="earn-join-ctas">
+        <a
+          class="earn-btn-primary earn-btn-discord"
+          href="https://discord.gg/hololiscraft">Discordに参加する →</a
+        >
+        <a class="earn-btn-outline" href="/earnings/rules">ルールを読む</a>
+      </div>
+    </div>
+  </section>
+</EarningsLayout>
+
+<style>
+  /* ---------- HERO ---------- */
+  .earn-hero {
+    position: relative;
+    padding: 100px 0 90px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--earn-line);
+  }
+  .earn-hero-grid {
+    position: absolute;
+    right: 48px;
+    top: 90px;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+  .pixel-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 14px);
+    grid-template-rows: repeat(8, 14px);
+    gap: 4px;
+  }
+  .px {
+    display: block;
+    width: 14px;
+    height: 14px;
+  }
+  .px.b {
+    background: var(--earn-gold-bright);
+  }
+  .px.c {
+    background: var(--earn-gold);
+  }
+  .px.d {
+    background: rgba(201, 162, 39, 0.6);
+  }
+  .px.e {
+    background: rgba(201, 162, 39, 0.3);
+  }
+  .px.f {
+    background: rgba(201, 162, 39, 0.15);
+  }
+  .earn-hero-inner {
+    position: relative;
+    z-index: 2;
+  }
+  .earn-eyebrow-mono {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.34em;
+    color: var(--earn-gold);
+  }
+  .earn-hero-title {
+    font-size: 96px;
+    font-weight: 900;
+    line-height: 1.06;
+    margin: 24px 0 0;
+    letter-spacing: 0.01em;
+  }
+  .earn-hero-underline {
+    width: 72px;
+    height: 3px;
+    background: var(--earn-gold);
+    margin-top: 30px;
+  }
+  .earn-hero-lead {
+    font-size: 15.5px;
+    font-weight: 500;
+    line-height: 2.2;
+    color: var(--earn-text-muted);
+    margin: 24px 0 0;
+  }
+  .earn-hero-ctas {
+    display: flex;
+    gap: 16px;
+    margin-top: 38px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .earn-hero-date {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(232, 226, 212, 0.45);
+    margin-left: 22px;
+  }
+  .earn-hero-date b {
+    color: var(--earn-gold);
+    font-weight: 700;
+  }
+
+  /* ---------- 数字ストリップ ---------- */
+  .earn-strip {
+    border-top: 1px solid rgba(201, 162, 39, 0.3);
+    border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .earn-strip .cell {
+    padding: 26px 20px;
+    text-align: center;
+  }
+  .earn-strip .cell + .cell {
+    border-left: 1px solid rgba(201, 162, 39, 0.2);
+  }
+  .earn-strip .num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--earn-gold);
+  }
+  .earn-strip .cap {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(232, 226, 212, 0.6);
+    margin-top: 4px;
+  }
+
+  /* ---------- BLOCK ---------- */
+  .earn-block {
+    padding: 84px 0;
+  }
+  .earn-block-dark {
+    background: var(--earn-bg-2);
+    border-top: 1px solid rgba(201, 162, 39, 0.25);
+    border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+  }
+
+  /* ---------- 金策手段 2x2 ---------- */
+  .earn-grid-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(201, 162, 39, 0.25);
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    margin-top: 36px;
+  }
+  .earn-card {
+    background: var(--earn-bg);
+    padding: 36px 34px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.15s ease;
+    position: relative;
+  }
+  .earn-card:hover {
+    background: var(--earn-bg-3);
+  }
+  .earn-card-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .earn-card-no {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--earn-gold);
+  }
+  .earn-card-risk {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(232, 226, 212, 0.4);
+  }
+  .earn-card-title {
+    font-size: 26px;
+    font-weight: 900;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .earn-card-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 900;
+    background: var(--earn-gold);
+    color: #121212;
+    padding: 3px 10px;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+  }
+  .earn-card-desc {
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 2.05;
+    color: rgba(232, 226, 212, 0.68);
+    margin: 10px 0 0;
+    flex: 1;
+  }
+  .earn-card-arrow {
+    margin-top: 20px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--earn-gold);
+  }
+
+  /* ---------- LEADERBOARD ---------- */
+  .earn-two-col {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .earn-sub-h {
+    font-size: 30px;
+    font-weight: 900;
+    margin: 16px 0 0;
+    line-height: 1.4;
+  }
+  .earn-annot {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(232, 226, 212, 0.4);
+    margin-left: 14px;
+  }
+  .earn-rank {
+    display: flex;
+    flex-direction: column;
+    margin-top: 22px;
+    border-bottom: 1px solid var(--earn-line-hair);
+  }
+  .earn-rank-row {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 15px 4px;
+    border-top: 1px solid var(--earn-line-hair);
+  }
+  .earn-rank-row .pos {
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(232, 226, 212, 0.55);
+  }
+  .earn-rank-row .name {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .earn-rank-row .amount {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .earn-rank-row.is-top .pos,
+  .earn-rank-row.is-top .amount {
+    color: var(--earn-gold);
+  }
+  .earn-rank-row.is-muted {
+    color: rgba(232, 226, 212, 0.75);
+  }
+  .earn-rank-row.is-muted .pos {
+    color: rgba(232, 226, 212, 0.45);
+  }
+  .earn-note {
+    font-size: 11.5px;
+    color: rgba(232, 226, 212, 0.4);
+    margin: 14px 0 0;
+    line-height: 1.8;
+  }
+  .earn-p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 2.1;
+    color: rgba(232, 226, 212, 0.68);
+    margin: 14px 0 0;
+  }
+  .earn-p a {
+    color: var(--earn-gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201, 162, 39, 0.4);
+  }
+  .earn-p a:hover {
+    border-bottom-color: var(--earn-gold);
+  }
+  .earn-p-lead {
+    max-width: 640px;
+  }
+  .earn-p-center {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 560px;
+    margin-top: 16px;
+    text-align: center;
+  }
+  .earn-photo {
+    position: relative;
+    overflow: hidden;
+    height: 210px;
+    margin: 24px 0 0;
+    border: 1px solid rgba(201, 162, 39, 0.3);
+  }
+  .earn-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .earn-photo figcaption {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(11, 11, 11, 0.85);
+    color: var(--earn-text);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 8px 16px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ---------- GUIDES ---------- */
+  .earn-guide-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(201, 162, 39, 0.22);
+    border: 1px solid rgba(201, 162, 39, 0.22);
+    margin-top: 36px;
+  }
+  .earn-guide-card {
+    background: var(--earn-bg);
+    padding: 30px 26px 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: background 0.15s ease;
+  }
+  .earn-guide-card:hover {
+    background: var(--earn-bg-3);
+  }
+  .earn-guide-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    color: var(--earn-gold);
+  }
+  .earn-guide-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-top: 4px;
+  }
+  .earn-guide-lead {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.9;
+    color: rgba(232, 226, 212, 0.65);
+    flex: 1;
+  }
+  .earn-guide-arrow {
+    margin-top: 14px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--earn-gold);
+  }
+
+  /* ---------- JOIN ---------- */
+  .earn-block-join {
+    border-top: 1px solid rgba(201, 162, 39, 0.3);
+  }
+  .earn-center {
+    text-align: center;
+  }
+  .earn-join-h {
+    font-size: 44px;
+    font-weight: 900;
+    margin-top: 18px;
+    line-height: 1.35;
+  }
+  .earn-gold-text {
+    color: var(--earn-gold);
+  }
+  .earn-join-ctas {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .earn-btn-discord {
+    background: #5865f2;
+    color: #fff;
+  }
+  .earn-btn-discord:hover {
+    background: #4551e0;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 820px) {
+    .earn-hero {
+      padding: 60px 0 56px;
+    }
+    .earn-hero-grid {
+      right: 22px;
+      top: 60px;
+      transform: scale(0.7);
+      transform-origin: right top;
+      opacity: 0.6;
+    }
+    .earn-hero-title {
+      font-size: 58px;
+    }
+    .earn-strip {
+      grid-template-columns: 1fr 1fr;
+    }
+    .earn-strip .cell:nth-child(3),
+    .earn-strip .cell:nth-child(4) {
+      border-top: 1px solid rgba(201, 162, 39, 0.2);
+    }
+    .earn-strip .cell:nth-child(3) {
+      border-left: none;
+    }
+    .earn-block {
+      padding: 56px 0;
+    }
+    .earn-grid-4 {
+      grid-template-columns: 1fr;
+    }
+    .earn-two-col {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .earn-guide-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .earn-join-h {
+      font-size: 30px;
+    }
+    .earn-hero-date {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+  @media (max-width: 480px) {
+    .earn-hero-title {
+      font-size: 44px;
+    }
+    .earn-guide-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

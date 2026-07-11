@@ -1,0 +1,56 @@
+---
+interface Props {
+  current?: "jobs" | "shop" | "stock" | "economy";
+}
+const { current } = Astro.props;
+
+const items = [
+  {
+    key: "jobs",
+    label: "JOBS",
+    title: "仕事",
+    lead: "専業を選び、対応する行動で自動収入。",
+    href: "/earnings/jobs",
+  },
+  {
+    key: "shop",
+    label: "SHOP",
+    title: "取引",
+    lead: "村人ショップで買う・売る・仕入れる。",
+    href: "/earnings/shop",
+  },
+  {
+    key: "stock",
+    label: "STOCK",
+    title: "株",
+    lead: "国営銘柄と会社株、日次配当と値動き。",
+    href: "/earnings/stock",
+  },
+  {
+    key: "economy",
+    label: "ECONOMY",
+    title: "経済",
+    lead: "残高・送金・法人口座、お金のインフラ。",
+    href: "/earnings/economy",
+  },
+];
+---
+
+<section class="guide-related">
+  <div class="earn-container">
+    <div class="earn-section-eyebrow">
+      <span class="label">OTHER GUIDES</span><span class="rule"></span>
+    </div>
+    <div class="guide-related-grid">
+      {
+        items.map((i) => (
+          <a href={i.href} class:list={[current === i.key ? "is-current" : ""]}>
+            <span class="lbl">{i.label}</span>
+            <span class="ttl">{i.title}</span>
+            <span class="lead">{i.lead}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

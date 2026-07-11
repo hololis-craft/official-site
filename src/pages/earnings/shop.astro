@@ -1,0 +1,142 @@
+---
+import EarningsLayout from "../../layouts/EarningsLayout.astro";
+import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
+---
+
+<EarningsLayout
+  title="取引ガイド — 金策サバイバル 2026"
+  description="ModernVillagerShop の使い方。村人ショップの探し方、購入・納品の流れ、自分のショップの持ち方までまとめた金策サバイバル公式ガイド。"
+  ogImage="/assets/kinsaku-player-shop.jpg"
+  active="guides"
+>
+  <section class="guide-hero">
+    <div class="earn-container">
+      <div class="guide-crumb">
+        <a href="/earnings">TOP</a> / <a href="/earnings#guides">GUIDES</a> /
+        <span class="current">SHOP</span>
+      </div>
+      <div class="guide-label">02 — HOW TO EARN / SHOP</div>
+      <h1 class="guide-title">取引で稼ぐ。</h1>
+      <div class="guide-underline"></div>
+      <p class="guide-lead">
+        ワールドに立つ「村人ショップ」を舞台に、買う・売る・仕入れる。相場観と商才で差益を生む金策手段です。
+      </p>
+    </div>
+  </section>
+
+  <section class="guide-body earn-container">
+    <div class="guide-body-inner">
+      <h2>ショップとは</h2>
+      <ul>
+        <li>ショップは<b>村人(Villager)の姿</b>で世界に配置されています。</li>
+        <li>
+          各ショップは複数の出品枠を持ち、それぞれ次のいずれかが設定されます。
+          <ul>
+            <li>
+              <b>販売(SELL)</b>: 店主が売っているアイテムを<b>あなたが買う</b>
+            </li>
+            <li>
+              <b>買取(BUY)</b>: 店主が募集しているアイテムを
+              <b>あなたが納品して代金を受け取る</b>
+            </li>
+            <li><b>双方向(BOTH)</b>: 同じアイテムの販売と買取を1枠で扱う</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h2>ショップを開く</h2>
+      <p>
+        ショップ化された村人を近くで
+        <b>右クリック</b>
+        するとチェストUIが開きます。デフォルトは6ブロック以内。開けない場合、距離が遠いか、店主が編集中か、権限が足りていません。
+      </p>
+
+      <h2>ショップを探す</h2>
+      <div class="guide-cmd-list">
+        <div class="row">
+          <code>/vshop search &lt;アイテム名&gt;</code>
+          <div class="desc">
+            アイテム名で部分一致検索。ヒットしたショップID・単価・種別が並びます。
+          </div>
+        </div>
+      </div>
+
+      <h2>購入する(SELL 枠)</h2>
+      <ol>
+        <li>チェストUIで目当ての枠をクリック(BOTHは「購入する」を選択)。</li>
+        <li>
+          <b>数量入力ダイアログ</b>
+          で買いたい
+          <b>パック数</b>を入力。1パックの個数はショップ側で決まっています (例:
+          1パック=16個の枠で3パック買うと48個)。
+        </li>
+        <li>
+          <b>購入確認ダイアログ</b>で単価・合計・手数料を確認して「購入する」。
+        </li>
+        <li>代金が即時引き落とされ、アイテムがインベントリに入ります。</li>
+      </ol>
+
+      <div class="guide-callout is-warn">
+        <div class="cal-label">FAIL</div>
+        <p>
+          「在庫が不足しています」「所持金が足りません」「取引上限に達しています」「価格が変動したためキャンセルしました」等が出た場合は
+          UI で示されるメッセージに従います。
+          <b>インベントリの空きも事前に確保</b>を。
+        </p>
+      </div>
+
+      <h2>納品する(BUY 枠)</h2>
+      <ol>
+        <li>BUY枠(買取単価が表示されている枠)をクリック。</li>
+        <li>数量入力ダイアログでパック数を入力。</li>
+        <li>納品確認ダイアログで受取額と手数料を確認し「納品する」。</li>
+        <li>インベントリからアイテムが減り、代金が即時入金されます。</li>
+      </ol>
+      <p>
+        <b>「店主の残高が不足しているため取引できません」</b>
+        が出た場合、プレイヤーショップの店主にお知らせしましょう。
+      </p>
+
+      <h2>自分のショップを持つ</h2>
+      <p>
+        自分でショップを開くには、運営ショップで専用のエッグを買います。エッグに「出品枠の行数」が書かれているので、
+        必要な行数のものを買いましょう。ただ、出品枠の行数は在庫できるアイテム数にも関わるので、
+        気をつけましょう。
+      </p>
+      <p>
+        エッグをブロックの上で右クリックすると村人が生成され、その場がショップになります。
+        設置後は右クリックで編集メニューが開くので、そこから出品枠を作り、在庫を投入します。
+      </p>
+
+      <h2>アイテムの同一性</h2>
+      <p>
+        「同じアイテムか」は名前・エンチャント・カスタムデータまで含めて厳密判定されます。
+        エンチャント・リネーム・カスタムモデルが違うアイテムは別物扱いです。
+        <b>ショップの表示アイテムをまるごと持ち込むのが確実</b>です。
+      </p>
+
+      <h2>よくある質問</h2>
+      <ul>
+        <li>
+          <b>買った村人を叩いても消えない</b>:
+          ショップ村人は無敵で、削除は店主・管理者だけ。
+        </li>
+        <li>
+          <b>通知が来ない</b>: 購入者側に通知は送られません。店主向け機能です。
+        </li>
+        <li>
+          <b>Bedrock版で色が出ない</b>:
+          ダイアログの装飾がプレーンテキストにフォールバックする仕様です。操作は同じ。
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <EarningsGuideRelated current="shop" />
+</EarningsLayout>
+
+<style>
+  .guide-body-inner {
+    max-width: 820px;
+  }
+</style>
