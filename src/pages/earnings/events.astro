@@ -1,0 +1,289 @@
+---
+import EarningsLayout from "../../layouts/EarningsLayout.astro";
+import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
+
+// イベントは期間中に追加されます。ここに1件足すと一覧に反映されます。
+// theme(お題)は任意。無いイベントは theme: null を指定してください。
+const events = [
+  {
+    no: "EV 01",
+    name: "建築コンテスト",
+    status: "開催予定",
+    statusKind: "upcoming" as const,
+    theme: "hololive Dreams",
+    period: "日程は追って告知",
+    lead: "ホロライブ公式ゲーム「hololive Dreams」にちなんだ建築を期間内に完成させ、審査で順位を決めるコンテスト。上位入賞者には賞金、完成させて応募した全員に参加賞が出ます。",
+    prize: "賞金 + 参加賞",
+    entry: "エントリー制 / 参加費無料",
+    detail: [
+      "「hololive Dreams」に登場する建物・風景・モチーフなど、ゲームにちなんだ建築であればOK。再現でもアレンジでも構いません。",
+      "レギュレーション・審査基準・応募方法は開催前に Discord で発表します。",
+      "審査対象は期間中に建てた建築のみ。過去に建てたものは対象外です。",
+      "賞金・参加賞はそのまま所持金に加算されるので、総資産にカウントされます。",
+    ],
+  },
+];
+
+const statusLabel = {
+  upcoming: "開催予定",
+  open: "開催中",
+  closed: "終了",
+};
+---
+
+<EarningsLayout
+  title="イベントガイド — 金策サバイバル 2026"
+  description="金策サバイバル期間中に開催されるイベントの一覧。ホロライブ公式ゲーム「hololive Dreams」がお題の建築コンテストをはじめ、賞金・参加賞つきのイベントで資産を伸ばす方法をまとめました。"
+  ogImage="/assets/bibidiba-castle.jpeg"
+  active="guides"
+>
+  <section class="guide-hero">
+    <div class="earn-container">
+      <div class="guide-crumb">
+        <a href="/earnings">TOP</a> / <a href="/earnings#guides">GUIDES</a> /
+        <span class="current">EVENTS</span>
+      </div>
+      <div class="guide-label">06 — HOW TO EARN / EVENTS</div>
+      <h1 class="guide-title">イベントで稼ぐ。</h1>
+      <div class="guide-underline"></div>
+      <p class="guide-lead">
+        期間中、運営から不定期にイベントを開催します。上位入賞には賞金、参加するだけでも参加賞。
+        腕とセンスがそのまま資産になる、いちばん健全な一発です。
+      </p>
+    </div>
+  </section>
+
+  <section class="guide-body earn-container">
+    <div class="guide-body-inner">
+      <h2>イベントの基本</h2>
+      <ul>
+        <li>
+          <b>参加費は無料</b>。エントリーして、完走すれば参加賞がもらえます。
+        </li>
+        <li>
+          <b>賞金・参加賞は所持金に直接入ります</b
+          >。そのまま総資産にカウントされます。
+        </li>
+        <li>
+          <b>イベントは期間中に追加されます</b>。開催のたびに Discord
+          とこのページでお知らせします。
+        </li>
+      </ul>
+
+      <div class="guide-callout">
+        <div class="cal-label">RISK</div>
+        <p>
+          カジノや株と違って、<b>参加してマイナスになることはありません</b>。
+          作業時間を仕事に回すか、イベントに賭けるか。そこだけが判断のしどころです。
+        </p>
+      </div>
+
+      <h2>開催イベント一覧</h2>
+      <div class="ev-list">
+        {
+          events.map((e) => (
+            <article class="ev-card">
+              <div class="ev-head">
+                <span class="ev-no earn-mono">{e.no}</span>
+                <span class={"ev-status earn-mono is-" + e.statusKind}>
+                  {statusLabel[e.statusKind]}
+                </span>
+              </div>
+              <h3 class="ev-name">{e.name}</h3>
+              {e.theme && (
+                <p class="ev-theme">
+                  <span class="lbl earn-mono">お題</span>
+                  <span class="val">{e.theme}</span>
+                </p>
+              )}
+              <p class="ev-lead">{e.lead}</p>
+              <dl class="ev-meta">
+                <div>
+                  <dt class="earn-mono">PERIOD</dt>
+                  <dd>{e.period}</dd>
+                </div>
+                <div>
+                  <dt class="earn-mono">REWARD</dt>
+                  <dd>{e.prize}</dd>
+                </div>
+                <div>
+                  <dt class="earn-mono">ENTRY</dt>
+                  <dd>{e.entry}</dd>
+                </div>
+              </dl>
+              <ul class="ev-detail">
+                {e.detail.map((d) => (
+                  <li>{d}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+      <p class="ev-more earn-mono">
+        MORE EVENTS COMING — 新しいイベントはここに追加されます。
+      </p>
+
+      <h2>賞金を取りにいくために</h2>
+      <ul>
+        <li>
+          <b>「hololive Dreams」を予習する</b>:
+          ゲームに登場する建物やモチーフを押さえておくと、テーマに沿った題材を選びやすくなります。
+        </li>
+        <li>
+          <b>レギュレーションの発表を待つ</b>:
+          建築サイズや使用ブロックに条件が付く場合があります。着工前に必ず確認を。
+        </li>
+        <li>
+          <b>資材の調達コストを計算する</b>:
+          豪華に作るほど資材費がかさみます。賞金より材料費が高くつくと本末転倒。
+        </li>
+        <li>
+          <b>まず「完成」させる</b>:
+          未完成だと参加賞も取り逃します。手を広げすぎず、締切から逆算を。
+        </li>
+        <li>
+          <b>会社で分担する</b>:
+          <a href="/earnings/stock">会社</a>
+          のメンバーで資材集めと建築を分ければ、大型建築も現実的になります。
+        </li>
+      </ul>
+
+      <h2>最新情報</h2>
+      <p>
+        イベントの開催告知・お題の発表・結果発表はすべて
+        <a href="https://discord.gg/DuhcMGGw4">Discord</a> で行います。 参加を逃さないよう、通知をオンにしておくのがおすすめです。
+      </p>
+    </div>
+  </section>
+
+  <EarningsGuideRelated current="events" />
+</EarningsLayout>
+
+<style>
+  .guide-body-inner {
+    max-width: 820px;
+  }
+
+  .ev-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(201, 162, 39, 0.25);
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    margin: 22px 0 0;
+    max-width: 780px;
+  }
+  .ev-card {
+    background: var(--earn-bg);
+    padding: 30px 32px;
+  }
+  .ev-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .ev-no {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--earn-gold);
+  }
+  .ev-status {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    padding: 3px 10px;
+    border: 1px solid currentColor;
+  }
+  .ev-status.is-upcoming {
+    color: var(--earn-gold);
+  }
+  .ev-status.is-open {
+    color: #6fce7d;
+  }
+  .ev-status.is-closed {
+    color: rgba(232, 226, 212, 0.4);
+  }
+  .ev-name {
+    font-size: 24px;
+    font-weight: 900;
+    margin: 12px 0 0;
+  }
+  .guide-body .ev-theme {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 14px 0 0;
+  }
+  .ev-theme .lbl {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #121212;
+    background: var(--earn-gold);
+    padding: 3px 10px;
+  }
+  .ev-theme .val {
+    font-size: 17px;
+    font-weight: 900;
+    color: var(--earn-gold);
+  }
+  .guide-body .ev-lead {
+    font-size: 13.5px;
+    line-height: 1.95;
+    color: rgba(232, 226, 212, 0.68);
+    margin: 8px 0 0;
+  }
+  .ev-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--earn-line-hair);
+    border: 1px solid var(--earn-line-hair);
+    margin: 20px 0 0;
+  }
+  .ev-meta > div {
+    background: var(--earn-bg);
+    padding: 14px 16px;
+  }
+  .ev-meta dt {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: rgba(232, 226, 212, 0.45);
+  }
+  .ev-meta dd {
+    font-size: 13px;
+    font-weight: 700;
+    margin: 6px 0 0;
+    line-height: 1.7;
+  }
+  .guide-body .ev-detail {
+    margin-top: 18px;
+  }
+  .guide-body .ev-detail li {
+    font-size: 13.5px;
+    color: rgba(232, 226, 212, 0.7);
+  }
+  .ev-more {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: rgba(232, 226, 212, 0.4);
+    margin: 18px 0 0;
+  }
+
+  @media (max-width: 820px) {
+    .ev-card {
+      padding: 24px 22px;
+    }
+    .ev-name {
+      font-size: 20px;
+    }
+    .ev-meta {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
