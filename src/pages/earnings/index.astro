@@ -14,7 +14,7 @@ const earnMethods = [
     no: "02",
     risk: "●●○",
     name: "取引",
-    desc: "村人ショップを開いて売買。プレイヤー同士の相場観と商才が問われる。",
+    desc: "村人ショップを開いて売買。プレイヤー同士の相場観と商才が問われる。運営ショップは無限に買取可能。",
     href: "/earnings/shop",
     tag: null,
   },
@@ -29,14 +29,28 @@ const earnMethods = [
   {
     no: "04",
     risk: "●●●",
-    name: "経済",
-    desc: "所持金の残し方、送金、法人口座。「稼ぐ」の裏側にあるお金のインフラ。",
-    href: "/earnings/economy",
+    name: "カジノ",
+    desc: "スロットとパチンコでメダルを増やし、換金して所持金に。振れ幅は期間中いちばん。",
+    href: "/earnings/casino",
     tag: null,
+  },
+  {
+    no: "05",
+    risk: "●○○",
+    name: "イベント",
+    desc: "建築コンテストなど、期間中に開催されるイベント。上位には賞金、参加するだけでも参加賞。",
+    href: "/earnings/events",
+    tag: "NEW",
   },
 ];
 
 const guides = [
+  {
+    label: "SYSTEM",
+    title: "経済・システム",
+    lead: "残高確認 /money、送金 /money pay、/lobby ロビー移動など",
+    href: "/earnings/system",
+  },
   {
     label: "JOBS",
     title: "仕事の始め方",
@@ -55,18 +69,25 @@ const guides = [
     lead: "国営株に会社設立、一時間1回の株価変動。",
     href: "/earnings/stock",
   },
+
   {
-    label: "ECONOMY",
-    title: "お金の基本",
-    lead: "残高確認 /money、送金 /money pay、税や手数料の見え方。",
-    href: "/earnings/economy",
+    label: "CASINO",
+    title: "カジノ",
+    lead: "メダルに換えて遊び、増やして換金。溶かさない立ち回り。",
+    href: "/earnings/casino",
+  },
+  {
+    label: "EVENTS",
+    title: "イベント",
+    lead: "建築コンテストほか、賞金と参加賞のあるイベント一覧。",
+    href: "/earnings/events",
   },
 ];
 ---
 
 <EarningsLayout
   title="金策サバイバル 2026 — ホロリスくらふと特設サイト"
-  description="ホロリスくらふとの特別企画「金策サバイバル 2026」公式特設サイト。仕事・取引・株・カジノを駆使し、最終日の総資産で頂点を競う。"
+  description="ホロリスくらふとの特別企画「金策サバイバル 2026」公式特設サイト。仕事・取引・株・カジノ・イベントを駆使し、最終日の総資産で頂点を競う。"
   ogImage="/assets/kinsaku-shop.jpeg"
   active="top"
 >
@@ -92,7 +113,7 @@ const guides = [
       <div class="earn-hero-underline"></div>
       <p class="earn-hero-lead">
         ホロライブ「金策サバイバル」をホロリスで再現。<br />
-        仕事・取引・株・カジノを駆使し、豪華景品を手に入れよう
+        仕事・取引・株・カジノ・イベントを駆使し、豪華景品を手に入れよう
       </p>
       <div class="earn-hero-ctas">
         <a class="earn-btn-primary" href="https://discord.gg/DuhcMGGw4">
@@ -130,7 +151,7 @@ const guides = [
       <div class="earn-section-eyebrow">
         <span class="label">HOW TO EARN</span><span class="rule"></span>
       </div>
-      <h2 class="earn-h2">稼ぎ方は、4つ。</h2>
+      <h2 class="earn-h2">稼ぎ方は、5つ。</h2>
       <div class="earn-grid-4">
         {
           earnMethods.map((m) => (
@@ -205,7 +226,7 @@ const guides = [
         使い方は、<span class="earn-gold-text">ここに全部。</span>
       </h2>
       <p class="earn-p earn-p-lead">
-        4つの金策手段それぞれについて、コマンドと立ち回りを実用ガイドにまとめました。ルールの確認は
+        6つの金策手段それぞれについて、コマンドと立ち回りを実用ガイドにまとめました。ルールの確認は
         <a href="/earnings/rules">ルール説明</a> から。
       </p>
       <div class="earn-guide-grid">
@@ -560,7 +581,7 @@ const guides = [
   /* ---------- GUIDES ---------- */
   .earn-guide-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     background: rgba(201, 162, 39, 0.22);
     border: 1px solid rgba(201, 162, 39, 0.22);

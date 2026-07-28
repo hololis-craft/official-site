@@ -1,0 +1,176 @@
+---
+import EarningsLayout from "../../layouts/EarningsLayout.astro";
+import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
+
+const games = [
+  {
+    name: "スロット",
+    lead: "絵柄を揃える定番。回転が速く、短時間で試行回数を稼げます。",
+    tag: "回転が速い",
+  },
+  {
+    name: "パチンコ(メダルゲーム)",
+    lead: "レッドストーン回路で組まれたメダルゲーム。玉の行方次第で払い出しが変わります。",
+    tag: "一撃が大きい",
+  },
+];
+---
+
+<EarningsLayout
+  title="カジノガイド — 金策サバイバル 2026"
+  description="金策サバイバルのカジノ攻略ガイド。スロットやパチンコでメダルを増やし、経済システムで換金する流れと、資金を溶かさない立ち回りをまとめました。"
+  ogImage="/assets/hololive-head-gacha.jpeg"
+  active="guides"
+>
+  <section class="guide-hero">
+    <div class="earn-container">
+      <div class="guide-crumb">
+        <a href="/earnings">TOP</a> / <a href="/earnings#guides">GUIDES</a> /
+        <span class="current">CASINO</span>
+      </div>
+      <div class="guide-label">05 — HOW TO EARN / CASINO</div>
+      <h1 class="guide-title">カジノで、賭ける。</h1>
+      <div class="guide-underline"></div>
+      <p class="guide-lead">
+        スロットとパチンコでメダルを増やし、経済システムで換金する。
+        期間中いちばん振れ幅の大きい金策です。伸びるときは一気に、溶けるときも一気に。
+      </p>
+    </div>
+  </section>
+
+  <section class="guide-body earn-container">
+    <div class="guide-body-inner">
+      <h2>カジノへの行き方</h2>
+      <p>
+        カジノへはロビーを経由して行くことができます。ロビーは、初期スポーンの島のロビーゲートや、
+        <code>/lobby</code
+        >コマンドで移動できます。ロビーからカジノへの移動は、どこかにポータルが
+        あるので、そちらを通ってください。その場所は、隠されているので探してみましょう。
+      </p>
+
+      <h2>お金が増える流れ</h2>
+      <ol>
+        <li>所持金を <b>カジノメダル</b> に交換する。</li>
+        <li>スロットやパチンコで遊び、メダルを増やす(減らす)。</li>
+        <li>手元のメダルを <b>換金</b> して所持金に戻す。</li>
+      </ol>
+      <p>
+        カジノメダルは経済システムと連動しているので、増やしたメダルはそのまま総資産に反映できます。
+        逆に、<b>メダルのまま持っていても資産にはカウントされません</b
+        >。最終日までに必ず換金しておいてください。
+      </p>
+
+      <h2>遊べるゲーム</h2>
+      <div class="casino-games">
+        {
+          games.map((g) => (
+            <div class="casino-game">
+              <div class="casino-game-head">
+                <span class="ttl">{g.name}</span>
+                <span class="tag earn-mono">{g.tag}</span>
+              </div>
+              <p class="lead">{g.lead}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p>
+        どちらもレッドストーン回路で作られた実機です。カジノエリアに足を運んで、実際にレバーを引くところから始まります。
+        新しい台が追加された場合は Discord で告知します。
+      </p>
+
+      <h2>金策としての立ち回り</h2>
+      <p>
+        カジノは<b>期待値で勝ちにいく金策ではありません</b
+        >。仕事・取引・株で積み上げた資金の
+        一部を張って、上振れを狙うための手段だと考えてください。
+      </p>
+      <ul>
+        <li>
+          <b>予算を先に決める</b>:
+          「今日はここまで」と決めた額だけメダルに換え、なくなったら仕事に戻る。これがいちばん効きます。
+        </li>
+        <li>
+          <b>勝ち逃げのラインも決める</b>:
+          増えた分をそのまま突っ込むと、結局ゼロに戻ります。目標額に届いたら換金。
+        </li>
+        <li>
+          <b>換金を忘れない</b>:
+          集計されるのは所持金です。メダルを抱えたまま最終日を迎えるのが最悪のパターン。
+        </li>
+        <li>
+          <b>順位が離れているときの一発逆転に</b>:
+          安定収入では届かない差を詰めたいとき、リスクを取る価値が出てきます。
+        </li>
+      </ul>
+
+      <div class="guide-callout is-warn">
+        <div class="cal-label">CAUTION</div>
+        <p>
+          残高がマイナスになることはありませんが、<b>賭けたメダルは戻りません</b
+          >。
+          生活費まで溶かしてしまうと、そこからの立て直しに時間がかかります。ほどほどに。
+        </p>
+      </div>
+
+      <h2>禁止事項</h2>
+      <ul>
+        <li>台の分解・改造、レッドストーン回路への干渉。</li>
+        <li>
+          バグや処理落ちを利用した不正な払い出し。発見したら運営へ報告を。
+        </li>
+        <li>他プレイヤーのプレイ妨害。</li>
+      </ul>
+      <p>
+        詳しくは <a href="/earnings/rules">ルール説明</a> を確認してください。
+      </p>
+    </div>
+  </section>
+
+  <EarningsGuideRelated current="casino" />
+</EarningsLayout>
+
+<style>
+  .casino-games {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(201, 162, 39, 0.25);
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    margin: 22px 0 0;
+  }
+  .casino-game {
+    background: var(--earn-bg);
+    padding: 24px 26px;
+  }
+  .casino-game-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .casino-game-head .ttl {
+    font-size: 18px;
+    font-weight: 900;
+  }
+  .casino-game-head .tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--earn-gold);
+    letter-spacing: 0.12em;
+  }
+  .casino-game .lead {
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.95;
+    color: rgba(232, 226, 212, 0.68);
+    margin: 8px 0 0;
+  }
+
+  @media (max-width: 820px) {
+    .casino-games {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

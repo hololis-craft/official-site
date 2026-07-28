@@ -4,8 +4,8 @@ import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
 ---
 
 <EarningsLayout
-  title="経済(Economy)ガイド — 金策サバイバル 2026"
-  description="経済プラグインの使い方。残高確認、送金、通貨表示の読み方、送金失敗時の挙動までまとめた金策サバイバル公式ガイド。"
+  title="システムガイド — 金策サバイバル 2026"
+  description="残高確認、送金、ランキング、ロビー移動など、システムの基本をまとめた公式ガイド。"
   ogImage="/assets/kinsaku-shop.jpeg"
   active="guides"
 >
@@ -13,36 +13,23 @@ import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
     <div class="earn-container">
       <div class="guide-crumb">
         <a href="/earnings">TOP</a> / <a href="/earnings#guides">GUIDES</a> /
-        <span class="current">ECONOMY</span>
+        <span class="current">SYSTEM</span>
       </div>
-      <div class="guide-label">04 — HOW TO EARN / ECONOMY</div>
-      <h1 class="guide-title">お金の基本。</h1>
+      <div class="guide-label">01 — HOW TO PLAY</div>
+      <h1 class="guide-title">システムの基本。</h1>
       <div class="guide-underline"></div>
       <p class="guide-lead">
-        すべての金策の裏側にある経済インフラ。
-        残高・送金・法人口座は、まずここを押さえておきます。
+        金策サバイバルを遊ぶ上で知っておきたい、残高確認、送金、ランキング、ロビー移動などのシステムの基本をまとめました。
       </p>
     </div>
   </section>
 
   <section class="guide-body earn-container">
     <div class="guide-body-inner">
-      <h2>前提</h2>
-      <ul>
-        <li>
-          コマンドは <code>/money</code> です。
-        </li>
-        <li>サーバーに初参加すると自動で口座が作られ、初期残高が入ります</li>
-      </ul>
-
       <h2>残高を確認する</h2>
       <p>自分の現在の残高を表示します。</p>
       <pre><code>/money</code></pre>
-      <pre><code>f0reach balance: 100 dollars 0 cents</code></pre>
-      <p>
-        通貨単位の見え方はサーバー側の設定に依存するので、<code>$ 100.00</code> や
-        <code>100円</code> のように表示されることもあります。
-      </p>
+      <pre><code>f0reach balance: 100 円</code></pre>
 
       <h2>プレイヤー間で送金する</h2>
       <pre><code>/money pay &lt;player&gt; &lt;amount&gt;</code></pre>
@@ -71,9 +58,6 @@ import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
           <b>自分自身への送金</b>: 自分を指定 →
           <code>Invalid argument: &lt;name&gt;</code>
         </li>
-        <li>
-          <b>プレイヤー以外からの実行</b>: コンソール等からは実行不可。
-        </li>
       </ul>
 
       <div class="guide-callout">
@@ -85,6 +69,24 @@ import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
           <a href="/earnings/rules">ルール</a>で禁止されているので注意。
         </p>
       </div>
+
+      <h2>ロビーへ移動する</h2>
+      <p>
+        ロビーはホロライブに関係する建築やミニゲーム、<a href="/earnings/casino"
+          >カジノ</a
+        >への入口や隠しワールドへの入口がある、いわばサーバーの玄関口です。
+      </p>
+      <pre><code>/lobby</code></pre>
+      <p>
+        ロビーへは初期スポーンの島のロビーゲートや、<code>/lobby</code
+        >コマンドで移動できます。
+      </p>
+
+      <h2>列車を運行する</h2>
+      <p>
+        このサーバにはTrain_Cartsというプラグインが導入されており、列車を運行できます。
+      </p>
+      <p>詳細は<a href="/guide/trains">こちら</a>から</p>
 
       <h2>コマンドまとめ</h2>
       <div class="guide-cmd-list">
@@ -99,49 +101,24 @@ import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
           <div class="desc">プレイヤー間の送金。</div>
         </div>
         <div class="row">
-          <code>/money help</code>
+          <code>/money top</code>
           <div class="desc">
-            利用可能なサブコマンドの簡易ヘルプ。権限次第で内容が変化。
+            残高ランキングのトップ10を表示。<code>/money top &lt;page&gt;</code>
+            でページ送り。
           </div>
         </div>
+        <div class="row">
+          <code>/lobby</code>
+          <div class="desc">ロビーへ移動。</div>
+        </div>
       </div>
-
-      <h2>覚えておくと便利</h2>
-      <ul>
-        <li>
-          <b>タブ補完</b>: <code>/money pay </code> まで打った時点で TAB を押すと送金先候補のプレイヤー名が出ます。
-        </li>
-        <li>
-          <b>小数点入力</b>: 2桁までを想定(内部で丸められます)。
-        </li>
-        <li>
-          <b>他プラグインとの関係</b>: Jobs の報酬、Shop の代金決済、Stock
-          の売買・配当はすべて Jecon 残高で行われます。
-        </li>
-      </ul>
-      <!-- 
-      <h2>トラブルシューティング</h2>
-      <ul>
-        <li>
-          <b><code>You don't have permission!!</code> と出る</b>:
-          サーバー管理者が権限を絞っている可能性。管理者に確認を。
-        </li>
-        <li>
-          <b><code>Account not found: &lt;自分の名前&gt;</code> と出る</b>:
-          何らかの理由で口座が未作成。ログインし直すか、管理者に対応を依頼。
-        </li>
-        <li>
-          <b>表示される通貨単位が変</b>: サーバー側の <code>format</code> セクション設定によるカスタマイズです。仕様上の異常ではありません。
-        </li>
-      </ul> -->
     </div>
   </section>
 
-  <EarningsGuideRelated current="economy" />
+  <EarningsGuideRelated current="system" />
 </EarningsLayout>
 
 <style>
   .guide-body-inner {
-    max-width: 820px;
   }
 </style>

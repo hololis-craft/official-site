@@ -10,7 +10,7 @@ const basicRules = [
   {
     no: "RULE 02",
     title: "稼ぎ方は、自由。",
-    body: "仕事・取引・株・カジノ、期間中はどの金策手段をどう組み合わせてもOK。戦略に正解はありません。",
+    body: "仕事・取引・株・カジノ・イベント、期間中はどの金策手段をどう組み合わせてもOK。戦略に正解はありません。",
   },
   {
     no: "RULE 03",
@@ -33,8 +33,20 @@ const scoring = [
     yes: true,
   },
   {
+    name: "イベントの賞金・参加賞",
+    note: "所持金に直接支給",
+    verdict: "カウントする",
+    yes: true,
+  },
+  {
     name: "アイテム・建築物・在庫",
     note: null,
+    verdict: "カウントしない",
+    yes: false,
+  },
+  {
+    name: "カジノメダル",
+    note: "最終日までに換金が必要",
     verdict: "カウントしない",
     yes: false,
   },
