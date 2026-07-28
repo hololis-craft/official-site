@@ -5,7 +5,7 @@ import EarningsGuideRelated from "../../components/EarningsGuideRelated.astro";
 const games = [
   {
     name: "スロット",
-    lead: "レバーを引いて絵柄を揃える定番。回転が速く、短時間で試行回数を稼げます。",
+    lead: "絵柄を揃える定番。回転が速く、短時間で試行回数を稼げます。",
     tag: "回転が速い",
   },
   {
@@ -40,6 +40,14 @@ const games = [
 
   <section class="guide-body earn-container">
     <div class="guide-body-inner">
+      <h2>カジノへの行き方</h2>
+      <p>
+        カジノへはロビーを経由して行くことができます。ロビーは、初期スポーンの島のロビーゲートや、
+        <code>/lobby</code
+        >コマンドで移動できます。ロビーからカジノへの移動は、どこかにポータルが
+        あるので、そちらを通ってください。その場所は、隠されているので探してみましょう。
+      </p>
+
       <h2>お金が増える流れ</h2>
       <ol>
         <li>所持金を <b>カジノメダル</b> に交換する。</li>
@@ -51,14 +59,6 @@ const games = [
         逆に、<b>メダルのまま持っていても資産にはカウントされません</b
         >。最終日までに必ず換金しておいてください。
       </p>
-
-      <div class="guide-callout">
-        <div class="cal-label">レート</div>
-        <p>
-          メダルの購入レート・換金レート、および1日の購入上限の有無は開催前に確定します。
-          決まり次第 <a href="https://discord.gg/DuhcMGGw4">Discord</a> でお知らせします。
-        </p>
-      </div>
 
       <h2>遊べるゲーム</h2>
       <div class="casino-games">
@@ -131,9 +131,6 @@ const games = [
 </EarningsLayout>
 
 <style>
-  .guide-body-inner {
-    max-width: 820px;
-  }
   .casino-games {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -141,7 +138,6 @@ const games = [
     background: rgba(201, 162, 39, 0.25);
     border: 1px solid rgba(201, 162, 39, 0.25);
     margin: 22px 0 0;
-    max-width: 780px;
   }
   .casino-game {
     background: var(--earn-bg);
