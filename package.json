@@ -7,13 +7,15 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "pnpm run build && wrangler dev",
     "astro": "astro",
     "sync:heads": "node scripts/sync-heads.mjs",
     "sync:discs": "node scripts/sync-discs.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "deploy": "pnpm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged"
@@ -22,6 +24,7 @@
     "*.{astro,ts,tsx,js,jsx,mjs,cjs,json,md,css,html,yml,yaml}": "prettier --write"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.13",
     "astro": "^5.0.0",
     "skinview3d": "^3.4.2"
   },
@@ -29,6 +32,7 @@
     "lint-staged": "^17.0.7",
     "prettier": "^3.8.4",
     "prettier-plugin-astro": "^0.14.1",
-    "simple-git-hooks": "^2.13.1"
+    "simple-git-hooks": "^2.13.1",
+    "wrangler": "^4.114.0"
   }
 }
