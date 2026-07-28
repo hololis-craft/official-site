@@ -1,10 +1,17 @@
 ---
 interface Props {
-  current?: "jobs" | "shop" | "stock" | "economy" | "casino" | "events";
+  current?: "jobs" | "shop" | "stock" | "system" | "casino" | "events";
 }
 const { current } = Astro.props;
 
 const items = [
+  {
+    key: "system",
+    label: "SYSTEM",
+    title: "経済・システム",
+    lead: "残高確認、送金、ロビー移動など",
+    href: "/earnings/system",
+  },
   {
     key: "jobs",
     label: "JOBS",
@@ -26,13 +33,7 @@ const items = [
     lead: "国営銘柄と会社株、日次配当と値動き。",
     href: "/earnings/stock",
   },
-  {
-    key: "economy",
-    label: "ECONOMY",
-    title: "経済",
-    lead: "残高・送金・法人口座、お金のインフラ。",
-    href: "/earnings/economy",
-  },
+
   {
     key: "casino",
     label: "CASINO",

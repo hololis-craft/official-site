@@ -14,7 +14,7 @@ const earnMethods = [
     no: "02",
     risk: "●●○",
     name: "取引",
-    desc: "村人ショップを開いて売買。プレイヤー同士の相場観と商才が問われる。",
+    desc: "村人ショップを開いて売買。プレイヤー同士の相場観と商才が問われる。運営ショップは無限に買取可能。",
     href: "/earnings/shop",
     tag: null,
   },
@@ -29,21 +29,13 @@ const earnMethods = [
   {
     no: "04",
     risk: "●●●",
-    name: "経済",
-    desc: "所持金の残し方、送金、法人口座。「稼ぐ」の裏側にあるお金のインフラ。",
-    href: "/earnings/economy",
-    tag: null,
-  },
-  {
-    no: "05",
-    risk: "●●●",
     name: "カジノ",
     desc: "スロットとパチンコでメダルを増やし、換金して所持金に。振れ幅は期間中いちばん。",
     href: "/earnings/casino",
     tag: null,
   },
   {
-    no: "06",
+    no: "05",
     risk: "●○○",
     name: "イベント",
     desc: "建築コンテストなど、期間中に開催されるイベント。上位には賞金、参加するだけでも参加賞。",
@@ -53,6 +45,12 @@ const earnMethods = [
 ];
 
 const guides = [
+  {
+    label: "SYSTEM",
+    title: "経済・システム",
+    lead: "残高確認 /money、送金 /money pay、/lobby ロビー移動など",
+    href: "/earnings/system",
+  },
   {
     label: "JOBS",
     title: "仕事の始め方",
@@ -71,12 +69,7 @@ const guides = [
     lead: "国営株に会社設立、一時間1回の株価変動。",
     href: "/earnings/stock",
   },
-  {
-    label: "ECONOMY",
-    title: "お金の基本",
-    lead: "残高確認 /money、送金 /money pay、税や手数料の見え方。",
-    href: "/earnings/economy",
-  },
+
   {
     label: "CASINO",
     title: "カジノ",
@@ -158,7 +151,7 @@ const guides = [
       <div class="earn-section-eyebrow">
         <span class="label">HOW TO EARN</span><span class="rule"></span>
       </div>
-      <h2 class="earn-h2">稼ぎ方は、6つ。</h2>
+      <h2 class="earn-h2">稼ぎ方は、5つ。</h2>
       <div class="earn-grid-4">
         {
           earnMethods.map((m) => (
