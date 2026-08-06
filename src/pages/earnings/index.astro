@@ -88,6 +88,12 @@ const guides = [
     lead: "全上場銘柄の現在株価と値動きチャート。サーバーの市場データを直接表示。",
     href: "/earnings/market",
   },
+  {
+    label: "RANKING",
+    title: "資産ランキング",
+    lead: "参加者全員の所持金ランキング。首位との差もひと目で。",
+    href: "/earnings/ranking",
+  },
 ];
 ---
 
@@ -186,17 +192,22 @@ const guides = [
           <span class="label">LEADERBOARD</span><span class="rule"></span>
         </div>
         <h2 class="earn-sub-h">
-          資産ランキング<span class="earn-mono earn-annot">TO BE FILLED</span>
+          資産ランキング<span id="lb-status" class="earn-mono earn-annot"
+            >LOADING…</span
+          >
         </h2>
-        <div class="earn-rank">
-          <div class="earn-rank-row is-top">
-            <span class="pos earn-mono">01</span>
-            <div class="name">????</div>
-            <div class="amount earn-mono">??? G</div>
+        <div id="lb-rows" class="earn-rank">
+          <div class="earn-rank-row is-muted">
+            <span class="pos earn-mono">--</span>
+            <div class="name">読み込み中…</div>
+            <div class="amount earn-mono">—</div>
           </div>
         </div>
-        <p class="earn-note">
-          ※ 開催中はワールド内とWebでリアルタイム更新予定。
+        <a class="earn-rank-more" href="/earnings/ranking"
+          >ランキング全体を見る →</a
+        >
+        <p id="lb-note" class="earn-note">
+          ※ 集計対象は所持金(通貨残高)のみ。1分ごとに自動更新されます。
         </p>
       </div>
       <div>
@@ -269,6 +280,57 @@ const guides = [
     </div>
   </section>
 </EarningsLayout>
+
+<script>
+  import "../../scripts/leaderboard.ts";
+</script>
+
+<!--
+  The leaderboard rows are built at runtime by scripts/leaderboard.ts, so they
+  never receive Astro's scope attribute. Their rules live here instead, scoped
+  by hand to the `.earn-rank` container.
+-->
+<style is:global>
+  .earn-rank {
+    display: flex;
+    flex-direction: column;
+    margin-top: 22px;
+    border-bottom: 1px solid var(--earn-line-hair);
+  }
+  .earn-rank .earn-rank-row {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 15px 4px;
+    border-top: 1px solid var(--earn-line-hair);
+  }
+  .earn-rank .earn-rank-row .pos {
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(232, 226, 212, 0.55);
+  }
+  .earn-rank .earn-rank-row .name {
+    font-size: 15px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+  .earn-rank .earn-rank-row .amount {
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .earn-rank .earn-rank-row.is-top .pos,
+  .earn-rank .earn-rank-row.is-top .amount {
+    color: var(--earn-gold);
+  }
+  .earn-rank .earn-rank-row.is-muted {
+    color: rgba(232, 226, 212, 0.75);
+  }
+  .earn-rank .earn-rank-row.is-muted .pos {
+    color: rgba(232, 226, 212, 0.45);
+  }
+</style>
 
 <style>
   /* ---------- HERO ---------- */
@@ -490,42 +552,18 @@ const guides = [
     color: rgba(232, 226, 212, 0.4);
     margin-left: 14px;
   }
-  .earn-rank {
-    display: flex;
-    flex-direction: column;
-    margin-top: 22px;
-    border-bottom: 1px solid var(--earn-line-hair);
-  }
-  .earn-rank-row {
-    display: grid;
-    grid-template-columns: 44px 1fr auto;
-    gap: 16px;
-    align-items: center;
-    padding: 15px 4px;
-    border-top: 1px solid var(--earn-line-hair);
-  }
-  .earn-rank-row .pos {
-    font-size: 15px;
+  .earn-rank-more {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
     font-weight: 700;
-    color: rgba(232, 226, 212, 0.55);
-  }
-  .earn-rank-row .name {
-    font-size: 15px;
-    font-weight: 700;
-  }
-  .earn-rank-row .amount {
-    font-size: 15px;
-    font-weight: 700;
-  }
-  .earn-rank-row.is-top .pos,
-  .earn-rank-row.is-top .amount {
+    letter-spacing: 0.14em;
     color: var(--earn-gold);
+    text-decoration: none;
   }
-  .earn-rank-row.is-muted {
-    color: rgba(232, 226, 212, 0.75);
-  }
-  .earn-rank-row.is-muted .pos {
-    color: rgba(232, 226, 212, 0.45);
+  .earn-rank-more:hover {
+    color: var(--earn-gold-bright);
   }
   .earn-note {
     font-size: 11.5px;
