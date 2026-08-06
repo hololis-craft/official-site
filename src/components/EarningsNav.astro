@@ -1,6 +1,6 @@
 ---
 interface Props {
-  active?: "top" | "rules" | "guides" | "market";
+  active?: "top" | "rules" | "guides" | "market" | "ranking";
 }
 const { active } = Astro.props;
 
@@ -10,6 +10,7 @@ const links = [
   { href: "/earnings/rules", label: "ルール", key: "rules" },
   { href: "/earnings#guides", label: "ガイド", key: "guides" },
   { href: "/earnings/market", label: "マーケット", key: "market" },
+  { href: "/earnings/ranking", label: "ランキング", key: "ranking" },
 ];
 ---
 
@@ -38,7 +39,8 @@ const links = [
             class:list={[
               (active === "rules" && l.key === "rules") ||
               (active === "guides" && l.key === "guides") ||
-              (active === "market" && l.key === "market")
+              (active === "market" && l.key === "market") ||
+              (active === "ranking" && l.key === "ranking")
                 ? "is-active"
                 : "",
             ]}
