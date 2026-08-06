@@ -27,9 +27,6 @@ type UpstreamStock = {
   day_open_price: number;
   day_change: number;
   day_change_pct: number;
-  total_shares: number;
-  outstanding_shares: number;
-  market_cap: number;
   listed_at: string;
 };
 
@@ -72,6 +69,8 @@ function json(body: unknown, status: number, cache: string) {
 
 export const GET: APIRoute = async () => {
   try {
+    // Market cap is not shown anywhere, but it still gives the list a stable
+    // "biggest first" order that does not jump around as prices move.
     const rawStocks = await fetchUpstream<UpstreamStock>({
       endpoint: "stocks",
       limit: "200",
@@ -118,9 +117,6 @@ export const GET: APIRoute = async () => {
       dayOpen: s.day_open_price,
       dayChange: s.day_change,
       dayChangePct: s.day_change_pct,
-      totalShares: s.total_shares,
-      outstandingShares: s.outstanding_shares,
-      marketCap: s.market_cap,
       listedAt: s.listed_at,
     }));
 

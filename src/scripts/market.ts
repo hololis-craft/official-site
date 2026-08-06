@@ -24,9 +24,6 @@ type Stock = {
   dayOpen: number;
   dayChange: number;
   dayChangePct: number;
-  totalShares: number;
-  outstandingShares: number;
-  marketCap: number;
   listedAt: string;
 };
 
@@ -98,7 +95,7 @@ const chartEl = $("market-chart");
 const chartEmptyEl = $("market-chart-empty");
 const tooltipEl = $("market-tooltip");
 const titleEl = $("market-chart-title");
-const codeEl = $("market-chart-code");
+const typeEl = $("market-chart-type");
 const priceEl = $("market-chart-price");
 const changeEl = $("market-chart-change");
 const statsEl = $("market-chart-stats");
@@ -126,7 +123,7 @@ const timef = new Intl.DateTimeFormat("ja-JP", {
   second: "2-digit",
 });
 
-const money = (n: number) => `${nf.format(Math.round(n))}G`;
+const money = (n: number) => `${nf.format(Math.round(n))}円`;
 const pct = (n: number) => `${n >= 0 ? "+" : ""}${n.toFixed(2)}%`;
 const signClass = (n: number) =>
   n > 0 ? "is-up" : n < 0 ? "is-down" : "is-flat";
@@ -245,19 +242,14 @@ function renderList() {
       const spark = sparkline(sliceRange(ticksFor(s.code), "24h"));
       const cls = signClass(s.dayChange);
       return `<tr class="market-row${s.code === selectedCode ? " is-selected" : ""}" data-code="${s.code}" tabindex="0" role="button" aria-label="${s.name} のチャートを表示">
-        <td class="c-name">
-          <span class="nm">${s.name}</span>
-          <span class="cd earn-mono">${s.code}</span>
-        </td>
+        <td class="c-name"><span class="nm">${s.name}</span></td>
         <td class="c-type"><span class="type-tag t-${s.type.toLowerCase()}">${s.type === "NATIONAL" ? "国営" : "会社"}</span></td>
         <td class="c-price earn-mono">${money(s.price)}</td>
         <td class="c-change earn-mono ${cls}">
-          <span class="chg">${s.dayChange >= 0 ? "+" : ""}${nf.format(s.dayChange)}</span>
+          <span class="chg">${s.dayChange >= 0 ? "+" : ""}${money(s.dayChange)}</span>
           <span class="chgp">${pct(s.dayChangePct)}</span>
         </td>
         <td class="c-spark">${spark}</td>
-        <td class="c-cap earn-mono">${money(s.marketCap)}</td>
-        <td class="c-shares earn-mono">${nf.format(s.totalShares)}</td>
       </tr>`;
     })
     .join("");
@@ -427,10 +419,12 @@ function renderChart() {
 
 function renderHeader(stock: Stock, ticks: Tick[]) {
   if (titleEl) titleEl.textContent = stock.name;
-  if (codeEl) codeEl.textContent = stock.code;
+  if (typeEl) {
+    typeEl.textContent = stock.type === "NATIONAL" ? "国営銘柄" : "会社銘柄";
+  }
   if (priceEl) priceEl.textContent = money(stock.price);
   if (changeEl) {
-    changeEl.textContent = `${stock.dayChange >= 0 ? "+" : ""}${nf.format(stock.dayChange)} (${pct(stock.dayChangePct)})`;
+    changeEl.textContent = `${stock.dayChange >= 0 ? "+" : ""}${money(stock.dayChange)} (${pct(stock.dayChangePct)})`;
     changeEl.className = `chart-change earn-mono ${signClass(stock.dayChange)}`;
   }
 
@@ -453,8 +447,6 @@ function renderHeader(stock: Stock, ticks: Tick[]) {
     [`${rangeLabel}安値`, money(low), ""],
     ["IPO価格", money(stock.ipoPrice), ""],
     ["IPO比", pct(ipoPct), signClass(ipoPct)],
-    ["時価総額", money(stock.marketCap), ""],
-    ["発行株数", `${nf.format(stock.totalShares)}株`, ""],
     ["上場日", dayf.format(new Date(stock.listedAt)), ""],
   ];
 
@@ -569,7 +561,7 @@ async function load(initial: boolean) {
     if (statusEl) statusEl.textContent = "";
     if (rowsEl) {
       rowsEl.innerHTML =
-        '<tr class="market-skeleton"><td colspan="7">データを表示できません。</td></tr>';
+        '<tr class="market-skeleton"><td colspan="5">データを表示できません。</td></tr>';
     }
   }
 }
